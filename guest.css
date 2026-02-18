@@ -68,7 +68,7 @@
 }
 .guest-bottom-card-container{
     font-family:"Roboto";
-    background-color:;
+    background-color:whitesmoke;
 }
 .guest-bottom-heading{
     font-weight:bold;
@@ -98,4 +98,79 @@
     font-size:26px;
     color:darkgreen;
     
+}
+
+.navbar-border{
+    border: none;
+    height: 1px;
+    background-color: #1C1C1C;
+
+}
+
+/* Get -Hydrated section*/
+
+.stay-hydrated-container{
+    font-family:"Bree serif";
+    background-color: rgb(153, 192, 46);
+}
+
+.stay-hydrated-image{
+    border-radius:20px;
+}
+.stay-hydrated-heading{
+    font-weight:bold;
+    font-size:36px;
+    color:rgba(34, 35, 34, 0.579);
+}
+.stay-hydrated-paragraph{
+    font-size:20px;
+    color:rgb(132, 101, 101);
+}
+.guest-card-content{
+    background-color:rgb(183, 209, 112);
+}
+
+
+/* Footer section*/
+.simple-footer {
+    background-color: #273029;
+    color: white;
+    text-align: center;
+
+    padding: 12px 10px;   /* smaller padding */
+    font-size: 14px;      /* smaller text */
+}
+
+.footer-container h3 {
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.footer-container p {
+    margin: 3px 0;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;   /* controls spacing */
+    margin-top: 5px;
+}
+
+.social-icons svg {
+    width: 14px;
+    height: 14px;
+}
+
+.social-icons a {
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.copyright {
+    font-size: 12px;
+    opacity: 0.8;
+    margin-top: 6px;
 }
