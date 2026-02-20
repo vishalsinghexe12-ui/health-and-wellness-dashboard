@@ -65,7 +65,7 @@ ob_start();
                         </div>
                     </div>
 
-                <button class="get-started-button shadow-lg mt-3 ml-3" onclick="location.href='guest.php'">Back to Home</button>
+                <button class="get-started-button shadow-lg mt-3 ml-3 d-none d-lg-inline-block" onclick="location.href='guest.php'">Back to Home</button>
                 </div>
             </div>
         </div>

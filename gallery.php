@@ -55,7 +55,7 @@ ob_start();
                         <h1 class="guest-card-heading text-center mt-2 ">Clean Eating Meal Prep</h1>
                     </div>
 
-                <button class="get-started-button shadow-lg mt-3" onclick="location.href='guest.php' ">Back to Home</button>
+                <button class="get-started-button shadow-lg mt-3 d-none d-lg-inline-block" onclick="location.href='guest.php' ">Back to Home</button>
                 </div>
             </div>
         </div>
