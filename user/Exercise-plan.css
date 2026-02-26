@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+.exercise-plan-container {
+    padding-top: 120px;
+    padding-bottom: 60px;
+}
+
+.exercise-plan-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.4s ease;
+}
+
+.exercise-plan-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.25);
+}
+
+.exercise-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.exercise-plan-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 15px;
+}
+
+.exercise-plan-description {
+    font-size: 14px;
+    color: #555;
+    margin-top: 10px;
+}
+
+.exercise-plan-category,
+.exercise-plan-duration,
+.exercise-plan-price {
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+@media (max-width: 576px) {
+    .exercise-plan-title {
+        font-size: 20px;
+    }
+
+    .exercise-img {
+        height: 180px;
+    }
+}
