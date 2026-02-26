@@ -142,9 +142,9 @@ ob_start();
                             <img class="stay-hydrated-image w-100 p-2" src="Images/get-hydrated.jpeg"/>
                         </div>
                         <div class="guest-card-content shadow-lg">
-                            <h1 class="stay-hydrated-heading p-2 pl-3">Stay Hydrated</h1>
+                            <h1 class="stay-hydrated-heading p-2 pl-3 " style="font-family: Roboto;">Stay Hydrated</h1>
                             <hr>
-                            <p class="stay-hydrated-paragraph p-2 pl-3">
+                            <p class="stay-hydrated-paragraph p-2 pl-3 " style="font-family: Roboto;">
                                 Proper hydration keeps your body functioning efficiently and boosts daily performance.
 
                                 Water is essential for almost every function in the human body. It helps regulate body temperature, supports digestion, transports nutrients, and removes waste through urine and sweat. Staying properly hydrated improves concentration, prevents fatigue, and keeps your skin healthy. Even slight dehydration can lead to headaches, dizziness, and reduced productivity.
@@ -163,7 +163,7 @@ ob_start();
                     
                     </div>
                 </div>
-                <button class="get-started-button shadow-lg" onclick="display('sectionGuest')">Back</button>
+                <button class="get-started-button shadow-lg d-none d-block-lg " onclick="display('sectionGuest')">Back</button>
             </div>
         </div>
     </div>

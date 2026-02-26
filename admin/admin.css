@@ -16,7 +16,6 @@
     border-color:white;
 }
 
-/* Sidebar navigation */
 /* Sidebar links */
 .sidebar-link{
     color:white !important;
@@ -108,4 +107,3 @@
 .page-content {
     flex: 1;
 }
-

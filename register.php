@@ -125,32 +125,27 @@ ob_start();
 
                     <!-- Gender -->
                     <div class="mb-4">
+                        <label class="form-label fw-semibold">Gender</label>
 
-                        <label class="form-label fw-semibold">
-                            Gender
-                        </label>
-
-                        <select
-                            class="form-control"
-                            name="gender"
-                            data-validation="required select"
-                        >
-
+                        <select class="form-control" name="gender" data-validation="required select">
                             <option value="">Select Gender</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
-
                         </select>
-
                         <span id="gender_error"></span>
-
                     </div>
 
+                    <div class="mb-4">
+                        <label>Upload Profile Picture</label>
+                        <input type="file" name="profileImage" class="form-control-file" data-validation="required fileSize fileType"  data-filesize="100" data-filetype="jpg,jpeg,png">   
+                        <span id="profileImage_error"></span> 
+                    </div>
 
                     <!-- Terms -->
                     <div class="mb-4">
-                        <input type="checkbox" name="terms" data-validation="required">I agree to Terms<span id="terms_error"></span>
+                        <input type="checkbox" name="terms" data-validation="required"> I agree to Terms<span id="terms_error"></span>
                     </div>
+
                     <!-- Submit Button -->
                     <button type="submit" class="btn btn-success w-100">Create Account
                     </button>
