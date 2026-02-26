@@ -33,122 +33,109 @@ ob_start();
       crossorigin="anonymous"
     ></script>
     
-    <link rel="stylesheet" href="Exercise-plans.css">
+    <link rel="stylesheet" href="Exercise-plan.css">
     
 </head>
 <body>
-
-<div class="exercise-plan-container py-5">
+    <div class="meal-plan-container py-5">
     <div class="container">
         <div class="row">
 
             <!-- Card 1 -->
             <div class="col-lg-4 col-md-6 col-12 mb-4 text-center">
-                <div class="exercise-plan-card shadow">
-                    <img src="../Exercise-Images/Beginner Fitness.jpg" class="img-fluid exercise-img">
-                    <h3 class="exercise-plan-title mt-3">Beginner Fitness Plan</h3>
-                    <p class="exercise-plan-description">
-                        A simple and effective workout routine designed for beginners to improve stamina and flexibility.
-                    </p>
-                    <p class="exercise-plan-category">Level: Beginner</p>
-                    <p class="exercise-plan-duration">Duration: 8 Weeks</p>
-                    <p class="exercise-plan-price">₹ 1999</p>
+                <div class="meal-plan-card shadow">
+                    <img src="../Exercise-Images/Beginner Fitness.jpg" class="img-fluid">
+                    <h3 class="meal-plan-title mt-3">Beginner Fitness Plan</h3>
+                    <p class="meal-plan-description">A simple and effective workout routine designed for beginners to improve stamina and flexibility.</p>
+                    <p class="meal-plan-category">Level: Beginner</p>
+                    <p class="meal-plan-kcal">Duration: 8 Weeks</p>
+                    <p class="meal-plan-price">₹ 1999</p>
                     <hr>
-                    <button class="btn btn-success btn-block">Join Now</button>
+                    <button class="btn btn-success btn-block">Buy Now</button>
                 </div>
             </div>
 
             <!-- Card 2 -->
             <div class="col-lg-4 col-md-6 col-12 mb-4 text-center">
-                <div class="exercise-plan-card shadow">
-                    <img src="../Exercise-Images/Weight loss fitness.jpg" class="img-fluid exercise-img">
-                    <h3 class="exercise-plan-title mt-3">Weight Loss Program</h3>
-                    <p class="exercise-plan-description">
-                        Fat-burning cardio workouts combined with strength exercises to help you lose weight effectively.
-                    </p>
-                    <p class="exercise-plan-category">Goal: Weight Loss</p>
-                    <p class="exercise-plan-duration">Duration: 12 Weeks</p>
-                    <p class="exercise-plan-price">₹ 2499</p>
+                <div class="meal-plan-card shadow">
+                    <img src="../Exercise-Images/Weight loss fitness.jpg" class="img-fluid">
+                    <h3 class="meal-plan-title mt-3">Weight Loss Program</h3>
+                    <p class="meal-plan-description">Fat-burning cardio workouts combined with strength exercises to help you lose weight effectively.</p>
+                    <p class="meal-plan-category">Goal: Weight Loss</p>
+                    <p class="meal-plan-kcal">Duration: 12 Weeks</p>
+                    <p class="meal-plan-price">₹ 2499</p>
                     <hr>
-                    <button class="btn btn-success btn-block">Join Now</button>
+                    <button class="btn btn-success btn-block">Buy Now</button>
                 </div>
             </div>
 
             <!-- Card 3 -->
             <div class="col-lg-4 col-md-6 col-12 mb-4 text-center">
-                <div class="exercise-plan-card shadow">
-                    <img src="../Exercise-Images/muscle gain fitness.jpg" class="img-fluid exercise-img">
-                    <h3 class="exercise-plan-title mt-3">Muscle Gain Program</h3>
-                    <p class="exercise-plan-description">
-                        Strength training routines focused on increasing muscle mass and improving overall strength.
-                    </p>
-                    <p class="exercise-plan-category">Goal: Muscle Building</p>
-                    <p class="exercise-plan-duration">Duration: 16 Weeks</p>
-                    <p class="exercise-plan-price">₹ 2999</p>
+                <div class="meal-plan-card shadow">
+                    <img src="../Exercise-Images/muscle gain fitness.jpg" class="img-fluid">
+                    <h3 class="meal-plan-title mt-3">Muscle Gain Program</h3>
+                    <p class="meal-plan-description">Strength training routines focused on increasing muscle mass and <br>improving overall strength.</p>
+                    <p class="meal-plan-category">Goal: Muscle Building</p>
+                    <p class="meal-plan-kcal">Duration: 16 Weeks</p>
+                    <p class="meal-plan-price">₹ 2999</p>
                     <hr>
-                    <button class="btn btn-success btn-block">Join Now</button>
+                    <button class="btn btn-success btn-block">Buy Now</button>
                 </div>
             </div>
 
             <!-- Card 4 -->
             <div class="col-lg-4 col-md-6 col-12 mb-4 text-center">
-                <div class="exercise-plan-card shadow">
-                    <img src="../Exercise-Images/HIIT Blast.jpg" class="img-fluid exercise-img">
-                    <h3 class="exercise-plan-title mt-3">HIIT Blast Plan</h3>
-                    <p class="exercise-plan-description">
-                        High-Intensity Interval Training designed to burn maximum calories in minimum time.
-                    </p>
-                    <p class="exercise-plan-category">Level: Advanced</p>
-                    <p class="exercise-plan-duration">Duration: 10 Weeks</p>
-                    <p class="exercise-plan-price">₹ 2799</p>
+                <div class="meal-plan-card shadow">
+                    <img src="../Exercise-Images/HIIT Blast.jpg" class="img-fluid">
+                    <h3 class="meal-plan-title mt-3">HIIT Blast Plan</h3>
+                    <p class="meal-plan-description">High-Intensity Interval Training designed to burn maximum calories in minimum time.</p>
+                    <p class="meal-plan-category">Level: Advanced</p>
+                    <p class="meal-plan-kcal">Duration: 10 Weeks</p>
+                    <p class="meal-plan-price">₹ 2799</p>
                     <hr>
-                    <button class="btn btn-success btn-block">Join Now</button>
+                    <button class="btn btn-success btn-block">Buy Now</button>
                 </div>
             </div>
 
             <!-- Card 5 -->
             <div class="col-lg-4 col-md-6 col-12 mb-4 text-center">
-                <div class="exercise-plan-card shadow">
-                    <img src="../Exercise-Images/Beginner Fitness.jpg" class="img-fluid exercise-img">
-                    <h3 class="exercise-plan-title mt-3">Strength & Conditioning</h3>
-                    <p class="exercise-plan-description">
-                        Improve endurance, core strength, and athletic performance with structured training.
-                    </p>
-                    <p class="exercise-plan-category">Level: Intermediate</p>
-                    <p class="exercise-plan-duration">Duration: 14 Weeks</p>
-                    <p class="exercise-plan-price">₹ 3199</p>
+                <div class="meal-plan-card shadow">
+                    <img src="../Exercise-Images/Strenght.jpg" class="img-fluid">
+                    <h3 class="meal-plan-title mt-3">Strength & Conditioning</h3>
+                    <p class="meal-plan-description">Improve endurance, core strength, and athletic performance <br>with structured training.</p>
+                    <p class="meal-plan-category">Level: Intermediate</p>
+                    <p class="meal-plan-kcal">Duration: 14 Weeks</p>
+                    <p class="meal-plan-price">₹ 3199</p>
                     <hr>
-                    <button class="btn btn-success btn-block">Join Now</button>
+                    <button class="btn btn-success btn-block">Buy Now</button>
                 </div>
             </div>
 
             <!-- Card 6 -->
             <div class="col-lg-4 col-md-6 col-12 mb-4 text-center">
-                <div class="exercise-plan-card shadow">
-                    <img src="../Exercise-Images/Full Body Workout.jpg" class="img-fluid exercise-img">
-                    <h3 class="exercise-plan-title mt-3">Full Body Workout</h3>
-                    <p class="exercise-plan-description">
-                        Balanced workouts targeting all major muscle groups for overall fitness.
-                    </p>
-                    <p class="exercise-plan-category">Goal: General Fitness</p>
-                    <p class="exercise-plan-duration">Duration: 12 Weeks</p>
-                    <p class="exercise-plan-price">₹ 2599</p>
+                <div class="meal-plan-card shadow">
+                    <img src="../Exercise-Images/Full Body Workout.jpg" class="img-fluid">
+                    <h3 class="meal-plan-title mt-3">Full Body Workout</h3>
+                    <p class="meal-plan-description">Balanced workouts targeting all major muscle groups<br> for overall fitness.</p>
+                    <p class="meal-plan-category">Goal: General Fitness</p>
+                    <p class="meal-plan-kcal"> Duration: 12 Weeks</p>
+                    <p class="meal-plan-price">₹ 4999</p>
                     <hr>
-                    <button class="btn btn-success btn-block">Join Now</button>
+                    <button class="btn btn-success btn-block">Buy Now</button>
                 </div>
             </div>
 
         </div>
     </div>
-</div>
- 
-   <script type="text/javascript" src="https://new-assets.ccbp.in/frontend/content/static-ccbp-ui-kit/static-ccbp-ui-kit.js"></script>
+</div>     
+
+     <script type="text/javascript" src="https://new-assets.ccbp.in/frontend/content/static-ccbp-ui-kit/static-ccbp-ui-kit.js"></script>
 </body>
 </html>
 
  
 <?php
 $content = ob_get_clean();
-include("../includes/registered_layout.php");
+include("../includes/user_layout.php");
 
 ?>

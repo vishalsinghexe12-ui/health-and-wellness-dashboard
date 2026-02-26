@@ -19,11 +19,11 @@ ob_start();
 
                     <!-- Role Selection Buttons -->
                     <div class="d-flex gap-3">
-                        <a href="login.php" class="btn btn-outline-success w-50">
+                        <a href="login.php" class="btn btn-outline-success w-50 mr-3 text-white bg-success">
                             User
                         </a>
 
-                        <a href="../health-and-wellness-dashboard/admin/admin-login.php" class="btn btn-outline-dark w-50">
+                        <a href="../admin/admin-login.php" class="btn btn-outline-success w-50  text-white bg-success">
                             Admin
                         </a>
                     </div>

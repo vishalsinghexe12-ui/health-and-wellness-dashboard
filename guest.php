@@ -163,7 +163,7 @@ ob_start();
                     
                     </div>
                 </div>
-                <button class="get-started-button shadow-lg d-none d-block-lg " onclick="display('sectionGuest')">Back</button>
+                <button class="get-started-button shadow-lg " onclick="display('sectionGuest')">Back</button>
             </div>
         </div>
     </div>

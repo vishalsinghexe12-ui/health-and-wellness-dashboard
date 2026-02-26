@@ -74,7 +74,7 @@ ob_start();
                 <div class="meal-plan-card shadow">
                     <img src="../meal-plans-images/keto meal.jpg" class="img-fluid">
                     <h3 class="meal-plan-title mt-3">Keto Plan</h3>
-                    <p class="meal-plan-description">Limit carbohydrates to enhance fat burning.</p>
+                    <p class="meal-plan-description">Limit carbohydrates to enhance <br>fat burning.</p>
                     <p class="meal-plan-category">Weight Loss</p>
                     <p class="meal-plan-kcal">1,800 kcal/day</p>
                     <p class="meal-plan-price">₹ 2799</p>
@@ -102,7 +102,7 @@ ob_start();
                 <div class="meal-plan-card shadow">
                     <img src="../meal-plans-images/muscle gain.jpg" class="img-fluid">
                     <h3 class="meal-plan-title mt-3">Muscle Gain Pro</h3>
-                    <p class="meal-plan-description">Increase calories to maximize muscle mass.</p>
+                    <p class="meal-plan-description">Increase calories to maximize <br>muscle mass.</p>
                     <p class="meal-plan-category">Bulking</p>
                     <p class="meal-plan-kcal">2,800 kcal/day</p>
                     <p class="meal-plan-price">₹ 3299</p>
@@ -116,7 +116,7 @@ ob_start();
                 <div class="meal-plan-card shadow">
                     <img src="../meal-plans-images/Balanced meal.jpg" class="img-fluid">
                     <h3 class="meal-plan-title mt-3">Balanced Diet</h3>
-                    <p class="meal-plan-description">Maintain nutrient balance for steady energy.</p>
+                    <p class="meal-plan-description">Maintain nutrient balance for <br> steady energy.</p>
                     <p class="meal-plan-category">General Fitness</p>
                     <p class="meal-plan-kcal">2,000 kcal/day</p>
                     <p class="meal-plan-price">₹ 2499</p>

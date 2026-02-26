@@ -138,6 +138,6 @@ ob_start();
  
 <?php
 $content = ob_get_clean();
-include("../includes/registered_layout.php");
+include("../includes/user_layout.php");
 
 ?>

@@ -44,83 +44,113 @@ ob_start();
     <div class="container-fluid">
       <div class="row" style="height:100vh;">
 
-        <!-- Sidebar -->
-        <div class="col-2 bg-success">
-          <div class="sticky-top"> 
-            <nav class="nav flex-column mt-3 sidebar">
+         <!-- Sidebar -->
+    <div class="col-2 bg-success">
+      <div class="sticky-top"> 
+        <nav class="nav flex-column mt-3 sidebar">
 
-            <a class="nav-link active sidebar-link" style="white-space: nowrap;" href="#">
-              <i class="fa-solid fa-gauge mr-2"></i> <span class="d-none d-sm-inline ms-2">Dashboard</span>
-            </a>
+          <a class="nav-link active sidebar-link" style="white-space: nowrap;" href="#">
+            <i class="fa-solid fa-gauge mr-2"></i> 
+            <span class="d-none d-sm-inline ms-2">Dashboard</span>
+          </a>
 
-            <hr class="sidebar-divider">
+          <hr class="sidebar-divider">
 
-            <a class="nav-link sidebar-link" style="white-space: nowrap;" href="meal-plans.php">
-              <i class="fa-solid fa-bowl-food mr-2"></i> <span class="d-none d-sm-inline ms-2"> Meal Plans</span>
-            </a>
+          <a class="nav-link sidebar-link" style="white-space: nowrap;" href="meal-plans.php">
+            <i class="fa-solid fa-bowl-food mr-2"></i> 
+            <span class="d-none d-sm-inline ms-2">Meal Plans</span>
+          </a>
 
-            <a class="nav-link sidebar-link" style="white-space: nowrap;" href="Exercise-plans.php">
-              <i class="fa-solid fa-dumbbell mr-2"></i> <span class="d-none d-sm-inline ms-2">Exercise Plans</span>
-            </a>
+          <a class="nav-link sidebar-link" style="white-space: nowrap;" href="Exercise-plans.php">
+            <i class="fa-solid fa-dumbbell mr-2"></i> 
+            <span class="d-none d-sm-inline ms-2">Exercise Plans</span>
+          </a>
 
-            <a class="nav-link sidebar-link" style="white-space: nowrap;" href="#">
-              <i class="fa-solid fa-bars-progress mr-2"></i> <span class="d-none d-sm-inline ms-2">Progress Data</span>
-            </a>
+          <a class="nav-link sidebar-link" style="white-space: nowrap;" href="progress.php">
+            <i class="fa-solid fa-bars-progress mr-2"></i> 
+            <span class="d-none d-sm-inline ms-2">Progress Data</span>
+          </a>
 
-            <a class="nav-link sidebar-link" style="white-space: nowrap;" href="Sub-tips.php">
-              <i class="fa-solid fa-lightbulb mr-2"></i> <span class="d-none d-sm-inline ms-2">SUBI Tips</span>
-            </a>
+          <a class="nav-link sidebar-link" style="white-space: nowrap;" href="Sub-tips.php">
+            <i class="fa-solid fa-lightbulb mr-2"></i> 
+            <span class="d-none d-sm-inline ms-2">SUBI Tips</span>
+          </a>
 
-            <a class="nav-link sidebar-link" style="white-space: nowrap;" href="../login.php">
-              <i class="fa-solid fa-right-from-bracket mr-2"></i> <span class="d-none d-sm-inline ms-2">Logout</span>
-            </a>
+          <!-- NEW: Manage Plans -->
+          <a class="nav-link sidebar-link" style="white-space: nowrap;" href="manage-plans.php">
+            <i class="fa-solid fa-clipboard-list mr-2"></i> 
+            <span class="d-none d-sm-inline ms-2">Manage Plans</span>
+          </a>
 
-          </nav>
-          </div>
-        </div>
+          <!-- NEW: Support -->
+          <a class="nav-link sidebar-link" style="white-space: nowrap;" href="support.php">
+            <i class="fa-solid fa-headset mr-2"></i> 
+            <span class="d-none d-sm-inline ms-2">Support</span>
+          </a>
 
-        <!-- Main Content -->
+          <a class="nav-link sidebar-link" style="white-space: nowrap;" href="../login.php">
+            <i class="fa-solid fa-right-from-bracket mr-2"></i> 
+            <span class="d-none d-sm-inline ms-2">Logout</span>
+          </a>
 
-        <!--Stat card-->
-        <div class="col-lg-10 p-4">
-           <div class="row g-4 mb-4">
-
-            <div class="col-md-3">
-              <div class="card stat-card p-3 text-white">
-                <h6>Total Sessions</h6>
-                <h3>1,250</h3>
-                <small>Sessions completed</small>
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <div class="card stat-card p-3 text-white">
-                <h6>Credits Balance</h6>
-                <h3>850</h3>
-                <small>Available credits</small>
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <div class="card stat-card p-3 text-white">
-                <h6>Days Active</h6>
-                <h3>12</h3>
-                <small>This month</small>
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <div class="card stat-card p-2 text-white">
-                <h6>Motivation</h6>
-                <h3>Stay Consistent</h3>
-                <p>Stay Focused</p>
-              </div>
-            </div>
-
-          </div>
+        </nav>
       </div>
     </div>
 
+        <!-- Main Content -->
+
+    
+  <div class="col-10">
+    <div class="container-fluid mt-4">
+      <div class="row g-3">
+
+        <!-- Card 1 -->
+        <div class="col-12 col-sm-6 col-lg-3">
+          <div class="card bg-success text-white h-100">
+            <div class="card-body">
+              <h5>Total Sessions</h5>
+              <h2>1,250</h2>
+              <p>Sessions completed</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-12 col-sm-6 col-lg-3">
+          <div class="card bg-success text-white h-100">
+            <div class="card-body">
+              <h5>Credits Balance</h5>
+              <h2>850</h2>
+              <p>Available credits</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-12 col-sm-6 col-lg-3">
+          <div class="card bg-success text-white h-100">
+            <div class="card-body">
+              <h5>Days Active</h5>
+              <h2>12</h2>
+              <p>This month</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-12 col-sm-6 col-lg-3">
+          <div class="card bg-success text-white h-100">
+            <div class="card-body">
+              <h5>Motivation</h5>
+              <h2>Stay Consistent</h2>
+              <p>Stay Focused</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
 
     <script type="text/javascript" src="https://new-assets.ccbp.in/frontend/content/static-ccbp-ui-kit/static-ccbp-ui-kit.js"></script>
