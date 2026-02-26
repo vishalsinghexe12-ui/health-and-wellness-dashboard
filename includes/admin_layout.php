@@ -1,61 +1,63 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo isset($title) ? $title : "Health & Wellness"; ?></title>
+    <title><?php echo isset($title) ? $title : "Admin - Health & Wellness"; ?></title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <!-- Page CSS -->
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/ccc7436e56.js" crossorigin="anonymous"></script>
+
+    <!-- Your Admin CSS -->
     <?php
     if(isset($css)){
         echo '<link rel="stylesheet" href="'.$css.'">';
     }
     ?>
-
 </head>
-<body>
 
-<!-- NAVBAR -->
-<div id="sectionGuest">
-        <div class="container-fluid">
+<body class="d-flex flex-column min-vh-100">
+
+<!-- NAVBAR  -->
+ <div class="container-fluid ">
             <nav class="navbar navbar-expand-lg navbar-light bg-white">
-                <hr class="navbar-border">
-            <a class="navbar-brand" href="guest.php"><img class="guest-nav-image" src="images/logo.jpeg"/><span class="guest-navbar-heading pt-5" id="navbar-name">Health & Wellness</span></a>
+            <a class="navbar-brand" href="guest.php"><img class="guest-nav-image" src="../images/logo.jpeg"/><span class="guest-navbar-heading pt-5" id="navbar-name">Health & Wellness</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <div class="ml-auto d-flex align-items-center">
+            <span class="mr-3">Hello, Admin 👋</span>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ml-auto">
-                <a class="nav-link active mr-3" id="gnavitem1" href="guest.php">Home <span class="sr-only">(current)</span></a>
-                <a class="nav-link mr-3" id="gnavitem2" href="about.php">About Us</a>
-                <a class="nav-link mr-3" id="gnavitem3" href="plans.php" >Plans</a>
-                <a class="nav-link mr-3" id="gnavitem4" href="gallery.php">Gallery</a>
-                <a class="nav-link mr-3" id="gnavitem5" href="contact.php">Contact Us</a>
-                <a class="nav-link bg-success mr-3" id="gnavitem6" href="login.php">Login</a>
+                <a class="nav-link bg-success mr-3 text-white" id="gnavitem6" href="../admin/admin-profile.php">My Profile</a>
                 </div>
             </div>
             </nav>
-        </div>
+    </div>
 
 
-<!-- PAGE CONTENT -->
-<?php
-if(isset($content)){
-    echo $content;
-}
-?>
-
-
-<!--Footer Section -->
-    <footer class="simple-footer">
+<!-- MAIN SECTION -->
+<div class="container-fluid">
+    <div class="row">
+        <main class="flex-fill">
+        <?php
+        if(isset($content)){
+            echo $content;
+        }
+        ?>
+        </main>
+    </div>
+</div>
+</div>
+<footer class="simple-footer">
     <div class="footer-container">
 
         <h3>Health & Wellness</h3>

@@ -40,7 +40,14 @@ ob_start();
 <body>
 
 <div class="tips-page">
-
+<div class="mb-4">
+                <a href="javascript:history.back()" class="back-btn d-inline-flex align-items-center">
+                    <span class="back-icon">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </span>
+                    <span class="ml-2">Back</span>
+                </a>
+            </div>
     <div class="tips-title">
         <h2>SUBI Special Tips</h2>
         <p>Improve your lifestyle with smart daily habits</p>

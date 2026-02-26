@@ -22,27 +22,21 @@
 </head>
 <body  class="d-flex flex-column min-vh-100">
 
-
-    <!-- Register Navigation Bar -->
+<!-- Register Navigation Bar -->
     <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-white">
-            <a class="navbar-brand" href="#"><img class="guest-nav-image" src="../images/logo.jpeg"/><span class="guest-navbar-heading pt-5">Health & Wellness</span></a>
+            <a class="navbar-brand" href="guest.php"><img class="guest-nav-image" src="../images/logo.jpeg"/><span class="guest-navbar-heading pt-5" id="navbar-name">Health & Wellness</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ml-auto">
-                <a class="nav-link active mr-3" id="gnavitem1" href="#">Dashboard <span class="sr-only">(current)</span></a>
-                <a class="nav-link mr-3" id="gnavitem2" href="#">Manage Plans</a>
-                <a class="nav-link mr-3" id="gnavitem3" href="#">Workout Library</a>
-                <a class="nav-link mr-3" id="gnavitem4" href="#">Support</a>
-                <a class="nav-link bg-success mr-3 text-white" id="gnavitem6" href="../login.php">Logout</a>
+                <span class="mr-3 mt-2">Hello, User 👋</span>
+                <a class="nav-link bg-success mr-3 text-white" id="gnavitem6" href="../user/my-profile.php">My Profile</a>
                 </div>
             </div>
             </nav>
     </div>
-
-
 
 <!-- PAGE CONTENT -->
 <main class="flex-fill">

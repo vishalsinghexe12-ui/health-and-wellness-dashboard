@@ -65,3 +65,29 @@
         font-size: 20px;
     }
 }
+.back-btn {
+    text-decoration: none;
+    color: #212529;
+    font-weight: 500;
+}
+
+.back-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: 0.3s ease;
+}
+
+.back-btn:hover .back-icon {
+    background-color: #198754;  /* your theme green */
+    color: white;
+}
+
+.back-btn:hover {
+    text-decoration: none;
+}

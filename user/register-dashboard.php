@@ -70,7 +70,7 @@ ob_start();
               <i class="fa-solid fa-dumbbell mr-2"></i> <span class="d-none d-sm-inline ms-2">Exercise Plans</span>
             </a>
 
-            <a class="nav-link sidebar-link" style="white-space: nowrap;" href="#">
+            <a class="nav-link sidebar-link" style="white-space: nowrap;" href="progress.php">
               <i class="fa-solid fa-bars-progress mr-2"></i> <span class="d-none d-sm-inline ms-2">Progress Data</span>
             </a>
 
@@ -137,5 +137,5 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
-include("../includes/user_layout.php");
+include("../includes/registered_layout.php");
 ?>

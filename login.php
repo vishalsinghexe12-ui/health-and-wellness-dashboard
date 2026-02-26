@@ -10,7 +10,7 @@ ob_start();
         <div class="col-md-6 col-lg-5">
             <div class="card border-0 shadow-lg">
                 <div class="card-body p-5">
-
+                    
                     <!-- Heading -->
                     <div class="text-center mb-4">
                         <h2 class="font-weight-bold text-success">Welcome Back</h2>
@@ -19,7 +19,7 @@ ob_start();
 
                     <!-- Role Selection Buttons -->
                     <div class="d-flex gap-3">
-                        <a href="login.php" class="btn btn-outline-success w-50">
+                        <a href="../health-and-wellness-dashboard/login.php" class="btn btn-outline-success w-50">
                             User
                         </a>
 
@@ -59,7 +59,7 @@ ob_start();
 
 
                         <!-- Login Button -->
-                        <button type="button" class="btn btn-success w-100 btn-lg mb-3" onclick="window.location.href='user/register.php'">Login </button>
+                        <button type="button" class="btn btn-success w-100 btn-lg mb-3" onclick="window.location.href='user/register-dashboard.php'">Login </button>
 
 
                         <!-- Register -->

@@ -25,7 +25,7 @@ ob_start();
             </a>
 
             <a class="nav-link sidebar-link" style="white-space: nowrap;" href="messages.php">
-              <i class="fa-solid fa-bars-progress mr-2"></i> <span class="d-none d-sm-inline ms-2">Messages</span>
+              <i class="fa-solid fa-envelope mr-2"></i> <span class="d-none d-sm-inline ms-2">Messages</span>
             </a>
 
             <a class="nav-link sidebar-link" style="white-space: nowrap;" href="../login.php">
