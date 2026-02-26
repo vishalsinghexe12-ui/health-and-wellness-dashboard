@@ -127,3 +127,9 @@ ob_start();
 
 </body>
 </html>
+
+<?php
+$content = ob_get_clean();
+include("../includes/user_layout.php");
+
+?>

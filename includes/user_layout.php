@@ -32,11 +32,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ml-auto">
-                <a class="nav-link active mr-3" id="gnavitem1" href="#">Dashboard <span class="sr-only">(current)</span></a>
                 <a class="nav-link mr-3" id="gnavitem2" href="#">Manage Plans</a>
-                <a class="nav-link mr-3" id="gnavitem3" href="#">Workout Library</a>
                 <a class="nav-link mr-3" id="gnavitem4" href="#">Support</a>
-                <a class="nav-link bg-success mr-3 text-white" id="gnavitem6" href="../login.php">Logout</a>
+                <a class="nav-link bg-success mr-3 text-white" id="gnavitem6" href="../login.php">My Profile</a>
                 </div>
             </div>
             </nav>
