@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+ 
+.meal-plan-container {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+ 
+.meal-plan-card {
+    font-family: "Roboto", sans-serif;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+ 
+.meal-plan-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+}
+
+ 
+.meal-plan-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+ 
+.meal-plan-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 15px;
+}
+
+ 
+.meal-plan-description {
+    font-size: 14px;
+    color: #555;
+    margin-top: 10px;
+}
+
+ 
+.meal-plan-category,
+.meal-plan-kcal,
+.meal-plan-price {
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+ 
+.meal-plan-card .btn {
+    margin-top: 10px;
+}
+
+ 
+@media (max-width: 576px) {
+    .meal-plan-card {
+        padding: 20px;
+    }
+
+    .meal-plan-title {
+        font-size: 20px;
+    }
+}
