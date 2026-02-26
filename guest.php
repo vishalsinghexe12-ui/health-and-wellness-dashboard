@@ -59,7 +59,7 @@ ob_start();
                     
 
                     <!-- Card 1 -->
-                    <div class="col-4 mt-3">
+                    <div class="col-lg-4 col-md-6 col-12 mb-4 mt-3">
                         <div class="stay-hydrated-card  text-center guest-card shadow" onclick="display('section-Stay-Hydrated')">
                             <img class="w-100 P-1" src="images/get-hydrated.jpeg"/>
                             <h1 class="guest-card-heading mt-3">Stay Hydrated</h1>
@@ -70,7 +70,7 @@ ob_start();
                     </div>
 
                     <!-- Card 2 -->
-                    <div class="col-4 mt-3">
+                    <div class="col-lg-4 col-md-6 col-12 mb-4 mt-3">
                         <div class="enough-sleep-card text-center guest-card shadow" onclick="display('section-Enough-Sleep')">
                             <img class="w-100 P-1" src="images/enough-sleep.jpeg"/>
                             <h1 class="guest-card-heading mt-3">Enough Sleep</h1>
@@ -81,7 +81,7 @@ ob_start();
                     </div>
 
                     <!-- Card 3 -->
-                    <div class="col-4 mt-3">
+                    <div class="col-lg-4 col-md-6 col-12 mb-4 mt-3">
                         <div class="manage-stress-card text-center guest-card shadow"  onclick="display('section-Manage-Stress')">
                             <img class="w-100 P-1" src="images/manage-stress.jpeg"/>
                             <h1 class="guest-card-heading mt-3">Manage Stress</h1>
@@ -92,7 +92,7 @@ ob_start();
                     </div>
 
                     <!-- Card 4 -->
-                    <div class="col-4 mt-3 mb-5">
+                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-5">
                         <div class="manage-stress-card text-center guest-card shadow" onclick="display('section-Eat-More-Greens')">
                             <img class="w-100 P-2" src="Images/Eat More Greens.jpeg"/>
                             <h1 class="guest-card-heading mt-3">Eat More Greens</h1>
@@ -103,7 +103,7 @@ ob_start();
                     </div>
 
                     <!-- Card 5 -->
-                    <div class="col-4 mt-3 mb-5">
+                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-5">
                         <div class="manage-stress-card text-center guest-card shadow" onclick="display('section-Regular-Exercise')">
                             <img class="w-100 P-1" src="Images/Regular Exercise.jpeg"/>
                             <h1 class="guest-card-heading mt-3">Regular Exercise</h1>
@@ -115,7 +115,7 @@ ob_start();
                     </div>
 
                     <!-- Card 6 -->
-                    <div class="col-4 mt-3 mb-5">
+                    <div class="col-lg-4 col-md-6 col-12 mb-5">
                         <div class="manage-stress-card text-center guest-card shadow" onclick="display('section-Healthy-Snacks')">
                             <img class="w-100 P-1" src="Images/Healthy Snacks.jpeg"/>
                             <h1 class="guest-card-heading mt-3">Healthy Snacks</h1>

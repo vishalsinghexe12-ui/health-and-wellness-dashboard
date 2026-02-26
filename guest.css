@@ -28,6 +28,7 @@
     color:black;
 }
 
+
 .guest-nav-image{
     height:50px;
     width:60px;
@@ -93,7 +94,7 @@
 }
 
 .guest-navbar-heading{
-    font-family:"Bree serif";
+    font-family:'Roboto';
     font-weight:300;
     font-size:26px;
     color:darkgreen;
