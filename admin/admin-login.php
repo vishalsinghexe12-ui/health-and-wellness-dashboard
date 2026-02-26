@@ -19,11 +19,11 @@ ob_start();
 
                     <!-- Role Selection Buttons -->
                     <div class="d-flex gap-3">
-                        <a href="login.php" class="btn btn-outline-success w-50">
+                        <a href="../login.php" class="btn btn-outline-success w-50">
                             User
                         </a>
 
-                        <a href="../health-and-wellness-dashboard/admin/admin-login.php" class="btn btn-outline-dark w-50">
+                        <a href="admin-login.php" class="btn btn-outline-dark w-50">
                             Admin
                         </a>
                     </div>
@@ -59,7 +59,7 @@ ob_start();
 
 
                         <!-- Login Button -->
-                        <button type="button" class="btn btn-success w-100 btn-lg mb-3" onclick="window.location.href='user/register.php'">Login </button>
+                        <button type="button" class="btn btn-success w-100 btn-lg mb-3" href="admin.php">Login </button>
 
 
                         <!-- Register -->
