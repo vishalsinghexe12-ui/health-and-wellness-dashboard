@@ -49,7 +49,7 @@ ob_start();
       <div class="sticky-top"> 
         <nav class="nav flex-column mt-3 sidebar">
 
-          <a class="nav-link active sidebar-link" style="white-space: nowrap;" href="#">
+          <a class="nav-link active sidebar-link" style="white-space: nowrap;" href="register-dashboard.php">
             <i class="fa-solid fa-gauge mr-2"></i> 
             <span class="d-none d-sm-inline ms-2">Dashboard</span>
           </a>
