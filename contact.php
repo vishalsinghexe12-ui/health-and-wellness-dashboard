@@ -106,7 +106,7 @@ ob_start();
 
 
 <!-- Include validation -->
-<script src="../assets/js/validation.js"></script>
+<script src="js/validate.js"></script>
 
 
 <?php

@@ -1,79 +1,69 @@
 <?php
-$title = "Plans";
+$title = "Plans - Health & Wellness";
 $css = "guest.css"; 
 
 ob_start();
 ?>
 
-
-  
-        <div class="guest-plans-container mb-5 bg-light mt-3">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 mb-3">
-                        <h1 class="guest-bottom-heading">Plans</h1>
-                        <hr>
-                    </div>
-                    
-
-                <!-- Plan 1 -->
-                    <div class="col-6 mb-3">
-                        <div class="plan-card shadow p-3 text-center">
-                            <img src="images/beautiful-girls-are-playing-yoga-park.jpg" class="w-100 plan-img"/>
-                            <h1 class="guest-card-heading mt-3">Beginner Plan</h1>
-                            <p class="guest-card-paragraph pl-3 pr-3 mt-3">Basic Yoga<br>10 Min Daily Exercise<br>Water tracking</p>
-                            <p class="guest-card-paragraph">Duration: 4 Weeks</p>
-                            <p class="guest-card-paragraph">Goal: Build healthy habits</p>
-                            <button class="get-started-button shadow-lg">Start Plan</button>
-                        </div>
-                    </div>
-
-                <!-- Plan 2 -->
-                    <div class="col-6">
-                        <div class="plan-card shadow p-3 text-center">
-                            <img src="images/Guest-Img-5.jpeg" class="w-100 plan-img"/>
-                            <h1 class="guest-card-heading mt-3">Fitness Plan</h1>
-                            <p class="guest-card-paragraph mt-3">Strength Training<br>Daily step tracking<br>Workout Shedule</p>
-                            <p class="guest-card-paragraph">Duration: 8 Weeks</p>
-                            <p class="guest-card-paragraph">Goal :Improve Strength</p></p>
-                            <button class="get-started-button shadow-lg">Start Plan</button>
-                        </div>
-                    </div>
-                    
-                <!-- Plan 3 -->
-                    <div class="col-6">
-                        <div class="plan-card shadow p-3 text-center">
-                            <img src="images/vegetable-image.jpeg" class="w-100 plan-img"/>
-                            <h1 class="guest-card-heading mt-3">Diet Plan</h1>
-                            <p class="guest-card-paragraph mt-3">Healthy Meal Suggestions<br>Water intake goals<br>Nutrition tips</p>
-                            <p class="guest-card-paragraph">Duration: 4 Weeks</p>
-                            <p>Goal : Improve Nutrition</p>
-                            <button class="get-started-button shadow-lg">Start Plan</button>
-                        </div>
-                    </div>
-
-
-                <!-- Plan 4 -->
-                    <div class="col-6">
-                        <div class="plan-card shadow p-3 text-center">
-                            <img src="images/woman-lotus-pose-park.jpg" class="w-100 plan-img"/>
-                            <h1 class="guest-card-heading mt-3">Mental Wellness Plan</h1>
-                            <p class="guest-card-paragraph mt-3">Meditation<br>Sleep tracking<br>Stress Management tips</p>
-                            <p class="guest-card-paragraph">Duration: 6 Weeks</p>
-                            <p class="guest-card-paragraph">Goal: Reduce stress</p>
-                            <button class="get-started-button shadow-lg">Start Plan</button>
-                        </div>
-                    </div>
-
-                <button class="get-started-button shadow-lg mt-3 ml-3 d-none d-lg-inline-block" onclick="location.href='guest.php'">Back to Home</button>
+<div class="guest-plans-container py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-5 text-center">
+                <h1 class="guest-bottom-heading">Our Wellness Plans</h1>
+                <hr class="heading-hr mx-auto">
+            </div>
+            
+            <!-- Plan 1 -->
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="plan-card text-center">
+                    <img src="images/beautiful-girls-are-playing-yoga-park.jpg" class="w-100 plan-img" alt="Beginner Plan"/>
+                    <h2 class="guest-card-heading">Beginner Plan</h2>
+                    <p class="guest-card-paragraph mt-3">Basic Yoga &bull; 10 Min Daily Exercise &bull; Water tracking</p>
+                    <p class="guest-card-paragraph text-primary font-weight-bold">Duration: 4 Weeks</p>
+                    <p class="guest-card-paragraph mb-4">Goal: Build healthy habits</p>
+                    <button class="get-started-button">Start Plan</button>
                 </div>
             </div>
+
+            <!-- Plan 2 -->
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="plan-card text-center">
+                    <img src="images/Guest-Img-5.jpeg" class="w-100 plan-img" alt="Fitness Plan"/>
+                    <h2 class="guest-card-heading">Fitness Plan</h2>
+                    <p class="guest-card-paragraph mt-3">Strength Training &bull; Daily step tracking &bull; Workout Schedule</p>
+                    <p class="guest-card-paragraph text-primary font-weight-bold">Duration: 8 Weeks</p>
+                    <p class="guest-card-paragraph mb-4">Goal: Improve Strength</p>
+                    <button class="get-started-button">Start Plan</button>
+                </div>
+            </div>
+            
+            <!-- Plan 3 -->
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="plan-card text-center">
+                    <img src="images/vegetable-image.jpeg" class="w-100 plan-img" alt="Diet Plan"/>
+                    <h2 class="guest-card-heading">Diet Plan</h2>
+                    <p class="guest-card-paragraph mt-3">Healthy Meals &bull; Water goals &bull; Nutrition tips</p>
+                    <p class="guest-card-paragraph text-primary font-weight-bold">Duration: 4 Weeks</p>
+                    <p class="guest-card-paragraph mb-4">Goal: Improve Nutrition</p>
+                    <button class="get-started-button">Start Plan</button>
+                </div>
+            </div>
+
+            <!-- Plan 4 -->
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="plan-card text-center">
+                    <img src="images/woman-lotus-pose-park.jpg" class="w-100 plan-img" alt="Mental Wellness"/>
+                    <h2 class="guest-card-heading">Mental Wellness Plan</h2>
+                    <p class="guest-card-paragraph mt-3">Meditation &bull; Sleep tracking &bull; Stress Management</p>
+                    <p class="guest-card-paragraph text-primary font-weight-bold">Duration: 6 Weeks</p>
+                    <p class="guest-card-paragraph mb-4">Goal: Reduce stress</p>
+                    <button class="get-started-button">Start Plan</button>
+                </div>
+            </div>
+
         </div>
-   
-
-
-     <script type="text/javascript" src="https://new-assets.ccbp.in/frontend/content/static-ccbp-ui-kit/static-ccbp-ui-kit.js"></script>
-
+    </div>
+</div>
 
 <?php
 $content = ob_get_clean();

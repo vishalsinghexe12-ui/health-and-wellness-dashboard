@@ -59,7 +59,7 @@ ob_start();
 
 
                         <!-- Login Button -->
-                        <button type="button" class="btn btn-success w-100 btn-lg mb-3" onclick="window.location.href='user/register-dashboard.php'">Login </button>
+                        <button type="submit" class="btn btn-success w-100 btn-lg mb-3">Login</button>
 
 
                         <!-- Register -->

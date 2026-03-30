@@ -25,26 +25,29 @@
 
 
 <!-- NAVBAR -->
-<div id="sectionGuest">
-        <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg navbar-light bg-white">
-                <hr class="navbar-border">
-            <a class="navbar-brand" href="guest.php"><img class="guest-nav-image" src="images/logo.jpeg"/><span class="guest-navbar-heading pt-5" id="navbar-name">Health & Wellness</span></a>
+<div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="guest.php">
+                <img class="guest-nav-image" src="images/logo.jpeg" alt="Logo"/>
+                <span class="guest-navbar-heading">Health & Wellness</span>
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ml-auto">
-                <a class="nav-link active mr-3" id="gnavitem1" href="guest.php">Home <span class="sr-only">(current)</span></a>
-                <a class="nav-link mr-3" id="gnavitem2" href="about.php">About Us</a>
-                <a class="nav-link mr-3" id="gnavitem3" href="plans.php" >Plans</a>
-                <a class="nav-link mr-3" id="gnavitem4" href="gallery.php">Gallery</a>
-                <a class="nav-link mr-3" id="gnavitem5" href="contact.php">Contact Us</a>
-                <a class="nav-link bg-success mr-3" id="gnavitem6" href="login.php">Login</a>
+                    <a class="nav-link active" href="guest.php">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="about.php">About Us</a>
+                    <a class="nav-link" href="plans.php">Plans</a>
+                    <a class="nav-link" href="gallery.php">Gallery</a>
+                    <a class="nav-link" href="contact.php">Contact Us</a>
+                    <a class="nav-link bg-success text-white ml-2" href="login.php" style="border-radius: 8px;">Login</a>
                 </div>
             </div>
-            </nav>
         </div>
+    </nav>
+</div>
 
 
 <!-- PAGE CONTENT -->
@@ -56,11 +59,10 @@ if(isset($content)){
 
 
 <!--Footer Section -->
-    <footer class="simple-footer">
-    <div class="footer-container">
-
+<footer class="simple-footer">
+    <div class="container footer-container">
         <h3>Health & Wellness</h3>
-        <p class="mb-1">Stay Fit • Stay Healthy • Stay Strong</p>
+        <p class="mb-4 text-muted">Stay Fit • Stay Healthy • Stay Strong</p>
         <div class="social-icons">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
             <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
