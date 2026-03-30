@@ -25,7 +25,7 @@
 
 
 <!-- NAVBAR -->
-<div class="container-fluid p-0">
+<div class="container-fluid p-0 sticky-top" style="z-index: 1030; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);">
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="guest.php">

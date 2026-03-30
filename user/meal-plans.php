@@ -1,127 +1,106 @@
 <?php
-$title = "Plans";
+$title = "Meal Plans";
 $css = "register-dashboard.css"; 
 
 ob_start();
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health & Wellness</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-      crossorigin="anonymous"
-    ></script>
     
-    <link rel="stylesheet" href="meal-plans.css">
-    
-</head>
-<body>
-    <div class="meal-plan-container py-5">
+<div class="py-5" style="background-color: var(--bg-light); min-height: calc(100vh - 70px);">
     <div class="container">
-        <div class="row">
+        <div class="text-center mb-5">
+            <h2 class="font-weight-bold mb-2" style="color: var(--primary-dark);">Nutrition Meal Plans</h2>
+            <p class="text-muted">Scientifically crafted meal plans to accelerate your health journey.</p>
+        </div>
+        
+        <div class="row g-4">
 
             <!-- Card 1 -->
-            <div class="col-lg-4 col-md-6 col-12 mb-4 text-center">
-                <div class="meal-plan-card shadow">
-                    <img src="../meal-plans-images/weight loss.jpg" class="img-fluid">
-                    <h3 class="meal-plan-title mt-3">Low Carb Plan</h3>
-                    <p class="meal-plan-description">Reduce carbs to promote fat burning and stable energy levels.</p>
-                    <p class="meal-plan-category">Weight Loss</p>
-                    <p class="meal-plan-kcal">1,500 kcal/day</p>
-                    <p class="meal-plan-price">₹ 2499</p>
-                    <hr>
-                    <button class="btn btn-success btn-block">Buy Now</button>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="stat-card h-100 d-flex flex-column" style="padding: 15px;">
+                    <img src="../meal-plans-images/weight loss.jpg" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;">
+                    <h4 class="font-weight-bold" style="color: var(--text-main);">Low Carb Plan</h4>
+                    <p class="text-muted flex-grow-1" style="font-size:14px;">Reduce carbs to promote fat burning and stable energy levels.</p>
+                    <div class="d-flex justify-content-between text-muted mb-2 font-weight-bold" style="font-size:13px;">
+                        <span>Goal: Weight Loss</span>
+                        <span>1,500 kcal/day</span>
+                    </div>
+                    <div class="buy-amoount text-center mb-3">₹ 2499</div>
+                    <a href="payment.php?plan=Low+Carb+Plan&price=2499" class="btn btn-success btn-block text-white" style="border-radius: 8px;">Buy Now</a>
                 </div>
             </div>
 
             <!-- Card 2 -->
-            <div class="col-lg-4 col-md-6 col-12 mb-4 text-center">
-                <div class="meal-plan-card shadow">
-                    <img src="../meal-plans-images/High Protien.jpg" class="img-fluid">
-                    <h3 class="meal-plan-title mt-3">High Protein Plan</h3>
-                    <p class="meal-plan-description">Increase protein intake to support muscle growth and recovery.</p>
-                    <p class="meal-plan-category">Muscle Gain</p>
-                    <p class="meal-plan-kcal">2,500 kcal/day</p>
-                    <p class="meal-plan-price">₹ 2999</p>
-                    <hr>
-                    <button class="btn btn-success btn-block">Buy Now</button>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="stat-card h-100 d-flex flex-column" style="padding: 15px;">
+                    <img src="../meal-plans-images/High Protien.jpg" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;">
+                    <h4 class="font-weight-bold" style="color: var(--text-main);">High Protein Plan</h4>
+                    <p class="text-muted flex-grow-1" style="font-size:14px;">Increase protein intake to support muscle growth and recovery.</p>
+                    <div class="d-flex justify-content-between text-muted mb-2 font-weight-bold" style="font-size:13px;">
+                        <span>Goal: Muscle Gain</span>
+                        <span>2,500 kcal/day</span>
+                    </div>
+                    <div class="buy-amoount text-center mb-3">₹ 2999</div>
+                    <a href="payment.php?plan=High+Protein+Plan&price=2999" class="btn btn-success btn-block text-white" style="border-radius: 8px;">Buy Now</a>
                 </div>
             </div>
 
             <!-- Card 3 -->
-            <div class="col-lg-4 col-md-6 col-12 mb-4 text-center">
-                <div class="meal-plan-card shadow">
-                    <img src="../meal-plans-images/keto meal.jpg" class="img-fluid">
-                    <h3 class="meal-plan-title mt-3">Keto Plan</h3>
-                    <p class="meal-plan-description">Limit carbohydrates to enhance <br>fat burning.</p>
-                    <p class="meal-plan-category">Weight Loss</p>
-                    <p class="meal-plan-kcal">1,800 kcal/day</p>
-                    <p class="meal-plan-price">₹ 2799</p>
-                    <hr>
-                    <button class="btn btn-success btn-block">Buy Now</button>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="stat-card h-100 d-flex flex-column" style="padding: 15px;">
+                    <img src="../meal-plans-images/keto meal.jpg" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;">
+                    <h4 class="font-weight-bold" style="color: var(--text-main);">Keto Plan</h4>
+                    <p class="text-muted flex-grow-1" style="font-size:14px;">Limit carbohydrates to enhance fat burning and enter ketosis quickly.</p>
+                    <div class="d-flex justify-content-between text-muted mb-2 font-weight-bold" style="font-size:13px;">
+                        <span>Goal: Weight Loss</span>
+                        <span>1,800 kcal/day</span>
+                    </div>
+                    <div class="buy-amoount text-center mb-3">₹ 2799</div>
+                    <a href="payment.php?plan=Keto+Plan&price=2799" class="btn btn-success btn-block text-white" style="border-radius: 8px;">Buy Now</a>
                 </div>
             </div>
 
             <!-- Card 4 -->
-            <div class="col-lg-4 col-md-6 col-12 mb-4 text-center">
-                <div class="meal-plan-card shadow">
-                    <img src="../meal-plans-images/Vegan meal.jpg" class="img-fluid">
-                    <h3 class="meal-plan-title mt-3">Vegan Plan</h3>
-                    <p class="meal-plan-description">Plant-based meals for better digestion and energy.</p>
-                    <p class="meal-plan-category">Healthy Lifestyle</p>
-                    <p class="meal-plan-kcal">1,700 kcal/day</p>
-                    <p class="meal-plan-price">₹ 2499</p>
-                    <hr>
-                    <button class="btn btn-success btn-block">Buy Now</button>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="stat-card h-100 d-flex flex-column" style="padding: 15px;">
+                    <img src="../meal-plans-images/Vegan meal.jpg" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;">
+                    <h4 class="font-weight-bold" style="color: var(--text-main);">Vegan Plan</h4>
+                    <p class="text-muted flex-grow-1" style="font-size:14px;">Plant-based meals for better digestion, energy, and overall health.</p>
+                    <div class="d-flex justify-content-between text-muted mb-2 font-weight-bold" style="font-size:13px;">
+                        <span>Lifestyle: Vegan</span>
+                        <span>1,700 kcal/day</span>
+                    </div>
+                    <div class="buy-amoount text-center mb-3">₹ 2499</div>
+                    <a href="payment.php?plan=Vegan+Plan&price=2499" class="btn btn-success btn-block text-white" style="border-radius: 8px;">Buy Now</a>
                 </div>
             </div>
 
             <!-- Card 5 -->
-            <div class="col-lg-4 col-md-6 col-12 mb-4 text-center">
-                <div class="meal-plan-card shadow">
-                    <img src="../meal-plans-images/muscle gain.jpg" class="img-fluid">
-                    <h3 class="meal-plan-title mt-3">Muscle Gain Pro</h3>
-                    <p class="meal-plan-description">Increase calories to maximize <br>muscle mass.</p>
-                    <p class="meal-plan-category">Bulking</p>
-                    <p class="meal-plan-kcal">2,800 kcal/day</p>
-                    <p class="meal-plan-price">₹ 3299</p>
-                    <hr>
-                    <button class="btn btn-success btn-block">Buy Now</button>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="stat-card h-100 d-flex flex-column" style="padding: 15px;">
+                    <img src="../meal-plans-images/muscle gain.jpg" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;">
+                    <h4 class="font-weight-bold" style="color: var(--text-main);">Muscle Gain Pro</h4>
+                    <p class="text-muted flex-grow-1" style="font-size:14px;">Increase calories with rich nutrients to maximize muscle mass predictably.</p>
+                    <div class="d-flex justify-content-between text-muted mb-2 font-weight-bold" style="font-size:13px;">
+                        <span>Goal: Bulking</span>
+                        <span>2,800 kcal/day</span>
+                    </div>
+                    <div class="buy-amoount text-center mb-3">₹ 3299</div>
+                    <a href="payment.php?plan=Muscle+Gain+Pro&price=3299" class="btn btn-success btn-block text-white" style="border-radius: 8px;">Buy Now</a>
                 </div>
             </div>
 
             <!-- Card 6 -->
-            <div class="col-lg-4 col-md-6 col-12 mb-4 text-center">
-                <div class="meal-plan-card shadow">
-                    <img src="../meal-plans-images/Balanced meal.jpg" class="img-fluid">
-                    <h3 class="meal-plan-title mt-3">Balanced Diet</h3>
-                    <p class="meal-plan-description">Maintain nutrient balance for <br> steady energy.</p>
-                    <p class="meal-plan-category">General Fitness</p>
-                    <p class="meal-plan-kcal">2,000 kcal/day</p>
-                    <p class="meal-plan-price">₹ 2499</p>
-                    <hr>
-                    <button class="btn btn-success btn-block">Buy Now</button>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="stat-card h-100 d-flex flex-column" style="padding: 15px;">
+                    <img src="../meal-plans-images/Balanced meal.jpg" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;">
+                    <h4 class="font-weight-bold" style="color: var(--text-main);">Balanced Diet</h4>
+                    <p class="text-muted flex-grow-1" style="font-size:14px;">Maintain a perfect macronutrient balance for steady daily energy.</p>
+                    <div class="d-flex justify-content-between text-muted mb-2 font-weight-bold" style="font-size:13px;">
+                        <span>Goal: Maintenance</span>
+                        <span>2,000 kcal/day</span>
+                    </div>
+                    <div class="buy-amoount text-center mb-3">₹ 2499</div>
+                    <a href="payment.php?plan=Balanced+Diet&price=2499" class="btn btn-success btn-block text-white" style="border-radius: 8px;">Buy Now</a>
                 </div>
             </div>
 
@@ -129,13 +108,7 @@ ob_start();
     </div>
 </div>     
 
-     <script type="text/javascript" src="https://new-assets.ccbp.in/frontend/content/static-ccbp-ui-kit/static-ccbp-ui-kit.js"></script>
-</body>
-</html>
-
- 
 <?php
 $content = ob_get_clean();
 include("../includes/user_layout.php");
-
 ?>

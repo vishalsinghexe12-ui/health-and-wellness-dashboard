@@ -1,143 +1,153 @@
 <?php
-$title = "Plans";
-$css = "register-dashboard.css"; 
+$title = "SUBI Tips";
+$css = "Sub-tips.css"; 
 
 ob_start();
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health & Wellness</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-      crossorigin="anonymous"
-    ></script>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="Sub-tips.css">
-    
-</head>
-<body>
+<div class="tips-page py-5" style="background-color: var(--bg-light); min-height: calc(100vh - 70px);">
+    <div class="container">
+        <div class="tips-title text-center mb-5">
+            <h2 class="font-weight-bold" style="color: var(--primary-dark);">SUBI Special Tips</h2>
+            <p class="text-muted">Improve your lifestyle with smart daily habits.</p>
+        </div>
 
-<div class="tips-page">
+        <div class="row g-4">
+            
+            <!-- Tip 1 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="stat-card h-100 text-center py-4">
+                    <div style="font-size: 40px; color: var(--primary);" class="mb-3"><i class="fas fa-glass-water"></i></div>
+                    <span class="badge badge-success mb-2 p-2">Nutrition</span>
+                    <h4 class="font-weight-bold">Hydration Boost</h4>
+                    <p class="text-muted mt-2" style="font-size: 14px;">Drink 2-3 liters of water daily to improve metabolism and energy levels.</p>
+                    <button class="btn btn-outline-success mt-auto mx-auto" style="border-radius:8px;" data-toggle="modal" data-target="#tipModal1">Learn More</button>
+                </div>
+            </div>
 
-    <div class="tips-title">
-        <h2>SUBI Special Tips</h2>
-        <p>Improve your lifestyle with smart daily habits</p>
+            <!-- Tip 2 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="stat-card h-100 text-center py-4">
+                    <div style="font-size: 40px; color: var(--primary);" class="mb-3"><i class="fas fa-dumbbell"></i></div>
+                    <span class="badge badge-success mb-2 p-2">Workout</span>
+                    <h4 class="font-weight-bold">Daily Exercise</h4>
+                    <p class="text-muted mt-2" style="font-size: 14px;">30 minutes of daily exercise strengthens your heart and muscles.</p>
+                    <button class="btn btn-outline-success mt-auto mx-auto" style="border-radius:8px;" data-toggle="modal" data-target="#tipModal2">Learn More</button>
+                </div>
+            </div>
+
+            <!-- Tip 3 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="stat-card h-100 text-center py-4" style="background: linear-gradient(135deg, var(--bg-light), #e6fcf5); border: 2px solid var(--primary);">
+                    <div style="font-size: 40px; color: var(--primary-dark);" class="mb-3"><i class="fas fa-bed"></i></div>
+                    <span class="badge badge-success mb-2 p-2">Recovery</span>
+                    <h4 class="font-weight-bold">Quality Sleep</h4>
+                    <p class="text-muted mt-2" style="font-size: 14px;">Maintain 7-8 hours of sleep to enhance recovery and focus.</p>
+                    <button class="btn btn-success mt-auto mx-auto" style="border-radius:8px;" data-toggle="modal" data-target="#tipModal3">Start Now</button>
+                </div>
+            </div>
+
+            <!-- Tip 4 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="stat-card h-100 text-center py-4">
+                    <div style="font-size: 40px; color: var(--primary);" class="mb-3"><i class="fas fa-apple-whole"></i></div>
+                    <span class="badge badge-success mb-2 p-2">Diet</span>
+                    <h4 class="font-weight-bold">Balanced Diet</h4>
+                    <p class="text-muted mt-2" style="font-size: 14px;">Include proteins, carbs, and healthy fats in balanced proportions.</p>
+                    <button class="btn btn-outline-success mt-auto mx-auto" style="border-radius:8px;" data-toggle="modal" data-target="#tipModal4">Learn More</button>
+                </div>
+            </div>
+
+            <!-- Tip 5 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="stat-card h-100 text-center py-4">
+                    <div style="font-size: 40px; color: var(--primary);" class="mb-3"><i class="fas fa-chart-line"></i></div>
+                    <span class="badge badge-success mb-2 p-2">Tracking</span>
+                    <h4 class="font-weight-bold">Track Progress</h4>
+                    <p class="text-muted mt-2" style="font-size: 14px;">Weekly tracking helps you stay consistent and motivated.</p>
+                    <button class="btn btn-outline-success mt-auto mx-auto" style="border-radius:8px;" data-toggle="modal" data-target="#tipModal5">Learn More</button>
+                </div>
+            </div>
+
+            <!-- Tip 6 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="stat-card h-100 text-center py-4">
+                    <div style="font-size: 40px; color: var(--primary);" class="mb-3"><i class="fas fa-brain"></i></div>
+                    <span class="badge badge-success mb-2 p-2">Mind</span>
+                    <h4 class="font-weight-bold">Mental Wellness</h4>
+                    <p class="text-muted mt-2" style="font-size: 14px;">Practice meditation to reduce stress and improve concentration.</p>
+                    <button class="btn btn-outline-success mt-auto mx-auto" style="border-radius:8px;" data-toggle="modal" data-target="#tipModal6">Learn More</button>
+                </div>
+            </div>
+            
+        </div>
     </div>
-
-    <div class="tips-container">
-
-        <!-- Card 1 -->
-        <div class="tips-card">
-            <div class="tips-icon">
-                <i class="fas fa-glass-water"></i>
-                <span class="badge">Nutrition</span>
-            </div>
-            <div class="tips-content">
-                <h3>Hydration Boost</h3>
-                <p>Drink 2-3 liters of water daily to improve metabolism and energy levels.</p>
-                <a href="#" class="tips-btn">Learn More</a>
-            </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="tips-card">
-            <div class="tips-icon">
-                <i class="fas fa-dumbbell"></i>
-                <span class="badge">Workout</span>
-            </div>
-            <div class="tips-content">
-                <h3>Daily Exercise</h3>
-                <p>30 minutes of daily exercise strengthens your heart and muscles.</p>
-                <a href="#" class="tips-btn">Learn More</a>
-            </div>
-        </div>
-
-        <!-- Featured Card -->
-        <div class="tips-card featured">
-            <div class="tips-icon">
-                <i class="fas fa-bed"></i>
-                <span class="badge">Recovery</span>
-            </div>
-            <div class="tips-content">
-                <h3>Quality Sleep</h3>
-                <p>Maintain 7-8 hours of sleep to enhance recovery and focus.</p>
-                <a href="#" class="tips-btn">Start Now</a>
-            </div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="tips-card">
-            <div class="tips-icon">
-                <i class="fas fa-apple-whole"></i>
-                <span class="badge">Diet</span>
-            </div>
-            <div class="tips-content">
-                <h3>Balanced Diet</h3>
-                <p>Include proteins, carbs, and healthy fats in balanced proportions.</p>
-                <a href="#" class="tips-btn">Learn More</a>
-            </div>
-        </div>
-
-        <!-- Card 5 -->
-        <div class="tips-card">
-            <div class="tips-icon">
-                <i class="fas fa-chart-line"></i>
-                <span class="badge">Tracking</span>
-            </div>
-            <div class="tips-content">
-                <h3>Track Progress</h3>
-                <p>Weekly tracking helps you stay consistent and motivated.</p>
-                <a href="#" class="tips-btn">Learn More</a>
-            </div>
-        </div>
-
-        <!-- Card 6 -->
-        <div class="tips-card">
-            <div class="tips-icon">
-                <i class="fas fa-brain"></i>
-                <span class="badge">Mind</span>
-            </div>
-            <div class="tips-content">
-                <h3>Mental Wellness</h3>
-                <p>Practice meditation to reduce stress and improve concentration.</p>
-                <a href="#" class="tips-btn">Learn More</a>
-            </div>
-        </div>
-
-    </div>
-
 </div>
 
+<!-- Modals -->
+<div class="modal fade" id="tipModal1" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content p-4 text-center">
+      <h3 class="font-weight-bold text-success mb-3">💧 Hydration Framework</h3>
+      <p class="text-muted">Start your morning with a large glass of water. Keep a bottle at your desk and aim to refill it at least 3 times a day. Sipping consistently is much better than chugging all at once.</p>
+      <button class="btn btn-success mt-3" data-dismiss="modal">Got it!</button>
+    </div>
+  </div>
+</div>
 
-     <script type="text/javascript" src="https://new-assets.ccbp.in/frontend/content/static-ccbp-ui-kit/static-ccbp-ui-kit.js"></script>
-</body>
-</html>
+<div class="modal fade" id="tipModal2" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content p-4 text-center">
+      <h3 class="font-weight-bold text-success mb-3">🏃 Workout Plan</h3>
+      <p class="text-muted">Break your 30 minutes into two 15-minute bursts if you're strapped for time. Bodyweight exercises at home (like pushups, squats, and planks) are an excellent start.</p>
+      <button class="btn btn-success mt-3" data-dismiss="modal">Got it!</button>
+    </div>
+  </div>
+</div>
 
- 
+<div class="modal fade" id="tipModal3" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content p-4 text-center">
+      <h3 class="font-weight-bold text-success mb-3">🌙 Sleep Hygiene</h3>
+      <p class="text-muted">Lower the temperature in your room slightly and completely remove screen exposure 1 hour before bed. Deep sleep is mathematically when your muscles grow and recover!</p>
+      <button class="btn btn-success mt-3" data-dismiss="modal">Got it!</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="tipModal4" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content p-4 text-center">
+      <h3 class="font-weight-bold text-success mb-3">🥗 Dietary Routine</h3>
+      <p class="text-muted">Aim for the "Plate Rule": 50% color (vegetables), 25% clean protein (chicken, tofu, beans), and 25% complex carbs (rice, quinoa). Avoid hidden liquid calories.</p>
+      <button class="btn btn-success mt-3" data-dismiss="modal">Got it!</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="tipModal5" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content p-4 text-center">
+      <h3 class="font-weight-bold text-success mb-3">📈 Tracking Strategy</h3>
+      <p class="text-muted">Weigh yourself once a week, ideally at the same time in the morning. Better yet, track how your clothes feel or your energy levels throughout the week rather than just staring at numbers.</p>
+      <button class="btn btn-success mt-3" data-dismiss="modal">Got it!</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="tipModal6" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content p-4 text-center">
+      <h3 class="font-weight-bold text-success mb-3">🧘 Mental Framework</h3>
+      <p class="text-muted">Box breathing (4s inhale, 4s hold, 4s exhale, 4s hold) can immediately drop cortisol levels. Stress triggers fat retention, so relaxing is a core part of physical health!</p>
+      <button class="btn btn-success mt-3" data-dismiss="modal">Got it!</button>
+    </div>
+  </div>
+</div>
+
 <?php
 $content = ob_get_clean();
+// We add Sub-tips CSS context so it loads both general and sub-tips if needed.
+$css = "register-dashboard.css";
 include("../includes/user_layout.php");
-
 ?>

@@ -1,165 +1,159 @@
 <?php
-$title = "Registered User";
+$title = "Dashboard - Health & Wellness";
 $css = "register-dashboard.css"; 
 
 ob_start();
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registered Dashboard</title>
-    
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://kit.fontawesome.com/ccc7436e56.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="register-dashboard.css">
-</head>
-<body>
-
     <!-- Register Dashboard Content -->
-    <div class="container-fluid">
-      <div class="row" style="height:100vh;">
+    <div class="container-fluid" style="flex: 1; padding: 0;">
+      <div class="row m-0" style="min-height: calc(100vh - 70px);">
 
          <!-- Sidebar -->
-    <div class="col-2 bg-success">
-      <div class="sticky-top"> 
-        <nav class="nav flex-column mt-3 sidebar">
+        <div class="col-md-3 col-lg-2 bg-success p-0">
+          <div class="sticky-top sidebar"> 
+            <nav class="nav flex-column">
+              <a class="nav-link active sidebar-link" href="register-dashboard.php">
+                <i class="fa-solid fa-gauge"></i> 
+                <span class="d-none d-sm-inline">Dashboard</span>
+              </a>
 
-          <a class="nav-link active sidebar-link" style="white-space: nowrap;" href="register-dashboard.php">
-            <i class="fa-solid fa-gauge mr-2"></i> 
-            <span class="d-none d-sm-inline ms-2">Dashboard</span>
-          </a>
+              <hr class="sidebar-divider">
 
-          <hr class="sidebar-divider">
+              <a class="nav-link sidebar-link" href="meal-plans.php">
+                <i class="fa-solid fa-bowl-food"></i> 
+                <span class="d-none d-sm-inline">Meal Plans</span>
+              </a>
 
-          <a class="nav-link sidebar-link" style="white-space: nowrap;" href="meal-plans.php">
-            <i class="fa-solid fa-bowl-food mr-2"></i> 
-            <span class="d-none d-sm-inline ms-2">Meal Plans</span>
-          </a>
+              <a class="nav-link sidebar-link" href="Exercise-plans.php">
+                <i class="fa-solid fa-dumbbell"></i> 
+                <span class="d-none d-sm-inline">Exercise Plans</span>
+              </a>
 
-          <a class="nav-link sidebar-link" style="white-space: nowrap;" href="Exercise-plans.php">
-            <i class="fa-solid fa-dumbbell mr-2"></i> 
-            <span class="d-none d-sm-inline ms-2">Exercise Plans</span>
-          </a>
+              <a class="nav-link sidebar-link" href="progress.php">
+                <i class="fa-solid fa-bars-progress"></i> 
+                <span class="d-none d-sm-inline">Progress Data</span>
+              </a>
 
-          <a class="nav-link sidebar-link" style="white-space: nowrap;" href="progress.php">
-            <i class="fa-solid fa-bars-progress mr-2"></i> 
-            <span class="d-none d-sm-inline ms-2">Progress Data</span>
-          </a>
+              <a class="nav-link sidebar-link" href="Sub-tips.php">
+                <i class="fa-solid fa-lightbulb"></i> 
+                <span class="d-none d-sm-inline">SUBI Tips</span>
+              </a>
 
-          <a class="nav-link sidebar-link" style="white-space: nowrap;" href="Sub-tips.php">
-            <i class="fa-solid fa-lightbulb mr-2"></i> 
-            <span class="d-none d-sm-inline ms-2">SUBI Tips</span>
-          </a>
+              <!-- NEW: Manage Plans -->
+              <a class="nav-link sidebar-link" href="manage-plans.php">
+                <i class="fa-solid fa-clipboard-list"></i> 
+                <span class="d-none d-sm-inline">Manage Plans</span>
+              </a>
 
-          <!-- NEW: Manage Plans -->
-          <a class="nav-link sidebar-link" style="white-space: nowrap;" href="manage-plans.php">
-            <i class="fa-solid fa-clipboard-list mr-2"></i> 
-            <span class="d-none d-sm-inline ms-2">Manage Plans</span>
-          </a>
+              <!-- NEW: Support -->
+              <a class="nav-link sidebar-link" href="support.php">
+                <i class="fa-solid fa-headset"></i> 
+                <span class="d-none d-sm-inline">Support</span>
+              </a>
 
-          <!-- NEW: Support -->
-          <a class="nav-link sidebar-link" style="white-space: nowrap;" href="support.php">
-            <i class="fa-solid fa-headset mr-2"></i> 
-            <span class="d-none d-sm-inline ms-2">Support</span>
-          </a>
+              <hr class="sidebar-divider pt-4 mt-auto">
 
-          <a class="nav-link sidebar-link" style="white-space: nowrap;" href="../login.php">
-            <i class="fa-solid fa-right-from-bracket mr-2"></i> 
-            <span class="d-none d-sm-inline ms-2">Logout</span>
-          </a>
-
-        </nav>
-      </div>
-    </div>
+              <a class="nav-link sidebar-link" href="../login.php">
+                <i class="fa-solid fa-right-from-bracket"></i> 
+                <span class="d-none d-sm-inline">Logout</span>
+              </a>
+            </nav>
+          </div>
+        </div>
 
         <!-- Main Content -->
+        <div class="col-md-9 col-lg-10 p-4" style="background-color: var(--bg-light);">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+              <h2 class="font-weight-bold m-0" style="color: var(--text-main);">Welcome Back!</h2>
+              <span class="text-muted"><?php echo date('l, F j, Y'); ?></span>
+          </div>
 
-    
-  <div class="col-10">
-    <div class="container-fluid mt-4">
-      <div class="row g-3">
+          <div class="row g-4 mb-5">
+            <!-- Card 1 -->
+            <div class="col-12 col-sm-6 col-xl-3 mb-4">
+              <div class="stat-card">
+                <i class="fa-solid fa-stopwatch stat-icon"></i>
+                <h5>Total Sessions</h5>
+                <h2>1,250</h2>
+                <p class="text-success"><i class="fa-solid fa-arrow-up"></i> 12% from last week</p>
+              </div>
+            </div>
 
-        <!-- Card 1 -->
-        <div class="col-12 col-sm-6 col-lg-3">
-          <div class="card bg-success text-white h-100">
-            <div class="card-body">
-              <h5>Total Sessions</h5>
-              <h2>1,250</h2>
-              <p>Sessions completed</p>
+            <!-- Card 2 -->
+            <div class="col-12 col-sm-6 col-xl-3 mb-4">
+              <div class="stat-card">
+                <i class="fa-solid fa-coins stat-icon"></i>
+                <h5>Credits Balance</h5>
+                <h2>850</h2>
+                <p>Available credits</p>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col-12 col-sm-6 col-xl-3 mb-4">
+              <div class="stat-card">
+                <i class="fa-solid fa-calendar-check stat-icon"></i>
+                <h5>Days Active</h5>
+                <h2>12</h2>
+                <p>Out of 30 this month</p>
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="col-12 col-sm-6 col-xl-3 mb-4">
+              <div class="stat-card">
+                <i class="fa-solid fa-fire stat-icon"></i>
+                <h5>Streak</h5>
+                <h2>4 Days</h2>
+                <p class="text-warning"><i class="fa-solid fa-star"></i> Keep it up!</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Card 2 -->
-        <div class="col-12 col-sm-6 col-lg-3">
-          <div class="card bg-success text-white h-100">
-            <div class="card-body">
-              <h5>Credits Balance</h5>
-              <h2>850</h2>
-              <p>Available credits</p>
-            </div>
+          <div class="row">
+              <div class="col-lg-8 mb-4">
+                  <div class="activity-card h-100 m-0">
+                      <h4 class="font-weight-bold mb-4">Recent Activity</h4>
+                      <div class="d-flex align-items-center mb-3">
+                          <div class="bg-success text-white rounded p-2 mr-3"><i class="fa-solid fa-dumbbell"></i></div>
+                          <div class="flex-grow-1">
+                              <h6 class="m-0 font-weight-bold">Completed HIIT Workout</h6>
+                              <small class="text-muted">Today at 8:30 AM</small>
+                          </div>
+                      </div>
+                      <div class="d-flex align-items-center mb-3">
+                          <div class="bg-info text-white rounded p-2 mr-3"><i class="fa-solid fa-bowl-food"></i></div>
+                          <div class="flex-grow-1">
+                              <h6 class="m-0 font-weight-bold">Logged High Protein Breakfast</h6>
+                              <small class="text-muted">Today at 9:15 AM</small>
+                          </div>
+                      </div>
+                      <div class="d-flex align-items-center mb-3">
+                          <div class="bg-warning text-white rounded p-2 mr-3"><i class="fa-solid fa-medal"></i></div>
+                          <div class="flex-grow-1">
+                              <h6 class="m-0 font-weight-bold">Achieved 10k Steps Goal</h6>
+                              <small class="text-muted">Yesterday at 6:45 PM</small>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-lg-4 mb-4">
+                  <div class="activity-card h-100 m-0 text-center d-flex flex-column justify-content-center align-items-center">
+                      <h4 class="font-weight-bold mb-3">Next Milestone</h4>
+                      <div class="spinner-border text-success mb-3" role="status" style="width: 3rem; height: 3rem;">
+                          <span class="sr-only">Loading...</span>
+                      </div>
+                      <p class="text-muted mb-0">5 Workout Sessions away from Level 3!</p>
+                  </div>
+              </div>
           </div>
-        </div>
 
-        <!-- Card 3 -->
-        <div class="col-12 col-sm-6 col-lg-3">
-          <div class="card bg-success text-white h-100">
-            <div class="card-body">
-              <h5>Days Active</h5>
-              <h2>12</h2>
-              <p>This month</p>
-            </div>
-          </div>
         </div>
-
-        <!-- Card 4 -->
-        <div class="col-12 col-sm-6 col-lg-3">
-          <div class="card bg-success text-white h-100">
-            <div class="card-body">
-              <h5>Motivation</h5>
-              <h2>Stay Consistent</h2>
-              <p>Stay Focused</p>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
-  </div>
-
-
-    <script type="text/javascript" src="https://new-assets.ccbp.in/frontend/content/static-ccbp-ui-kit/static-ccbp-ui-kit.js"></script>
-
-</body>
-</html>
 
 <?php
 $content = ob_get_clean();
 include("../includes/user_layout.php");
-
 ?>
