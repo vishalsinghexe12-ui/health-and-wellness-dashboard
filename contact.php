@@ -1,6 +1,16 @@
 <?php
+session_start();
 $title = "Contact Us - Health & Wellness";
 $css = "guest.css";
+
+$flashMessage = $_SESSION['flash_message'] ?? null;
+$flashType = isset($_GET['msg']) && $_GET['msg'] === 'sent' ? 'success' : 'danger';
+if (isset($_SESSION['flash_message'])) {
+    unset($_SESSION['flash_message']);
+}
+
+$old = $_SESSION['contact_form'] ?? ['name' => '', 'email' => '', 'subject' => '', 'message' => ''];
+unset($_SESSION['contact_form']);
 
 ob_start();
 ?>
@@ -13,6 +23,16 @@ ob_start();
             <p class="lead text-muted">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
         </div>
     </div>
+
+    <?php if ($flashMessage): ?>
+        <div class="row mb-3">
+            <div class="col-12">
+                <div class="alert alert-<?php echo $flashType; ?>" role="alert">
+                    <?php echo $flashMessage; ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
 
     <div class="row">
         <div class="col-lg-7 mb-4">
@@ -29,6 +49,7 @@ ob_start();
                                     type="text"
                                     class="form-control"
                                     name="name"
+                                    value="<?php echo htmlspecialchars($old['name'] ?? '', ENT_QUOTES); ?>"
                                     data-validation="required min"
                                     data-min="2"
                                 >
@@ -44,6 +65,7 @@ ob_start();
                                     type="text"
                                     class="form-control"
                                     name="email"
+                                    value="<?php echo htmlspecialchars($old['email'] ?? '', ENT_QUOTES); ?>"
                                     data-validation="required email"
                                 >
                                 <span id="email_error" class="text-danger"></span>
@@ -57,6 +79,7 @@ ob_start();
                                 type="text"
                                 class="form-control"
                                 name="subject"
+                                value="<?php echo htmlspecialchars($old['subject'] ?? '', ENT_QUOTES); ?>"
                                 data-validation="required min"
                                 data-min="3"
                             >
@@ -72,7 +95,7 @@ ob_start();
                                 rows="5"
                                 data-validation="required min"
                                 data-min="10"
-                            ></textarea>
+                            ><?php echo htmlspecialchars($old['message'] ?? '', ENT_QUOTES); ?></textarea>
 
                             <span id="message_error" class="text-danger"></span>
                         </div>

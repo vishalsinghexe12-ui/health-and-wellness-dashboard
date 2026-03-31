@@ -9,7 +9,7 @@ ob_start();
 <div class="container-fluid">
   <div class="row" style="height:100vh;">
     <!-- Sidebar -->
-        <div class="col-2 bg-success">
+        <div class="col-2 px-0 sidebar-wrapper">
           <div class="sticky-top"> 
             <nav class="nav flex-column mt-3 sidebar">
 
@@ -40,32 +40,33 @@ ob_start();
         </div>
 
     <!-- Main Content -->
-    <div class="col-lg-10 p-3">
-      <div class="row mb-4">
+    <div class="col-lg-10 p-4">
+      <div class="row mb-5 mt-2">
         <div class="col-md-4">
-          <div class="card bg-success text-white p-3">
-            <h6>Total Users</h6>
+          <div class="stat-card">
+            <h6><i class="fa-solid fa-users mr-2"></i>Total Users</h6>
             <h3>50</h3>
           </div>
         </div>
 
         <div class="col-md-4">
-          <div class="card bg-success text-white p-3">
-            <h6>Total Plans</h6>
+          <div class="stat-card">
+            <h6><i class="fa-solid fa-dumbbell mr-2"></i>Total Plans</h6>
             <h3>4</h3>
           </div>
         </div>
 
         <div class="col-md-4">
-          <div class="card bg-success text-white p-3">
-            <h6>Total Messages</h6>
+          <div class="stat-card">
+            <h6><i class="fa-solid fa-envelope mr-2"></i>Total Messages</h6>
             <h3>12</h3>
           </div>
         </div>
-        <div class="card shadow-sm mt-4 pl-3">
-        <div class="card-body mb-3">
+      </div>
+        <div class="card shadow-md mt-4 p-2">
+        <div class="card-body">
 
-        <h5 class="mb-3">Recent Users</h5>
+        <h4 class="mb-4" style="font-family:'Outfit', sans-serif;">Recent Users</h4>
 
         <table class="table table-bordered table-hover">
             <thead class="thead-light">

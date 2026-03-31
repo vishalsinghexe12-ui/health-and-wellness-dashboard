@@ -18,13 +18,13 @@ ob_start();
                     </div>
 
                     <!-- Role Selection Buttons -->
-                    <div class="d-flex gap-3">
-                        <a href="login.php" class="btn btn-outline-success w-50 mr-3 text-white bg-success">
-                            User
+                    <div class="d-flex mb-4">
+                        <a href="login.php" class="btn btn-outline-success active-toggle w-50 mr-2 d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-user mr-2"></i> User
                         </a>
 
-                        <a href="../admin/admin-login.php" class="btn btn-outline-success w-50  text-white bg-success">
-                            Admin
+                        <a href="admin/admin-login.php" class="btn btn-outline-success w-50 ml-2 d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-user-shield mr-2"></i> Admin
                         </a>
                     </div>
                     <br>

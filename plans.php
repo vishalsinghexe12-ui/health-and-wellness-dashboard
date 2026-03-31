@@ -21,7 +21,7 @@ ob_start();
                     <p class="guest-card-paragraph mt-3">Basic Yoga &bull; 10 Min Daily Exercise &bull; Water tracking</p>
                     <p class="guest-card-paragraph text-primary font-weight-bold">Duration: 4 Weeks</p>
                     <p class="guest-card-paragraph mb-4">Goal: Build healthy habits</p>
-                    <button class="get-started-button">Start Plan</button>
+                    <a href="user/payment.php?plan=Beginner+Plan&price=499" class="get-started-button d-inline-block text-decoration-none mt-2">Buy Now (₹499)</a>
                 </div>
             </div>
 
@@ -33,7 +33,7 @@ ob_start();
                     <p class="guest-card-paragraph mt-3">Strength Training &bull; Daily step tracking &bull; Workout Schedule</p>
                     <p class="guest-card-paragraph text-primary font-weight-bold">Duration: 8 Weeks</p>
                     <p class="guest-card-paragraph mb-4">Goal: Improve Strength</p>
-                    <button class="get-started-button">Start Plan</button>
+                    <a href="user/payment.php?plan=Fitness+Plan&price=799" class="get-started-button d-inline-block text-decoration-none mt-2">Buy Now (₹799)</a>
                 </div>
             </div>
             
@@ -45,7 +45,7 @@ ob_start();
                     <p class="guest-card-paragraph mt-3">Healthy Meals &bull; Water goals &bull; Nutrition tips</p>
                     <p class="guest-card-paragraph text-primary font-weight-bold">Duration: 4 Weeks</p>
                     <p class="guest-card-paragraph mb-4">Goal: Improve Nutrition</p>
-                    <button class="get-started-button">Start Plan</button>
+                    <a href="user/payment.php?plan=Diet+Plan&price=599" class="get-started-button d-inline-block text-decoration-none mt-2">Buy Now (₹599)</a>
                 </div>
             </div>
 
@@ -57,7 +57,7 @@ ob_start();
                     <p class="guest-card-paragraph mt-3">Meditation &bull; Sleep tracking &bull; Stress Management</p>
                     <p class="guest-card-paragraph text-primary font-weight-bold">Duration: 6 Weeks</p>
                     <p class="guest-card-paragraph mb-4">Goal: Reduce stress</p>
-                    <button class="get-started-button">Start Plan</button>
+                    <a href="user/payment.php?plan=Mental+Wellness+Plan&price=899" class="get-started-button d-inline-block text-decoration-none mt-2">Buy Now (₹899)</a>
                 </div>
             </div>
 
