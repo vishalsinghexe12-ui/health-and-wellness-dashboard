@@ -7,13 +7,20 @@ ob_start();
     
 <div class="py-5" style="background-color: var(--bg-light); min-height: calc(100vh - 70px);">
     <div class="container">
+        <!-- Back Button from remote -->
+        <div class="mb-4">
+            <a href="register-dashboard.php" class="btn btn-outline-success d-inline-flex align-items-center" style="border-radius: 20px; padding: 5px 20px;">
+                <i class="fa-solid fa-arrow-left mr-2"></i>
+                <span>Back to Dashboard</span>
+            </a>
+        </div>
+
         <div class="text-center mb-5">
             <h2 class="font-weight-bold mb-2" style="color: var(--primary-dark);">Nutrition Meal Plans</h2>
             <p class="text-muted">Scientifically crafted meal plans to accelerate your health journey.</p>
         </div>
         
         <div class="row g-4">
-
             <!-- Card 1 -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="stat-card h-100 d-flex flex-column" style="padding: 15px;">
@@ -103,7 +110,6 @@ ob_start();
                     <a href="payment.php?plan=Balanced+Diet&price=2499" class="btn btn-success btn-block text-white" style="border-radius: 8px;">Buy Now</a>
                 </div>
             </div>
-
         </div>
     </div>
 </div>     

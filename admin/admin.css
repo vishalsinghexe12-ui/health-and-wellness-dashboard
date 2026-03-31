@@ -197,3 +197,31 @@ h1, h2, h3, h4, h5, h6 {
 .nav-link { border-radius: 6px; }
 .guest-nav-image { height: 50px; width: 60px; object-fit: cover; border-radius: 8px; }
 .hr-line { border-top: 1px solid rgba(255,255,255,0.1); }
+
+/* --- Back Button --- */
+.back-btn {
+    text-decoration: none;
+    color: #212529;
+    font-weight: 500;
+}
+
+.back-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: 0.3s ease;
+}
+
+.back-btn:hover .back-icon {
+    background-color: var(--primary-dark);
+    color: white;
+}
+
+.back-btn:hover {
+    text-decoration: none;
+}

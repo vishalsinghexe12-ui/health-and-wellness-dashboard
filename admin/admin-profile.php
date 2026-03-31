@@ -1,6 +1,6 @@
 <?php
 $title = "My Profile - Health & Wellness";
-$css = "register-dashboard.css";
+$css = "admin.css";
 
 ob_start();
 ?>
@@ -8,28 +8,21 @@ ob_start();
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <div class="mb-4">
-                <a href="javascript:history.back()" class="back-btn d-inline-flex align-items-center">
-                    <span class="back-icon">
-                        <i class="fa-solid fa-arrow-left"></i>
-                    </span>
-                    <span class="ml-2">Back</span>
-                </a>
-            </div>
+
             <div class="card shadow-lg border-0">
                 <div class="card-body p-4">
 
                     <!-- Profile Header -->
                     <div class="text-center mb-4">
 
-                        <img src="../images/woman-lotus-pose-park.jpg"
+                        <img src="../images/smiling-fit-sporty-man-warming-up-training-afro-american-athlete-stretching-his-legs-before-running.jpg"
                              class="rounded-circle shadow"
                              width="150"
                              height="150"
                              style="object-fit: cover; border:4px solid #198754;">
 
-                        <h4 class="mt-3">Prajakta Sarode</h4>
-                        <p class="text-muted">Health Enthusiast</p>
+                        <h4 class="mt-3">Aditya BV</h4>
+                        <p class="text-muted">Admin</p>
 
                         <button class="btn btn-success btn-sm"
                                 id="editBtn">
@@ -48,7 +41,7 @@ ob_start();
                                 <label>First Name</label>
                                 <input type="text"
                                        class="form-control"
-                                       value="Prajakta"
+                                       value="Aditya"
                                        disabled>
                             </div>
 
@@ -56,7 +49,7 @@ ob_start();
                                 <label>Last Name</label>
                                 <input type="text"
                                        class="form-control"
-                                       value="Sarode"
+                                       value="BV"
                                        disabled>
                             </div>
 
@@ -64,7 +57,7 @@ ob_start();
                                 <label>Email</label>
                                 <input type="email"
                                        class="form-control"
-                                       value="prajakta@email.com"
+                                       value="aditya@email.com"
                                        disabled>
                             </div>
 
@@ -79,7 +72,7 @@ ob_start();
                             <div class="col-md-6 mb-3">
                                 <label>Gender</label>
                                 <select class="form-control" disabled>
-                                    <option selected>Female</option>
+                                    <option selected>Male</option>
                                     <option>Male</option>
                                 </select>
                             </div>
@@ -125,5 +118,5 @@ document.getElementById("editBtn").addEventListener("click", function () {
 
 <?php
 $content = ob_get_clean();
-include("../includes/registered_layout.php");
+include("../includes/admin_layout.php");
 ?>

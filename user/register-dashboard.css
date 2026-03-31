@@ -54,7 +54,7 @@ body {
     padding-top: 20px;
     height: 100%;
 }
-.col-2.bg-success {
+.col-md-3.bg-success, .col-2.bg-success {
     background-color: var(--primary) !important;
     min-height: calc(100vh - 70px);
     box-shadow: inset -5px 0 15px rgba(0,0,0,0.05);
@@ -213,4 +213,32 @@ body {
 .modal-title {
     font-weight: 800;
     color: var(--primary-dark);
+}
+
+/* --- Back Button from remote --- */
+.back-btn {
+    text-decoration: none;
+    color: #212529;
+    font-weight: 500;
+}
+
+.back-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: 0.3s ease;
+}
+
+.back-btn:hover .back-icon {
+    background-color: var(--primary-dark);
+    color: white;
+}
+
+.back-btn:hover {
+    text-decoration: none;
 }

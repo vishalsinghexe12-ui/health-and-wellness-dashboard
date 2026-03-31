@@ -1,0 +1,28 @@
+.support-wrapper {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #e8f5e9, #f5f5f5);
+    padding: 40px 0;
+}
+
+.support-card {
+    border-radius: 16px;
+}
+
+.support-btn {
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.support-btn:hover {
+    background-color: #157347;
+}
+
+.support-info p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 14px;
+}

@@ -45,10 +45,8 @@ ob_start();
                         <label class="form-label fw-semibold">Plan Type</label>
                          <select name="type" class="form-control" required>
                             <option value="">Select Type</option>
-                            <option>Weight Loss</option>
-                            <option>Weight Gain</option>
-                            <option>Fitness</option>
-                            <option>Muscle Building</option>
+                            <option>Exercise plan</option>
+                            <option>Meal Plan</option>
                         </select>
                     </div>
 

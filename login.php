@@ -10,7 +10,7 @@ ob_start();
         <div class="col-md-6 col-lg-5">
             <div class="card border-0 shadow-lg">
                 <div class="card-body p-5">
-
+                    
                     <!-- Heading -->
                     <div class="text-center mb-4">
                         <h2 class="font-weight-bold text-success">Welcome Back</h2>
@@ -27,7 +27,6 @@ ob_start();
                             <i class="fa-solid fa-user-shield mr-2"></i> Admin
                         </a>
                     </div>
-                    <br>
 
                     <!-- Login Form -->
                     <form action="login_process.php" method="POST">

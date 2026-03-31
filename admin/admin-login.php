@@ -1,6 +1,6 @@
 <?php
 $title = "Login";
-$css = "guest.css"; 
+$css = "admin.css"; 
 
 ob_start();
 ?>
@@ -58,7 +58,7 @@ ob_start();
 
 
                         <!-- Login Button -->
-                        <button type="button" class="btn btn-success w-100 btn-lg mb-3" href="admin.php">Login </button>
+                        <button type="button" class="btn btn-success w-100 btn-lg mb-3" onclick="window.location.href='admin.php'">Login </button>
 
 
                         <!-- Register -->
@@ -89,5 +89,5 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
-include("includes/layout.php");
+include("../includes/admin_layout.php");
 ?>

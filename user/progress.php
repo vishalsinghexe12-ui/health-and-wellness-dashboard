@@ -73,7 +73,14 @@ $dates = ["Apr 1", "Apr 8", "Apr 15", "Apr 22", "Apr 29", "May 6", "May 13"];
 ?>
 
 <div class="dashboard-container">
-
+    <div class="mb-4">
+                <a href="javascript:history.back()" class="back-btn d-inline-flex align-items-center">
+                    <span class="back-icon">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </span>
+                    <span class="ml-2">Back</span>
+                </a>
+    </div>
     <h2 class="mb-1">My Progress</h2>
     <p class="text-muted">Track your fitness journey</p>
 
@@ -163,5 +170,5 @@ new Chart(ctx, {
 
 <?php
 $content = ob_get_clean();
-include("../includes/user_layout.php");
+include("../includes/registered_layout.php");
 ?>
