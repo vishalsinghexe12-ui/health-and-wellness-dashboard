@@ -104,6 +104,7 @@
                     <li style="margin-bottom: 12px;"><a href="admin-exercise-plans.php" style="color: #94a3b8; text-decoration: none; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='#10b981';this.style.paddingLeft='5px'" onmouseout="this.style.color='#94a3b8';this.style.paddingLeft='0'">Exercise Plans</a></li>
                     <li style="margin-bottom: 12px;"><a href="add-plans.php" style="color: #94a3b8; text-decoration: none; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='#10b981';this.style.paddingLeft='5px'" onmouseout="this.style.color='#94a3b8';this.style.paddingLeft='0'">Add Plan</a></li>
                     <li><a href="admin-profile.php" style="color: #94a3b8; text-decoration: none; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='#10b981';this.style.paddingLeft='5px'" onmouseout="this.style.color='#94a3b8';this.style.paddingLeft='0'">Profile</a></li>
+                    <li style="margin-top: 12px;"><a href="change-password.php" style="color: #94a3b8; text-decoration: none; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='#10b981';this.style.paddingLeft='5px'" onmouseout="this.style.color='#94a3b8';this.style.paddingLeft='0'">Change Password</a></li>
                 </ul>
             </div>
             <div class="col-lg-4 col-md-6 mb-4">

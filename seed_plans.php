@@ -2,17 +2,34 @@
 // seed_plans.php
 try {
     $con = mysqli_connect("localhost", "root", "");
+    if (!$con) {
+        die("Connection failed: " . mysqli_connect_error() . "\n");
+    }
+    echo "Connected to MySQL successfully.\n";
+
+    // Create database first if it doesn't exist
+    mysqli_query($con, "CREATE DATABASE IF NOT EXISTS health_and_wellness");
+    echo "Database 'health_and_wellness' ensured.\n";
+
+    // Now select it
     mysqli_select_db($con, "health_and_wellness");
     
     // Drop tables to recreate them with new schemas
     mysqli_query($con, "DROP TABLE IF EXISTS register");
     mysqli_query($con, "DROP TABLE IF EXISTS plans");
+    mysqli_query($con, "DROP TABLE IF EXISTS password_token");
+    mysqli_query($con, "DROP TABLE IF EXISTS contact_messages");
+    echo "Dropped existing tables.\n";
 } catch (Exception $e) {
-    echo "Error dropping tables: " . $e->getMessage() . "\n";
+    echo "Error: " . $e->getMessage() . "\n";
 }
+
+// Close the connection before db_config creates a new one
+mysqli_close($con);
 
 // Include db config to trigger table creations
 require_once("db_config.php");
+echo "Tables created via db_config.php.\n";
 
 // Insert Wellness Plans
 $plans = [

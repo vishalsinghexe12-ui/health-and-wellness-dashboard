@@ -28,6 +28,9 @@ ob_start();
                                 id="editBtn">
                             Edit Profile
                         </button>
+                        <a href="change-password.php" class="btn btn-outline-success btn-sm ms-2">
+                            <i class="fas fa-lock me-1"></i> Change Password
+                        </a>
                     </div>
 
                     <hr>
