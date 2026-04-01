@@ -115,10 +115,20 @@ $create_purchases = "CREATE TABLE IF NOT EXISTS user_purchases (
     user_id INT NOT NULL,
     plan_name VARCHAR(255) NOT NULL,
     price INT,
+    duration VARCHAR(50) DEFAULT '3 Months',
     status VARCHAR(50) DEFAULT 'Active',
     purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)";
+) engine=InnoDB";
 mysqli_query($con, $create_purchases);
+
+// Safely add duration column for existing installations
+$chk_purch_dur = mysqli_query($con, "SHOW COLUMNS FROM user_purchases LIKE 'duration'");
+if (mysqli_num_rows($chk_purch_dur) == 0) {
+    mysqli_query($con, "ALTER TABLE user_purchases ADD COLUMN duration VARCHAR(50) DEFAULT '3 Months' AFTER price");
+}
+
+// Bulk update existing plans to have a 3-month duration if they're empty
+mysqli_query($con, "UPDATE plans SET duration = '3 Months' WHERE duration IS NULL OR duration = ''");
 
 // User Wellness Profiles table (for personalized recommendations)
 $create_wellness = "CREATE TABLE IF NOT EXISTS user_wellness_profiles (

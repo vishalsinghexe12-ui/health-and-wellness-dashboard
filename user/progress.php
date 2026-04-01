@@ -27,10 +27,10 @@ $q3->execute();
 $total_spent = $q3->get_result()->fetch_assoc()['spent'];
 
 // Fetch purchased plans list
-$q4 = $con->prepare("SELECT plan_name, price, purchase_date FROM user_purchases WHERE user_id = ? ORDER BY purchase_date DESC");
-$q4->bind_param("i", $user_id);
-$q4->execute();
-$purchases = $q4->get_result()->fetch_all(MYSQLI_ASSOC);
+$q_p = $con->prepare("SELECT plan_name, price, purchase_date, duration FROM user_purchases WHERE user_id = ? ORDER BY purchase_date DESC");
+$q_p->bind_param("i", $user_id);
+$q_p->execute();
+$purchases = $q_p->get_result()->fetch_all(MYSQLI_ASSOC);
 
 // Calculate data
 $bmi = $wellness ? $wellness['bmi'] : null;
@@ -292,7 +292,14 @@ ob_start();
                         <?php foreach ($purchases as $p): ?>
                         <div class="purchase-timeline-item">
                             <h6 class="font-weight-bold m-0"><?php echo htmlspecialchars($p['plan_name']); ?></h6>
-                            <small class="text-muted"><?php echo date('M j, Y', strtotime($p['purchase_date'])); ?></small>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted"><?php echo date('M j, Y', strtotime($p['purchase_date'])); ?></small>
+                                <?php if(!empty($p['duration'])): ?>
+                                    <small class="text-success font-weight-bold" style="font-size: 11px;">
+                                        Until <?php echo date('M j, Y', strtotime($p['purchase_date'] . " + " . $p['duration'])); ?>
+                                    </small>
+                                <?php endif; ?>
+                            </div>
                             <span class="d-block font-weight-bold" style="color: var(--primary-dark);">₹<?php echo number_format($p['price']); ?></span>
                         </div>
                         <?php endforeach; ?>

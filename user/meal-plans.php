@@ -29,6 +29,11 @@ $result = mysqli_query($con, $query);
                         <span>Goal: <?php echo htmlspecialchars($row['category']); ?></span>
                         <span><?php echo htmlspecialchars($row['calories']); ?></span>
                     </div>
+                    <?php if (!empty($row['duration'])): ?>
+                    <div class="text-muted mb-2 font-weight-bold" style="font-size:13px;">
+                        <i class="fa-solid fa-clock mr-1"></i> <?php echo htmlspecialchars($row['duration']); ?>
+                    </div>
+                    <?php endif; ?>
                     <div class="buy-amoount text-center mb-3">₹ <?php echo htmlspecialchars($row['price']); ?></div>
                     <a href="payment.php?plan=<?php echo urlencode($row['title']); ?>&price=<?php echo urlencode($row['price']); ?>" class="btn btn-success btn-block text-white" style="border-radius: 8px;">Buy Now</a>
                 </div>

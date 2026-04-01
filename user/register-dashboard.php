@@ -34,7 +34,7 @@ $q4->execute();
 $q4->get_result();
 
 // Recent purchases (last 5)
-$q5 = $con->prepare("SELECT plan_name, price, purchase_date FROM user_purchases WHERE user_id = ? ORDER BY purchase_date DESC LIMIT 5");
+$q5 = $con->prepare("SELECT plan_name, price, purchase_date, duration FROM user_purchases WHERE user_id = ? ORDER BY purchase_date DESC LIMIT 5");
 $q5->bind_param("i", $user_id);
 $q5->execute();
 $recent_purchases = $q5->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -157,7 +157,14 @@ ob_start();
                               </div>
                               <div class="flex-grow-1">
                                   <h6 class="m-0 font-weight-bold"><?php echo htmlspecialchars($purchase['plan_name']); ?></h6>
-                                  <small class="text-muted"><?php echo date('M j, Y \a\t g:i A', strtotime($purchase['purchase_date'])); ?></small>
+                                  <div class="d-flex align-items-center">
+                                      <small class="text-muted mr-2"><?php echo date('M j, Y', strtotime($purchase['purchase_date'])); ?></small>
+                                      <?php if(!empty($purchase['duration'])): ?>
+                                          <small class="badge badge-soft-success" style="font-size: 10px; background: rgba(16, 185, 129, 0.08); color: #10b981; border-radius: 4px; padding: 1px 6px;">
+                                              Valid until <?php echo date('M j, Y', strtotime($purchase['purchase_date'] . " + " . $purchase['duration'])); ?>
+                                          </small>
+                                      <?php endif; ?>
+                                  </div>
                               </div>
                               <span class="font-weight-bold" style="color: var(--primary-dark);">₹<?php echo number_format($purchase['price']); ?></span>
                           </div>

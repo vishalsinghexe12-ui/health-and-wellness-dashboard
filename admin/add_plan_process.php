@@ -20,8 +20,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $type = 'Meal';
     }
 
-    $duration = $_POST['duration'] ?? ''; // Currently number of weeks
-    if (is_numeric($duration)) $duration .= " Weeks";
+    $duration = $_POST['duration'] ?? '';
+    if (is_numeric($duration)) {
+        $duration = $duration == 1 ? $duration . " Month" : $duration . " Months";
+    }
 
     $price = $_POST['price'] ?? 0;
     $description = $_POST['description'] ?? '';

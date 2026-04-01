@@ -40,8 +40,8 @@ ob_start();
 
                     <!-- duration -->
                     <div class="mb-4">
-                        <label class="form-label fw-semibold">Duration (Weeks)</label>
-                        <input type="number" class="form-control" required>
+                        <label class="form-label fw-semibold">Duration (Months)</label>
+                        <input type="number" class="form-control" name="duration" min="1" max="24" placeholder="e.g. 3" required>
                     </div>
 
 

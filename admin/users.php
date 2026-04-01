@@ -51,21 +51,21 @@ ob_start();
         <!-- Stats Row -->
         <div class="row mb-4">
             <div class="col-md-4 mb-3">
-                <div class="stat-card text-center" style="border-radius: 14px; border-top: 4px solid #10b981;">
-                    <h3 class="font-weight-bold m-0" style="color:#10b981;"><?php echo $total; ?></h3>
-                    <p class="text-muted m-0">Total Users</p>
+                <div class="stat-card text-center" style="border-radius: 14px; background: linear-gradient(135deg, #059669, #10b981); color: white;">
+                    <h3 class="font-weight-bold m-0" style="color:white;"><?php echo $total; ?></h3>
+                    <p class="m-0" style="opacity:0.85;">Total Users</p>
                 </div>
             </div>
             <div class="col-md-4 mb-3">
-                <div class="stat-card text-center" style="border-radius: 14px; border-top: 4px solid #3b82f6;">
-                    <h3 class="font-weight-bold m-0" style="color:#3b82f6;"><?php echo $active_count; ?></h3>
-                    <p class="text-muted m-0">Active Users</p>
+                <div class="stat-card text-center" style="border-radius: 14px; background: linear-gradient(135deg, #2563eb, #3b82f6); color: white;">
+                    <h3 class="font-weight-bold m-0" style="color:white;"><?php echo $active_count; ?></h3>
+                    <p class="m-0" style="opacity:0.85;">Active Users</p>
                 </div>
             </div>
             <div class="col-md-4 mb-3">
-                <div class="stat-card text-center" style="border-radius: 14px; border-top: 4px solid #f59e0b;">
-                    <h3 class="font-weight-bold m-0" style="color:#f59e0b;"><?php echo $inactive_count; ?></h3>
-                    <p class="text-muted m-0">Inactive Users</p>
+                <div class="stat-card text-center" style="border-radius: 14px; background: linear-gradient(135deg, #d97706, #f59e0b); color: white;">
+                    <h3 class="font-weight-bold m-0" style="color:white;"><?php echo $inactive_count; ?></h3>
+                    <p class="m-0" style="opacity:0.85;">Inactive Users</p>
                 </div>
             </div>
         </div>

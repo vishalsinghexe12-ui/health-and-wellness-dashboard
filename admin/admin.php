@@ -53,63 +53,63 @@ ob_start();
         <!-- Stat Cards -->
         <div class="row mb-5">
             <div class="col-lg-3 col-md-6 mb-3">
-                <div class="stat-card" style="border-left: 4px solid #10b981; border-radius: 14px;">
+                <div class="stat-card" style="background: linear-gradient(135deg, #059669, #10b981); border-radius: 14px; color: white;">
                     <div class="d-flex align-items-center">
-                        <div style="width:50px; height:50px; border-radius:14px; background:rgba(16,185,129,0.1); display:flex; align-items:center; justify-content:center; margin-right:15px;">
-                            <i class="fa-solid fa-users" style="font-size:22px; color:#10b981;"></i>
+                        <div style="width:50px; height:50px; border-radius:14px; background:rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; margin-right:15px;">
+                            <i class="fa-solid fa-users" style="font-size:22px; color:#fff;"></i>
                         </div>
                         <div>
-                            <p class="text-muted m-0" style="font-size:13px;">Total Users</p>
-                            <h3 class="m-0 font-weight-bold"><?php echo $total_users; ?></h3>
+                            <p class="m-0" style="font-size:13px; opacity:0.85;">Total Users</p>
+                            <h3 class="m-0 font-weight-bold" style="color:white;"><?php echo $total_users; ?></h3>
                         </div>
                     </div>
-                    <small class="text-success mt-2 d-block"><i class="fa-solid fa-circle-check mr-1"></i><?php echo $active_users; ?> active</small>
+                    <small style="opacity:0.85;" class="mt-2 d-block"><i class="fa-solid fa-circle-check mr-1"></i><?php echo $active_users; ?> active</small>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-3">
-                <div class="stat-card" style="border-left: 4px solid #3b82f6; border-radius: 14px;">
+                <div class="stat-card" style="background: linear-gradient(135deg, #2563eb, #3b82f6); border-radius: 14px; color: white;">
                     <div class="d-flex align-items-center">
-                        <div style="width:50px; height:50px; border-radius:14px; background:rgba(59,130,246,0.1); display:flex; align-items:center; justify-content:center; margin-right:15px;">
-                            <i class="fa-solid fa-dumbbell" style="font-size:22px; color:#3b82f6;"></i>
+                        <div style="width:50px; height:50px; border-radius:14px; background:rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; margin-right:15px;">
+                            <i class="fa-solid fa-dumbbell" style="font-size:22px; color:#fff;"></i>
                         </div>
                         <div>
-                            <p class="text-muted m-0" style="font-size:13px;">Total Plans</p>
-                            <h3 class="m-0 font-weight-bold"><?php echo $total_plans; ?></h3>
+                            <p class="m-0" style="font-size:13px; opacity:0.85;">Total Plans</p>
+                            <h3 class="m-0 font-weight-bold" style="color:white;"><?php echo $total_plans; ?></h3>
                         </div>
                     </div>
-                    <a href="plans.php" class="text-primary mt-2 d-block" style="font-size:13px;">Manage plans →</a>
+                    <a href="plans.php" class="mt-2 d-block" style="font-size:13px; color:rgba(255,255,255,0.9);">Manage plans →</a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-3">
-                <div class="stat-card" style="border-left: 4px solid #f59e0b; border-radius: 14px;">
+                <div class="stat-card" style="background: linear-gradient(135deg, #d97706, #f59e0b); border-radius: 14px; color: white;">
                     <div class="d-flex align-items-center">
-                        <div style="width:50px; height:50px; border-radius:14px; background:rgba(245,158,11,0.1); display:flex; align-items:center; justify-content:center; margin-right:15px;">
-                            <i class="fa-solid fa-envelope" style="font-size:22px; color:#f59e0b;"></i>
+                        <div style="width:50px; height:50px; border-radius:14px; background:rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; margin-right:15px;">
+                            <i class="fa-solid fa-envelope" style="font-size:22px; color:#fff;"></i>
                         </div>
                         <div>
-                            <p class="text-muted m-0" style="font-size:13px;">Support Tickets</p>
-                            <h3 class="m-0 font-weight-bold"><?php echo $total_messages; ?></h3>
+                            <p class="m-0" style="font-size:13px; opacity:0.85;">Support Tickets</p>
+                            <h3 class="m-0 font-weight-bold" style="color:white;"><?php echo $total_messages; ?></h3>
                         </div>
                     </div>
                     <?php if ($new_messages > 0): ?>
-                        <small class="text-warning mt-2 d-block"><i class="fa-solid fa-bell mr-1"></i><?php echo $new_messages; ?> new</small>
+                        <small style="opacity:0.9;" class="mt-2 d-block"><i class="fa-solid fa-bell mr-1"></i><?php echo $new_messages; ?> new</small>
                     <?php else: ?>
-                        <small class="text-success mt-2 d-block"><i class="fa-solid fa-check mr-1"></i>All replied</small>
+                        <small style="opacity:0.9;" class="mt-2 d-block"><i class="fa-solid fa-check mr-1"></i>All replied</small>
                     <?php endif; ?>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-3">
-                <div class="stat-card" style="border-left: 4px solid #8b5cf6; border-radius: 14px;">
+                <div class="stat-card" style="background: linear-gradient(135deg, #7c3aed, #8b5cf6); border-radius: 14px; color: white;">
                     <div class="d-flex align-items-center">
-                        <div style="width:50px; height:50px; border-radius:14px; background:rgba(139,92,246,0.1); display:flex; align-items:center; justify-content:center; margin-right:15px;">
-                            <i class="fa-solid fa-cart-shopping" style="font-size:22px; color:#8b5cf6;"></i>
+                        <div style="width:50px; height:50px; border-radius:14px; background:rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; margin-right:15px;">
+                            <i class="fa-solid fa-cart-shopping" style="font-size:22px; color:#fff;"></i>
                         </div>
                         <div>
-                            <p class="text-muted m-0" style="font-size:13px;">Total Purchases</p>
-                            <h3 class="m-0 font-weight-bold"><?php echo $total_purchases; ?></h3>
+                            <p class="m-0" style="font-size:13px; opacity:0.85;">Total Purchases</p>
+                            <h3 class="m-0 font-weight-bold" style="color:white;"><?php echo $total_purchases; ?></h3>
                         </div>
                     </div>
-                    <small class="text-muted mt-2 d-block">₹<?php echo number_format($total_revenue); ?> revenue</small>
+                    <small style="opacity:0.85;" class="mt-2 d-block">₹<?php echo number_format($total_revenue); ?> revenue</small>
                 </div>
             </div>
         </div>
@@ -218,41 +218,7 @@ ob_start();
             </div>
         </div>
 
-        <!-- Quick Actions -->
-        <div class="row">
-            <div class="col-md-3 mb-3">
-                <a href="users.php" class="d-block text-decoration-none">
-                    <div class="stat-card text-center" style="border-radius: 14px; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
-                        <i class="fa-solid fa-users mb-2" style="font-size:30px; color:#10b981;"></i>
-                        <h6 class="font-weight-bold text-dark">Manage Users</h6>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3 mb-3">
-                <a href="plans.php" class="d-block text-decoration-none">
-                    <div class="stat-card text-center" style="border-radius: 14px; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
-                        <i class="fa-solid fa-clipboard-list mb-2" style="font-size:30px; color:#3b82f6;"></i>
-                        <h6 class="font-weight-bold text-dark">Manage Plans</h6>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3 mb-3">
-                <a href="messages.php" class="d-block text-decoration-none">
-                    <div class="stat-card text-center" style="border-radius: 14px; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
-                        <i class="fa-solid fa-envelope mb-2" style="font-size:30px; color:#f59e0b;"></i>
-                        <h6 class="font-weight-bold text-dark">Support Tickets</h6>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3 mb-3">
-                <a href="add-plans.php" class="d-block text-decoration-none">
-                    <div class="stat-card text-center" style="border-radius: 14px; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
-                        <i class="fa-solid fa-plus-circle mb-2" style="font-size:30px; color:#8b5cf6;"></i>
-                        <h6 class="font-weight-bold text-dark">Add New Plan</h6>
-                    </div>
-                </a>
-            </div>
-        </div>
+
 
     </div>
 </div>

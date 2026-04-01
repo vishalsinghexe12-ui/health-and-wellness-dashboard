@@ -9,8 +9,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id'])) {
     $price = (int)$price_clean;
     $user_id = $_SESSION['user_id'];
 
-    $stmt = $con->prepare("INSERT INTO user_purchases (user_id, plan_name, price, status) VALUES (?, ?, ?, 'Active')");
-    $stmt->bind_param("isi", $user_id, $plan_name, $price);
+    // Fetch duration from plans table
+    $duration = "3 Months"; // Default
+    $get_duration = $con->prepare("SELECT duration FROM plans WHERE title = ? LIMIT 1");
+    $get_duration->bind_param("s", $plan_name);
+    $get_duration->execute();
+    $res = $get_duration->get_result();
+    if($row = $res->fetch_assoc()){
+        if(!empty($row['duration'])) $duration = $row['duration'];
+    }
+
+    $stmt = $con->prepare("INSERT INTO user_purchases (user_id, plan_name, price, duration, status) VALUES (?, ?, ?, ?, 'Active')");
+    $stmt->bind_param("isis", $user_id, $plan_name, $price, $duration);
     
     if($stmt->execute()){
         echo "SUCCESS";

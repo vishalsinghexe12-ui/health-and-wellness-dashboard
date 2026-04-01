@@ -44,10 +44,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="adminNavbar">
                     <div class="navbar-nav ml-auto align-items-center">
-                        <a class="nav-link font-weight-bold mr-2 text-dark" href="admin.php"><i class="fa-solid fa-gauge mr-1"></i> Dashboard</a>
-                        <a class="nav-link font-weight-bold mr-2 text-dark" href="users.php"><i class="fa-solid fa-users mr-1"></i> Users</a>
-                        <a class="nav-link font-weight-bold mr-2 text-dark" href="plans.php"><i class="fa-solid fa-dumbbell mr-1"></i> Plans</a>
-                        <a class="nav-link font-weight-bold mr-2 text-dark" href="messages.php"><i class="fa-solid fa-envelope mr-1"></i> Messages</a>
+                        <a class="nav-link mr-2 text-dark" href="admin.php"><i class="fa-solid fa-gauge mr-1"></i> Dashboard</a>
+                        <a class="nav-link mr-2 text-dark" href="users.php"><i class="fa-solid fa-users mr-1"></i> Users</a>
+                        <a class="nav-link mr-2 text-dark" href="plans.php"><i class="fa-solid fa-dumbbell mr-1"></i> Plans</a>
+                        <a class="nav-link mr-2 text-dark" href="messages.php"><i class="fa-solid fa-envelope mr-1"></i> Messages</a>
                         <a class="nav-link bg-success text-white ml-2 px-3 py-2" style="border-radius: 8px; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);" href="admin-profile.php">
                             <i class="fa-regular fa-user mr-1"></i> Profile
                         </a>
