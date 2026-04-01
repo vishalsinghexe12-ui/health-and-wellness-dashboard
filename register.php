@@ -16,7 +16,7 @@ ob_start();
 
 
                 <!-- Form Start -->
-                <form action="register_process.php" method="POST" id="regform">
+                <form action="register_process.php" method="POST" id="regform" enctype="multipart/form-data">
 
                     <!-- First Name and Last Name -->
                     <div class="row">

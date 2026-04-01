@@ -19,7 +19,7 @@ ob_start();
 
 
                 <!-- Form Start -->
-                <form action="register_process.php" method="POST" id="regform">
+                <form action="add_plan_process.php" method="POST" id="regform" enctype="multipart/form-data">
 
                     <div class=" mb-4">
                         <label class="form-label fw-semibold">Plan Title</label>

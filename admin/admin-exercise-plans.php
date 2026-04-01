@@ -1,7 +1,11 @@
 <?php
-$title = "Plans";
+$title = "Exercise Plans";
 $css = "admin.css"; 
 ob_start();
+
+require_once("../db_config.php");
+$query = "SELECT * FROM plans WHERE type = 'Exercise'";
+$result = mysqli_query($con, $query);
 ?>
 
 <div class="exercise-plan-container py-5">
@@ -14,101 +18,24 @@ ob_start();
         
         <div class="row">
 
-            <!-- Card 1 -->
+            <?php while($row = mysqli_fetch_assoc($result)): ?>
+            <!-- Card -->
             <div class="col-lg-4 col-md-6 col-12 mb-4 d-flex">
-                <div class="exercise-plan-card shadow w-100 d-flex flex-column text-center">
-                    <img src="../Exercise-Images/Beginner Fitness.jpg" class="img-fluid exercise-img">
-                    <h3 class="exercise-plan-title mt-3">Beginner Fitness Plan</h3>
-                    <p class="exercise-plan-description">
-                        A simple and effective workout routine designed for beginners to improve stamina and flexibility.
+                <div class="exercise-plan-card shadow w-100 d-flex flex-column text-center h-100 p-3">
+                    <?php $img = !empty($row['image_path']) ? "../".$row['image_path'] : "../Exercise-Images/Beginner Fitness.jpg"; ?>
+                    <img src="<?php echo htmlspecialchars($img); ?>" class="img-fluid exercise-img mb-3" style="height:200px; object-fit:cover;">
+                    <h3 class="exercise-plan-title mt-3" style="font-size: 1.5rem;"><?php echo htmlspecialchars($row['title']); ?></h3>
+                    <p class="exercise-plan-description flex-grow-1">
+                        <?php echo htmlspecialchars($row['description']); ?>
                     </p>
-                    <p class="exercise-plan-category"><strong>Level:</strong> Beginner</p>
-                    <p class="exercise-plan-duration"><strong>Duration:</strong> 8 Weeks</p>
-                    <p class="exercise-plan-price font-weight-bold">₹ 1999</p>
+                    <p class="exercise-plan-category m-0"><strong>Category:</strong> <?php echo htmlspecialchars($row['category']); ?></p>
+                    <p class="exercise-plan-duration m-0"><strong>Duration:</strong> <?php echo htmlspecialchars($row['duration']); ?></p>
+                    <p class="exercise-plan-price font-weight-bold mt-2">₹ <?php echo htmlspecialchars($row['price']); ?></p>
                     <hr>
-                    <button class="btn btn-success btn-block mt-auto">Join Now</button>
+                    <button class="btn btn-success btn-block mt-auto">Edit / Delete</button>
                 </div>
             </div>
-
-            <!-- Card 2 -->
-            <div class="col-lg-4 col-md-6 col-12 mb-4 d-flex">
-                <div class="exercise-plan-card shadow w-100 d-flex flex-column text-center">
-                    <img src="../Exercise-Images/Weight loss fitness.jpg" class="img-fluid exercise-img">
-                    <h3 class="exercise-plan-title mt-3">Weight Loss Program</h3>
-                    <p class="exercise-plan-description">
-                        Fat-burning cardio workouts combined with strength exercises to help you lose weight effectively.
-                    </p>
-                    <p class="exercise-plan-category"><strong>Goal:</strong> Weight Loss</p>
-                    <p class="exercise-plan-duration"><strong>Duration:</strong> 12 Weeks</p>
-                    <p class="exercise-plan-price font-weight-bold">₹ 2499</p>
-                    <hr>
-                    <button class="btn btn-success btn-block mt-auto">Join Now</button>
-                </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="col-lg-4 col-md-6 col-12 mb-4 d-flex">
-                <div class="exercise-plan-card shadow w-100 d-flex flex-column text-center">
-                    <img src="../Exercise-Images/muscle gain fitness.jpg" class="img-fluid exercise-img">
-                    <h3 class="exercise-plan-title mt-3">Muscle Gain Program</h3>
-                    <p class="exercise-plan-description">
-                        Strength training routines focused on increasing muscle mass and improving overall strength.
-                    </p>
-                    <p class="exercise-plan-category"><strong>Goal:</strong> Muscle Building</p>
-                    <p class="exercise-plan-duration"><strong>Duration:</strong> 16 Weeks</p>
-                    <p class="exercise-plan-price font-weight-bold">₹ 2999</p>
-                    <hr>
-                    <button class="btn btn-success btn-block mt-auto">Join Now</button>
-                </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="col-lg-4 col-md-6 col-12 mb-4 d-flex">
-                <div class="exercise-plan-card shadow w-100 d-flex flex-column text-center">
-                    <img src="../Exercise-Images/HIIT Blast.jpg" class="img-fluid exercise-img">
-                    <h3 class="exercise-plan-title mt-3">HIIT Blast Plan</h3>
-                    <p class="exercise-plan-description">
-                        High-Intensity Interval Training designed to burn maximum calories in minimum time.
-                    </p>
-                    <p class="exercise-plan-category"><strong>Level:</strong> Advanced</p>
-                    <p class="exercise-plan-duration"><strong>Duration:</strong> 10 Weeks</p>
-                    <p class="exercise-plan-price font-weight-bold">₹ 2799</p>
-                    <hr>
-                    <button class="btn btn-success btn-block mt-auto">Join Now</button>
-                </div>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="col-lg-4 col-md-6 col-12 mb-4 d-flex">
-                <div class="exercise-plan-card shadow w-100 d-flex flex-column text-center">
-                    <img src="../Exercise-Images/Beginner Fitness.jpg" class="img-fluid exercise-img">
-                    <h3 class="exercise-plan-title mt-3">Strength & Conditioning</h3>
-                    <p class="exercise-plan-description">
-                        Improve endurance, core strength, and athletic performance with structured training.
-                    </p>
-                    <p class="exercise-plan-category"><strong>Level:</strong> Intermediate</p>
-                    <p class="exercise-plan-duration"><strong>Duration:</strong> 14 Weeks</p>
-                    <p class="exercise-plan-price font-weight-bold">₹ 3199</p>
-                    <hr>
-                    <button class="btn btn-success btn-block mt-auto">Join Now</button>
-                </div>
-            </div>
-
-            <!-- Card 6 -->
-            <div class="col-lg-4 col-md-6 col-12 mb-4 d-flex">
-                <div class="exercise-plan-card shadow w-100 d-flex flex-column text-center">
-                    <img src="../Exercise-Images/Full Body Workout.jpg" class="img-fluid exercise-img">
-                    <h3 class="exercise-plan-title mt-3">Full Body Workout</h3>
-                    <p class="exercise-plan-description">
-                        Balanced workouts targeting all major muscle groups for overall fitness.
-                    </p>
-                    <p class="exercise-plan-category"><strong>Goal:</strong> General Fitness</p>
-                    <p class="exercise-plan-duration"><strong>Duration:</strong> 12 Weeks</p>
-                    <p class="exercise-plan-price font-weight-bold">₹ 2599</p>
-                    <hr>
-                    <button class="btn btn-success btn-block mt-auto">Join Now</button>
-                </div>
-            </div>
+            <?php endwhile; ?>
 
         </div>
     </div>

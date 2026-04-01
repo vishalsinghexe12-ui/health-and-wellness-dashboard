@@ -27,20 +27,34 @@ try {
 // Step 4: Create tables (if not exist)
 
 // Users table
-$create_register = "CREATE TABLE IF NOT EXISTS register (
+$create_table = "create table register(
+id int auto_increment primary key, 
+name char(30), email varchar(20), 
+password varchar(20),
+mobile bigint(10),
+gender char(10), 
+profile_picture text,
+role char(20) default 'user',
+status char(10) default 'Inactive',
+token varchar(255) default null)";
+mysqli_query($con, $create_table);
+
+// Plans table
+$create_plans = "CREATE TABLE IF NOT EXISTS plans (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(60) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    mobile BIGINT(10),
-    gender CHAR(10),
-    profile_picture TEXT DEFAULT 'default.png',
-    role VARCHAR(20) DEFAULT 'user',
-    status VARCHAR(10) DEFAULT 'Active',
-    token VARCHAR(255) DEFAULT NULL,
+    title VARCHAR(255) NOT NULL,
+    type VARCHAR(50) NOT NULL,
+    description TEXT,
+    category VARCHAR(100),
+    duration VARCHAR(100),
+    calories VARCHAR(100),
+    intensity VARCHAR(100),
+    price INT,
+    image_path VARCHAR(255),
+    status VARCHAR(20) DEFAULT 'Active',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
-mysqli_query($con, $create_register);
+mysqli_query($con, $create_plans);
 
 // Password reset tokens table
 $create_password_token = "CREATE TABLE IF NOT EXISTS password_token (

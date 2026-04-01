@@ -1,3 +1,4 @@
+<?php require_once("admin_auth.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

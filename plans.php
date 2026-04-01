@@ -1,8 +1,11 @@
 <?php
 $title = "Plans - Health & Wellness";
 $css = "guest.css"; 
-
 ob_start();
+
+require_once("db_config.php");
+$query = "SELECT * FROM plans WHERE type = 'Wellness' AND status = 'Active'";
+$result = mysqli_query($con, $query);
 ?>
 
 <div class="guest-plans-container py-5">
@@ -13,53 +16,20 @@ ob_start();
                 <hr class="heading-hr mx-auto">
             </div>
             
-            <!-- Plan 1 -->
+            <?php while($row = mysqli_fetch_assoc($result)): ?>
+            <!-- Plan Card -->
             <div class="col-lg-6 col-md-6 mb-4">
-                <div class="plan-card text-center">
-                    <img src="images/beautiful-girls-are-playing-yoga-park.jpg" class="w-100 plan-img" alt="Beginner Plan"/>
-                    <h2 class="guest-card-heading">Beginner Plan</h2>
-                    <p class="guest-card-paragraph mt-3">Basic Yoga &bull; 10 Min Daily Exercise &bull; Water tracking</p>
-                    <p class="guest-card-paragraph text-primary font-weight-bold">Duration: 4 Weeks</p>
-                    <p class="guest-card-paragraph mb-4">Goal: Build healthy habits</p>
-                    <a href="user/payment.php?plan=Beginner+Plan&price=499" class="get-started-button d-inline-block text-decoration-none mt-2">Buy Now (₹499)</a>
+                <div class="plan-card text-center h-100 d-flex flex-column">
+                    <?php $img = !empty($row['image_path']) ? $row['image_path'] : "images/beautiful-girls-are-playing-yoga-park.jpg"; ?>
+                    <img src="<?php echo htmlspecialchars($img); ?>" class="w-100 plan-img mb-3" style="height:250px; object-fit:cover;" alt="<?php echo htmlspecialchars($row['title']); ?>"/>
+                    <h2 class="guest-card-heading"><?php echo htmlspecialchars($row['title']); ?></h2>
+                    <p class="guest-card-paragraph mt-3 flex-grow-1"><?php echo htmlspecialchars($row['description']); ?></p>
+                    <p class="guest-card-paragraph text-primary font-weight-bold">Duration: <?php echo htmlspecialchars($row['duration']); ?></p>
+                    <p class="guest-card-paragraph mb-4">Goal: <?php echo htmlspecialchars($row['category']); ?></p>
+                    <a href="user/payment.php?plan=<?php echo urlencode($row['title']); ?>&price=<?php echo urlencode($row['price']); ?>" class="get-started-button d-inline-block text-decoration-none mt-auto">Buy Now (₹<?php echo htmlspecialchars($row['price']); ?>)</a>
                 </div>
             </div>
-
-            <!-- Plan 2 -->
-            <div class="col-lg-6 col-md-6 mb-4">
-                <div class="plan-card text-center">
-                    <img src="images/Guest-Img-5.jpeg" class="w-100 plan-img" alt="Fitness Plan"/>
-                    <h2 class="guest-card-heading">Fitness Plan</h2>
-                    <p class="guest-card-paragraph mt-3">Strength Training &bull; Daily step tracking &bull; Workout Schedule</p>
-                    <p class="guest-card-paragraph text-primary font-weight-bold">Duration: 8 Weeks</p>
-                    <p class="guest-card-paragraph mb-4">Goal: Improve Strength</p>
-                    <a href="user/payment.php?plan=Fitness+Plan&price=799" class="get-started-button d-inline-block text-decoration-none mt-2">Buy Now (₹799)</a>
-                </div>
-            </div>
-            
-            <!-- Plan 3 -->
-            <div class="col-lg-6 col-md-6 mb-4">
-                <div class="plan-card text-center">
-                    <img src="images/vegetable-image.jpeg" class="w-100 plan-img" alt="Diet Plan"/>
-                    <h2 class="guest-card-heading">Diet Plan</h2>
-                    <p class="guest-card-paragraph mt-3">Healthy Meals &bull; Water goals &bull; Nutrition tips</p>
-                    <p class="guest-card-paragraph text-primary font-weight-bold">Duration: 4 Weeks</p>
-                    <p class="guest-card-paragraph mb-4">Goal: Improve Nutrition</p>
-                    <a href="user/payment.php?plan=Diet+Plan&price=599" class="get-started-button d-inline-block text-decoration-none mt-2">Buy Now (₹599)</a>
-                </div>
-            </div>
-
-            <!-- Plan 4 -->
-            <div class="col-lg-6 col-md-6 mb-4">
-                <div class="plan-card text-center">
-                    <img src="images/woman-lotus-pose-park.jpg" class="w-100 plan-img" alt="Mental Wellness"/>
-                    <h2 class="guest-card-heading">Mental Wellness Plan</h2>
-                    <p class="guest-card-paragraph mt-3">Meditation &bull; Sleep tracking &bull; Stress Management</p>
-                    <p class="guest-card-paragraph text-primary font-weight-bold">Duration: 6 Weeks</p>
-                    <p class="guest-card-paragraph mb-4">Goal: Reduce stress</p>
-                    <a href="user/payment.php?plan=Mental+Wellness+Plan&price=899" class="get-started-button d-inline-block text-decoration-none mt-2">Buy Now (₹899)</a>
-                </div>
-            </div>
+            <?php endwhile; ?>
 
         </div>
     </div>

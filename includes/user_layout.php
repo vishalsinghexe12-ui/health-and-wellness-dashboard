@@ -1,3 +1,4 @@
+<?php require_once("user_auth.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

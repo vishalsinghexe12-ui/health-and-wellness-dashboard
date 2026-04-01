@@ -29,7 +29,8 @@ ob_start();
                     </div>
 
                     <!-- Login Form -->
-                    <form action="login_process.php" method="POST">
+                    <form action="../login_process.php" method="POST">
+                        <input type="hidden" name="login_type" value="admin">
 
                         <!-- Email -->
                         <div class="mb-4">
@@ -58,7 +59,7 @@ ob_start();
 
 
                         <!-- Login Button -->
-                        <button type="button" class="btn btn-success w-100 btn-lg mb-3" onclick="window.location.href='admin.php'">Login </button>
+                        <button type="submit" class="btn btn-success w-100 btn-lg mb-3">Login</button>
 
 
                         <!-- Register -->
