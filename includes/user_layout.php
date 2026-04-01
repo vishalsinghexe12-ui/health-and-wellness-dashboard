@@ -44,19 +44,22 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav ml-auto align-items-center">
-                        <a class="nav-link font-weight-bold mr-2 text-dark" href="register-dashboard.php">Dashboard</a>
-                        <a class="nav-link font-weight-bold mr-2 text-dark" href="meal-plans.php">Meal Plans</a>
-                        <a class="nav-link font-weight-bold mr-2 text-dark" href="Exercise-plans.php">Exercise Plans</a>
-                        <a class="nav-link font-weight-bold mr-2 text-dark" href="progress.php">Progress</a>
+                        <a class="nav-link mr-2 text-dark" href="register-dashboard.php">Dashboard</a>
+                        <a class="nav-link mr-2 text-dark" href="manage-plans.php">Manage Plans</a>
+                        <a class="nav-link mr-2 text-dark" href="progress.php">Progress</a>
+                        <a class="nav-link mr-2 text-dark" href="support.php">Support</a>
                         <!-- Options dropdown -->
                         <div class="nav-item dropdown mr-2">
-                            <a class="nav-link dropdown-toggle font-weight-bold text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               More
                             </a>
                             <div class="dropdown-menu border-0 shadow" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="wellness-quiz.php"><i class="fa-solid fa-heart-pulse mr-2 text-success"></i>Wellness Quiz</a>
+                              <a class="dropdown-item" href="my-recommendations.php"><i class="fa-solid fa-wand-magic-sparkles mr-2 text-success"></i>My Recommendations</a>
+                              <div class="dropdown-divider"></div>
                               <a class="dropdown-item" href="Sub-tips.php">SUBI Tips</a>
-                              <a class="dropdown-item" href="manage-plans.php">Manage Plans</a>
-                              <a class="dropdown-item" href="support.php">Support</a>
+                              <a class="dropdown-item" href="meal-plans.php">Meal Plans</a>
+                              <a class="dropdown-item" href="Exercise-plans.php">Exercise Plans</a>
                             </div>
                         </div>
                         <a class="nav-link bg-success text-white ml-2 px-3 py-2" style="border-radius: 8px; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);" href="my-profile.php">

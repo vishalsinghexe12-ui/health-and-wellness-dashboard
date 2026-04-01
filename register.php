@@ -97,13 +97,20 @@ ob_start();
                             Password
                         </label>
 
-                        <input
-                            type="password"
-                            class="form-control"
-                            name="password"
-                            data-validation="required strongPassword"
-                        >
-
+                        <div class="input-group">
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="password"
+                                name="password"
+                                data-validation="required strongPassword"
+                            >
+                            <div class="input-group-append">
+                                <span class="input-group-text toggle-password" style="cursor: pointer; background: white;">
+                                    <i class="fa-solid fa-eye text-muted"></i>
+                                </span>
+                            </div>
+                        </div>
                         <span id="password_error"></span>
 
                     </div>
@@ -114,11 +121,19 @@ ob_start();
                         <label class="form-label fw-semibold">
                             Confirm Password
                         </label>
-                        <input
-                            type="password"
-                            class="form-control"
-                            name="confirmPassword"
-                            data-validation="required confirmPassword">
+                        <div class="input-group">
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                data-validation="required confirmPassword">
+                            <div class="input-group-append">
+                                <span class="input-group-text toggle-password" style="cursor: pointer; background: white;">
+                                    <i class="fa-solid fa-eye text-muted"></i>
+                                </span>
+                            </div>
+                        </div>
                         <span id="confirmPassword_error"></span>
                     </div>
 
@@ -136,8 +151,8 @@ ob_start();
                     </div>
 
                     <div class="mb-4">
-                        <label>Upload Profile Picture</label>
-                        <input type="file" name="profileImage" class="form-control-file" data-validation="required fileSize fileType"  data-filesize="100" data-filetype="jpg,jpeg,png">   
+                        <label>Upload Profile Picture (Max 10MB)</label>
+                        <input type="file" name="profileImage" class="form-control-file" data-validation="required fileSize fileType"  data-filesize="10240" data-filetype="jpg,jpeg,png">   
                         <span id="profileImage_error"></span> 
                     </div>
 
@@ -161,7 +176,23 @@ ob_start();
     </div>
 </div>
 
-<script src="js/validate.js"></script>
+<script src="js/validate.js?v=<?php echo time(); ?>"></script>
+<script>
+$(document).ready(function() {
+    $('.toggle-password').click(function() {
+        let input = $(this).closest('.input-group').find('input');
+        let icon = $(this).find('i');
+        
+        if (input.attr('type') === 'password') {
+            input.attr('type', 'text');
+            icon.removeClass('fa-eye').addClass('fa-eye-slash');
+        } else {
+            input.attr('type', 'password');
+            icon.removeClass('fa-eye-slash').addClass('fa-eye');
+        }
+    });
+});
+</script>
 <?php
 $content = ob_get_clean();
 include("includes/layout.php");

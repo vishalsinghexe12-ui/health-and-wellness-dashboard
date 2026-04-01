@@ -27,10 +27,10 @@ try {
 // Step 4: Create tables (if not exist)
 
 // Users table
-$create_table = "create table register(
+$create_table = "CREATE TABLE IF NOT EXISTS register(
 id int auto_increment primary key, 
-name char(30), email varchar(20), 
-password varchar(20),
+name varchar(100), email varchar(100), 
+password varchar(255),
 mobile bigint(10),
 gender char(10), 
 profile_picture text,
@@ -38,6 +38,17 @@ role char(20) default 'user',
 status char(10) default 'Inactive',
 token varchar(255) default null)";
 mysqli_query($con, $create_table);
+
+// Seed default Admin and User following the strong password rules
+$seed_admin = "INSERT INTO register (name, email, password, role, status)
+               SELECT 'Admin', 'admin@admin.com', 'Admin@123', 'admin', 'Active'
+               WHERE NOT EXISTS (SELECT id FROM register WHERE email = 'admin@admin.com')";
+mysqli_query($con, $seed_admin);
+
+$seed_user = "INSERT INTO register (name, email, password, role, status)
+              SELECT 'User', 'user@user.com', 'User@123', 'user', 'Active'
+              WHERE NOT EXISTS (SELECT id FROM register WHERE email = 'user@user.com')";
+mysqli_query($con, $seed_user);
 
 // Plans table
 $create_plans = "CREATE TABLE IF NOT EXISTS plans (
@@ -76,6 +87,9 @@ $create_contact = "CREATE TABLE IF NOT EXISTS contact_messages (
     subject VARCHAR(255) NOT NULL,
     message TEXT NOT NULL,
     status VARCHAR(20) DEFAULT 'new',
+    user_id INT DEFAULT NULL,
+    admin_reply TEXT DEFAULT NULL,
+    replied_at TIMESTAMP NULL DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 mysqli_query($con, $create_contact);
@@ -94,4 +108,30 @@ mysqli_query($con, $reset_otp_attempts_query);
 // Expire OTPs after 2 minutes
 $expire_otp_query = "UPDATE password_token SET otp = NULL WHERE expires_at < NOW()";
 mysqli_query($con, $expire_otp_query);
+
+// User Purchases table
+$create_purchases = "CREATE TABLE IF NOT EXISTS user_purchases (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    plan_name VARCHAR(255) NOT NULL,
+    price INT,
+    status VARCHAR(50) DEFAULT 'Active',
+    purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+mysqli_query($con, $create_purchases);
+
+// User Wellness Profiles table (for personalized recommendations)
+$create_wellness = "CREATE TABLE IF NOT EXISTS user_wellness_profiles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    fitness_goal VARCHAR(100),
+    diet_preference VARCHAR(100),
+    activity_level VARCHAR(50),
+    age INT,
+    weight DECIMAL(5,1),
+    height DECIMAL(5,1),
+    bmi DECIMAL(4,1),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+mysqli_query($con, $create_wellness);
 ?>

@@ -1,6 +1,25 @@
 <?php
+session_start();
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: ../login.php");
+    exit();
+}
+require_once("../db_config.php");
+
 $title = "Manage Active Plans";
 $css = "register-dashboard.css"; 
+
+$user_id = $_SESSION['user_id'];
+$purchases = [];
+
+$stmt = $con->prepare("SELECT plan_name, price, status, purchase_date FROM user_purchases WHERE user_id = ? ORDER BY purchase_date DESC");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+while ($row = $result->fetch_assoc()) {
+    $purchases[] = $row;
+}
 
 ob_start();
 ?>
@@ -15,19 +34,34 @@ ob_start();
         
         <div class="row g-4 mb-4">
             <div class="col-12 col-lg-8">
-                <div class="stat-card">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="font-weight-bold" style="color: var(--primary-dark);">Beginner Fitness Plan</h4>
-                        <span class="badge badge-success p-2">Active</span>
+                <?php if (count($purchases) > 0): ?>
+                    <?php foreach ($purchases as $plan): ?>
+                        <?php 
+                        $purchase_time = strtotime($plan['purchase_date']);
+                        $started = date("F j, Y", $purchase_time);
+                        $expires = date("F j, Y", strtotime("+60 days", $purchase_time)); // Dummy 60-day expiry
+                        ?>
+                        <div class="stat-card mb-4" style="border-left: 5px solid var(--success);">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h4 class="font-weight-bold" style="color: var(--primary-dark);"><?php echo htmlspecialchars($plan['plan_name']); ?></h4>
+                                <span class="badge badge-success p-2"><i class="fa-solid fa-check-circle mr-1"></i> <?php echo htmlspecialchars($plan['status']); ?></span>
+                            </div>
+                            <p class="text-muted mb-4">Started on: <strong><?php echo $started; ?></strong> <br> Expires on: <strong><?php echo $expires; ?></strong></p>
+                            <div class="progress mb-3" style="height: 10px; border-radius: 5px;">
+                              <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 5%" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <p class="text-muted"><small>Week 1 - Just Started!</small></p>
+                            <hr>
+                            <button class="btn border-success text-success font-weight-bold px-4" style="border-radius: 8px;">View Training Schedule</button>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="stat-card d-flex flex-column align-items-center justify-content-center h-100 text-center py-5">
+                        <i class="fa-solid fa-folder-open text-muted mb-3" style="font-size: 64px; opacity: 0.5;"></i>
+                        <h4 class="font-weight-bold text-dark mt-2 mb-2">No Plans Purchased Yet</h4>
+                        <p class="text-muted">You haven't purchased any plans. Browse our catalog to get started on your wellness journey!</p>
                     </div>
-                    <p class="text-muted mb-4">Started on: <strong>October 12, 2025</strong> <br> Expires on: <strong>December 12, 2025</strong></p>
-                    <div class="progress mb-3" style="height: 10px; border-radius: 5px;">
-                      <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <p class="text-muted"><small>Week 2 of 8 Completed</small></p>
-                    <hr>
-                    <button class="btn border-success text-success font-weight-bold px-4" style="border-radius: 8px;">View Training Schedule</button>
-                </div>
+                <?php endif; ?>
             </div>
             
             <div class="col-12 col-lg-4">

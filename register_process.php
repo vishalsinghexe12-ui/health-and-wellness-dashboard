@@ -31,14 +31,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
+    // Include the email helper
+    require_once("includes/send_email.php");
+
+    // Generate Verification Token
+    $token = bin2hex(random_bytes(16));
+
     // Insert user
     // `role` defaults to 'user', `status` defaults to 'Inactive' per schema.
     try {
-        $stmt = $con->prepare("INSERT INTO register (name, email, password, mobile, gender, profile_picture) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssss", $name, $email, $password, $phone, $gender, $profile_picture);
+        $stmt = $con->prepare("INSERT INTO register (name, email, password, mobile, gender, profile_picture, token) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssss", $name, $email, $password, $phone, $gender, $profile_picture, $token);
         
         if ($stmt->execute()) {
-            $_SESSION['auth_flash'] = "Registration successful! Please login.";
+            // Build the verify URL (assuming Laragon root)
+            $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
+            $domain = $_SERVER['HTTP_HOST'];
+            $app_path = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+            $verifyUrl = "{$protocol}://{$domain}{$app_path}/verify.php?token={$token}";
+
+            // Email body
+            $subject = "Verify Your Account - Health & Wellness";
+            $message = "
+                <h3>Welcome to Health & Wellness Dashboard, {$firstName}!</h3>
+                <p>Please click the link below to verify your email address and activate your account:</p>
+                <a href='{$verifyUrl}'>{$verifyUrl}</a>
+                <p>If you didn't request this, you can ignore this email.</p>
+            ";
+
+            // Send Email
+            if (send_email($email, $subject, $message)) {
+                $_SESSION['auth_flash'] = "Registration successful! Check your email to verify your account.";
+            } else {
+                $_SESSION['auth_flash'] = "Registered but failed to send verification email.";
+            }
             header("Location: login.php?msg=registered");
             exit();
         } else {

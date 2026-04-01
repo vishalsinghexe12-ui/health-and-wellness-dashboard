@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $stmt = $con->prepare("SELECT id, name, email, password, role, profile_picture FROM register WHERE email = ?");
+    $stmt = $con->prepare("SELECT id, name, email, password, role, profile_picture, status FROM register WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -22,12 +22,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($row = $result->fetch_assoc()) {
         // Since we are using varchar(20) for password, we compare plaintext
         if ($password === $row['password']) {
+            if ($row['status'] === 'Inactive') {
+                $_SESSION['auth_flash'] = "Your account is not activated. Please verify your email first.";
+                header("Location: login.php?error=inactive");
+                exit();
+            }
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['user_name'] = $row['name'];
             $_SESSION['user_email'] = $row['email'];
             $_SESSION['role'] = $row['role'];
             $_SESSION['profile_picture'] = $row['profile_picture'];
             $_SESSION['logged_in'] = true;
+            $_SESSION['login_success'] = "Login successful! Welcome back, " . htmlspecialchars($row['name']) . ".";
+
+            if (isset($_POST['remember'])) {
+                $token = bin2hex(random_bytes(16));
+                $update_token = $con->prepare("UPDATE register SET token = ? WHERE id = ?");
+                $update_token->bind_param("si", $token, $row['id']);
+                $update_token->execute();
+                setcookie('remember_login', $token, time() + (86400 * 30), "/"); // 30 days
+            }
 
             // Redirect based on role
             if ($row['role'] === 'admin') {

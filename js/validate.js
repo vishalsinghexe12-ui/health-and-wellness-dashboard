@@ -63,8 +63,9 @@ $(document).ready(function () {
 
       // Password confirmation validation
       if (validationType.includes("confirmPassword")) {
-        const confirmPassword = $("input[name='password']").val();
-        if (value !== confirmPassword) {
+        const mainPassInput = field.closest("form").find("input[name='password']");
+        const confirmPasswordVal = mainPassInput.val() ? mainPassInput.val().trim() : "";
+        if (value !== confirmPasswordVal) {
           errorMessage = "Passwords do not match.";
         }
       }
@@ -78,7 +79,8 @@ $(document).ready(function () {
       if (validationType.includes("fileSize")) {
         const file = field[0].files ? field[0].files[0] : null;
         if (file && file.size > fileSize * 1024) {
-          errorMessage = `File size must be less than ${fileSize}KB.`;
+          let sizeMsg = fileSize >= 1024 ? Math.round(fileSize / 1024) + "MB" : fileSize + "KB";
+          errorMessage = `File size must be less than ${sizeMsg}.`;
         }
       }
 
@@ -109,6 +111,13 @@ $(document).ready(function () {
     validateInput(this);
   });
 
+  $("input[name='password'], #password").on("input change", function () {
+    var confirmPasswordField = $("#confirmPassword").length ? $("#confirmPassword") : $("input[name='confirmPassword']");
+    if (confirmPasswordField.length > 0 && confirmPasswordField.val().trim() !== "") {
+      validateInput(confirmPasswordField[0]);
+    }
+  });
+
   $("form").on("submit", function (e) {
     let isValid = true;
     $(this)
@@ -122,13 +131,6 @@ $(document).ready(function () {
       });
     if (!isValid) {
       e.preventDefault();
-    } else {
-      if ($(this).attr("id") === "regform") {
-        e.preventDefault();
-        $(this).prepend('<div class="alert alert-success mt-3 mb-3">Registration successful! Please login.</div>');
-        $(this).find("button[type='submit']").attr("disabled", true);
-        $(this)[0].reset();
-      }
     }
   });
 });

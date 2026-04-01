@@ -88,7 +88,7 @@ $plans = [
         'calories' => '1,500 kcal/day',
         'intensity' => '',
         'price' => 2499,
-        'image_path' => '../meal-plans-images/weight loss.jpg'
+        'image_path' => 'meal-plans-images/weight loss.jpg'
     ],
     [
         'title' => 'High Protein Plan',
@@ -99,7 +99,7 @@ $plans = [
         'calories' => '2,500 kcal/day',
         'intensity' => '',
         'price' => 2999,
-        'image_path' => '../meal-plans-images/High Protien.jpg'
+        'image_path' => 'meal-plans-images/High Protien.jpg'
     ],
     [
         'title' => 'Keto Plan',
@@ -110,7 +110,7 @@ $plans = [
         'calories' => '1,800 kcal/day',
         'intensity' => '',
         'price' => 2799,
-        'image_path' => '../meal-plans-images/keto meal.jpg'
+        'image_path' => 'meal-plans-images/keto meal.jpg'
     ],
     [
         'title' => 'Vegan Plan',
@@ -121,7 +121,7 @@ $plans = [
         'calories' => '1,700 kcal/day',
         'intensity' => '',
         'price' => 2499,
-        'image_path' => '../meal-plans-images/Vegan meal.jpg'
+        'image_path' => 'meal-plans-images/Vegan meal.jpg'
     ],
     [
         'title' => 'Muscle Gain Pro',
@@ -132,7 +132,7 @@ $plans = [
         'calories' => '2,800 kcal/day',
         'intensity' => '',
         'price' => 3299,
-        'image_path' => '../meal-plans-images/muscle gain.jpg'
+        'image_path' => 'meal-plans-images/muscle gain.jpg'
     ],
     [
         'title' => 'Balanced Diet',
@@ -143,7 +143,7 @@ $plans = [
         'calories' => '2,000 kcal/day',
         'intensity' => '',
         'price' => 2499,
-        'image_path' => '../meal-plans-images/Balanced meal.jpg'
+        'image_path' => 'meal-plans-images/Balanced meal.jpg'
     ],
     
     // Exercise Plans
@@ -156,7 +156,7 @@ $plans = [
         'calories' => '',
         'intensity' => 'High',
         'price' => 3499,
-        'image_path' => '../Exercise-Images/Weight loss fitness.jpg'
+        'image_path' => 'Exercise-Images/Weight loss fitness.jpg'
     ],
     [
         'title' => 'Muscle Building Plan',
@@ -167,7 +167,7 @@ $plans = [
         'calories' => '',
         'intensity' => 'Medium',
         'price' => 3999,
-        'image_path' => '../Exercise-Images/muscle gain fitness.jpg'
+        'image_path' => 'Exercise-Images/muscle gain fitness.jpg'
     ],
     [
         'title' => 'Yoga & Flexibility',
@@ -178,7 +178,7 @@ $plans = [
         'calories' => '',
         'intensity' => 'Low',
         'price' => 2999,
-        'image_path' => '../Exercise-Images/Full Body Workout.jpg'
+        'image_path' => 'Exercise-Images/Full Body Workout.jpg'
     ],
     [
         'title' => 'HIIT Intensity',
@@ -189,7 +189,7 @@ $plans = [
         'calories' => '',
         'intensity' => 'Very High',
         'price' => 3699,
-        'image_path' => '../Exercise-Images/HIIT Blast.jpg'
+        'image_path' => 'Exercise-Images/HIIT Blast.jpg'
     ],
     [
         'title' => 'Endurance Plan',
@@ -200,7 +200,7 @@ $plans = [
         'calories' => '',
         'intensity' => 'Medium',
         'price' => 3299,
-        'image_path' => '../Exercise-Images/Beginner Fitness.jpg'
+        'image_path' => 'Exercise-Images/Beginner Fitness.jpg'
     ],
     [
         'title' => 'Strength Pro',
@@ -211,7 +211,7 @@ $plans = [
         'calories' => '',
         'intensity' => 'High',
         'price' => 3999,
-        'image_path' => '../Exercise-Images/Strenght.jpg'
+        'image_path' => 'Exercise-Images/Strenght.jpg'
     ]
 ];
 

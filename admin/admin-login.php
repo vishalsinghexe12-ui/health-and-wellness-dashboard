@@ -1,4 +1,26 @@
 <?php
+session_start();
+
+if (isset($_COOKIE['remember_login']) && !isset($_SESSION['logged_in'])) {
+    require_once(__DIR__ . "/../db_config.php");
+    $token = $_COOKIE['remember_login'];
+    $stmt = $con->prepare("SELECT id, name, email, role, profile_picture FROM register WHERE token = ? AND role = 'admin'");
+    $stmt->bind_param("s", $token);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        $_SESSION['user_id'] = $row['id'];
+        $_SESSION['user_name'] = $row['name'];
+        $_SESSION['user_email'] = $row['email'];
+        $_SESSION['role'] = $row['role'];
+        $_SESSION['profile_picture'] = $row['profile_picture'];
+        $_SESSION['logged_in'] = true;
+        
+        header("Location: admin.php");
+        exit();
+    }
+}
+
 $title = "Login";
 $css = "admin.css"; 
 
@@ -51,7 +73,7 @@ ob_start();
                         <!-- Remember + Forgot -->
                         <div class="mb-4 d-flex justify-content-between">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="remember" required>
+                                <input class="form-check-input" type="checkbox" name="remember">
                                 <label class="form-check-label">Remember me</label>
                             </div>
                             <a href="#" class="text-success">Forgot Password?</a>
@@ -86,7 +108,7 @@ ob_start();
     </div>
 </div>
 
-<script src="js/validate.js"></script>
+<script src="../js/validate.js?v=<?php echo time(); ?>"></script>
 
 <?php
 $content = ob_get_clean();

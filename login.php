@@ -1,5 +1,29 @@
 <?php
 session_start();
+
+if (isset($_COOKIE['remember_login']) && !isset($_SESSION['logged_in'])) {
+    require_once("db_config.php");
+    $token = $_COOKIE['remember_login'];
+    $stmt = $con->prepare("SELECT id, name, email, role, profile_picture FROM register WHERE token = ?");
+    $stmt->bind_param("s", $token);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        $_SESSION['user_id'] = $row['id'];
+        $_SESSION['user_name'] = $row['name'];
+        $_SESSION['user_email'] = $row['email'];
+        $_SESSION['role'] = $row['role'];
+        $_SESSION['profile_picture'] = $row['profile_picture'];
+        $_SESSION['logged_in'] = true;
+        
+        if ($row['role'] === 'admin') {
+            header("Location: admin/admin.php");
+        } else {
+            header("Location: user/register-dashboard.php");
+        }
+        exit();
+    }
+}
 $title = "Login";
 $css = "guest.css"; 
 
@@ -29,16 +53,7 @@ ob_start();
                         </div>
                     <?php endif; ?>
 
-                    <!-- Role Selection Buttons -->
-                    <div class="d-flex mb-4">
-                        <a href="login.php" class="btn btn-outline-success active-toggle w-50 mr-2 d-flex justify-content-center align-items-center">
-                            <i class="fa-solid fa-user mr-2"></i> User
-                        </a>
 
-                        <a href="admin/admin-login.php" class="btn btn-outline-success w-50 ml-2 d-flex justify-content-center align-items-center">
-                            <i class="fa-solid fa-user-shield mr-2"></i> Admin
-                        </a>
-                    </div>
 
                     <!-- Login Form -->
                     <form action="login_process.php" method="POST">
@@ -65,7 +80,7 @@ ob_start();
                                 <input class="form-check-input" type="checkbox" name="remember">
                                 <label class="form-check-label">Remember me</label>
                             </div>
-                            <a href="#" class="text-success">Forgot Password?</a>
+                            <a href="forgot_password.php" class="text-success">Forgot Password?</a>
                         </div>
 
 
@@ -97,7 +112,7 @@ ob_start();
     </div>
 </div>
 
-<script src="js/validate.js"></script>
+<script src="js/validate.js?v=<?php echo time(); ?>"></script>
 
 <?php
 $content = ob_get_clean();
