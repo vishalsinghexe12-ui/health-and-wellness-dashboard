@@ -33,6 +33,7 @@ body {
     color: var(--text-main);
     line-height: 1.6;
     overflow-x: hidden;
+    width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -176,12 +177,6 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 0 0 40px 40px;
     margin-bottom: 70px;
     box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-}
-@media(max-width: 768px) {
-    .guest-banner-container {
-        border-radius: 0 0 20px 20px;
-        height: 60vh;
-    }
 }
 .guest-banner-content {
     padding: 0 8%;
@@ -359,6 +354,20 @@ label.font-weight-bold, label.form-label.fw-semibold {
     padding: 10px;
 }
 
+/* --- Toggler for mobile --- */
+.navbar-toggler {
+    border: 2px solid var(--primary) !important;
+    border-radius: var(--border-radius-sm);
+    padding: 6px 10px;
+}
+.navbar-toggler:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+}
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23059669' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
 /* --- Footer Premium --- */
 .simple-footer {
     background: linear-gradient(to right, #111827, #1f2937);
@@ -435,6 +444,159 @@ a {
 a.text-success:hover {
     color: var(--primary-dark) !important;
     text-decoration: underline;
+}
+
+/* =============================================================
+   RESPONSIVE BREAKPOINTS — GUEST PAGES
+   ============================================================= */
+
+/* --- Tablets / Medium (max 992px) --- */
+@media (max-width: 991px) {
+    .navbar-nav {
+        padding: 15px 0;
+    }
+    .navbar-nav .nav-link {
+        padding: 12px 15px !important;
+        margin: 4px 0;
+    }
+    .navbar-nav .bg-success.nav-link {
+        display: inline-block;
+        margin: 8px 0;
+        text-align: center;
+    }
+    .guest-banner-heading {
+        font-size: 3.2rem;
+    }
+    .guest-banner-paragraph {
+        font-size: 1.15rem;
+    }
+    .guest-card img, .plan-card img {
+        height: 200px;
+    }
+}
+
+/* --- Small screens / Phones (max 768px) --- */
+@media (max-width: 768px) {
+    .guest-banner-container {
+        border-radius: 0 0 20px 20px;
+        height: auto;
+        min-height: 400px;
+        padding: 40px 0;
+    }
+    .guest-banner-heading {
+        font-size: 2.4rem !important;
+        letter-spacing: -0.5px;
+    }
+    .guest-banner-paragraph {
+        font-size: 1rem;
+        margin-bottom: 25px;
+    }
+    .get-started-button {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+    .guest-bottom-heading {
+        font-size: 1.8rem !important;
+    }
+    .guest-card, .plan-card, .card {
+        padding: 18px;
+    }
+    .guest-card img, .plan-card img {
+        height: 180px;
+    }
+    .guest-card-heading {
+        font-size: 1.2rem;
+        margin-top: 15px;
+    }
+    .heading-hr {
+        margin-bottom: 25px;
+    }
+    .guest-navbar-heading {
+        font-size: 20px !important;
+    }
+    .guest-nav-image {
+        height: 36px !important;
+    }
+    .modal-body {
+        padding: 20px;
+    }
+    .modal-header {
+        padding: 15px 20px;
+    }
+    .modal-title {
+        font-size: 1.3rem;
+    }
+    .simple-footer {
+        padding: 40px 15px 20px;
+        margin-top: 40px;
+    }
+    /* About page display-4 heading fix */
+    .display-4 {
+        font-size: 2rem !important;
+    }
+    /* Login/Register card padding */
+    .card-body.p-5 {
+        padding: 1.5rem !important;
+    }
+}
+
+/* --- Extra small phones (max 576px) --- */
+@media (max-width: 576px) {
+    .guest-navbar-heading {
+        font-size: 17px !important;
+    }
+    .guest-nav-image {
+        height: 32px !important;
+        margin-right: 8px !important;
+    }
+    .navbar {
+        padding: 10px 0;
+    }
+    .guest-banner-container {
+        min-height: 350px;
+        margin-bottom: 40px;
+    }
+    .guest-banner-heading {
+        font-size: 2rem !important;
+    }
+    .guest-banner-paragraph {
+        font-size: 0.9rem;
+    }
+    .guest-bottom-heading {
+        font-size: 1.5rem !important;
+    }
+    .guest-card-heading {
+        font-size: 1.1rem;
+    }
+    .guest-card-paragraph {
+        font-size: 0.9rem;
+    }
+    .guest-card img, .plan-card img {
+        height: 160px;
+    }
+    .simple-footer h3 {
+        font-size: 20px !important;
+    }
+    .simple-footer {
+        padding: 30px 10px 15px;
+        margin-top: 30px;
+    }
+    .copyright {
+        font-size: 12px;
+    }
+    .display-4 {
+        font-size: 1.6rem !important;
+    }
+    .card-body.p-5 {
+        padding: 1.25rem !important;
+    }
+    .form-control {
+        padding: 12px 14px;
+        font-size: 0.9rem;
+    }
+    .modal-body p {
+        font-size: 0.95rem;
+    }
 }
 
 /* --- Back Button --- */

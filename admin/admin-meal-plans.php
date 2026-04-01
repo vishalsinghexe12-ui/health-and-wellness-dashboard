@@ -6,14 +6,7 @@ ob_start();
 
 <div class="meal-plan-container py-5">
     <div class="container">
-        <div class="mb-4">
-            <a href="javascript:history.back()" class="back-btn d-inline-flex align-items-center">
-                <span class="back-icon">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </span>
-                <span class="ml-2">Back</span>
-            </a>
-        </div>
+
         <!-- Header -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h3 class="font-weight-bold">Meal Plans</h3>

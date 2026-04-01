@@ -7,13 +7,7 @@ ob_start();
     
 <div class="py-5" style="background-color: var(--bg-light); min-height: calc(100vh - 70px);">
     <div class="container">
-        <!-- Back Button from remote -->
-        <div class="mb-4">
-            <a href="register-dashboard.php" class="btn btn-outline-success d-inline-flex align-items-center" style="border-radius: 20px; padding: 5px 20px;">
-                <i class="fa-solid fa-arrow-left mr-2"></i>
-                <span>Back to Dashboard</span>
-            </a>
-        </div>
+
 
         <div class="text-center mb-5">
             <h2 class="font-weight-bold mb-2" style="color: var(--primary-dark);">Nutrition Meal Plans</h2>

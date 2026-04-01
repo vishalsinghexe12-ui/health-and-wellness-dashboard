@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo isset($title) ? $title : "Health & Wellness Dashboard"; ?></title>
 
-    <!-- Google Fonts Inter -->
+    <!-- Google Fonts Outfit + Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -31,25 +31,44 @@
 <body class="d-flex flex-column min-vh-100" style="font-family: 'Inter', sans-serif;">
 
     <!-- Register Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top w-100" style="z-index: 1030; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-        <div class="container-fluid px-2">
-            <a class="navbar-brand d-flex align-items-center" href="register-dashboard.php">
-                <img class="guest-nav-image" src="../images/logo.jpeg" style="height:40px; border-radius:8px; margin-right:10px;" alt="Logo"/>
-                <span class="guest-navbar-heading font-weight-bold" style="font-size: 22px; color: #059669;">Health & Wellness</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav ml-auto align-items-center">
-                    <span class="mr-3 text-muted"><i class="fa-solid fa-bell"></i></span>
-                    <a class="nav-link btn btn-success text-white px-4 py-2" style="border-radius: 8px;" href="../login.php">
-                        <i class="fa-regular fa-user mr-2"></i>My Profile
-                    </a>
+    <div class="container-fluid p-0 sticky-top" style="z-index: 1030; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid px-4">
+                <a class="navbar-brand d-flex align-items-center" href="register-dashboard.php">
+                    <img class="guest-nav-image" src="../images/logo.jpeg" style="height:48px; width:auto; border-radius:8px; margin-right:12px;" alt="Logo"/>
+                    <span class="guest-navbar-heading" style="font-weight: 800; font-size: 26px; background: linear-gradient(135deg, #047857, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Health & Wellness</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ml-auto align-items-center">
+                        <a class="nav-link font-weight-bold mr-2 text-dark" href="register-dashboard.php">Dashboard</a>
+                        <a class="nav-link font-weight-bold mr-2 text-dark" href="meal-plans.php">Meal Plans</a>
+                        <a class="nav-link font-weight-bold mr-2 text-dark" href="Exercise-plans.php">Exercise Plans</a>
+                        <a class="nav-link font-weight-bold mr-2 text-dark" href="progress.php">Progress</a>
+                        <!-- Options dropdown -->
+                        <div class="nav-item dropdown mr-2">
+                            <a class="nav-link dropdown-toggle font-weight-bold text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              More
+                            </a>
+                            <div class="dropdown-menu border-0 shadow" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="Sub-tips.php">SUBI Tips</a>
+                              <a class="dropdown-item" href="manage-plans.php">Manage Plans</a>
+                              <a class="dropdown-item" href="support.php">Support</a>
+                            </div>
+                        </div>
+                        <a class="nav-link bg-success text-white ml-2 px-3 py-2" style="border-radius: 8px; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);" href="my-profile.php">
+                            <i class="fa-regular fa-user mr-1"></i> My Profile
+                        </a>
+                        <a class="nav-link bg-danger text-white ml-2 px-3 py-2" style="border-radius: 8px; box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);" href="../login.php">
+                            Logout
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </div>
 
 <!-- PAGE CONTENT -->
 <main class="flex-fill d-flex flex-column">
@@ -61,20 +80,76 @@
 </main>
 
 <!-- Footer Section -->
-<footer class="simple-footer mt-auto" style="background-color: #111827; color: #f9fafb; padding: 20px 0; text-align: center;">
-    <div class="container footer-container">
-        <h3 style="color: #10B981; font-weight: 700; font-size:18px; margin-bottom: 5px;">Health & Wellness</h3>
-        <p class="mb-3 text-muted" style="font-size: 14px;">Stay Fit • Stay Healthy • Stay Strong</p>
-        
-        <div class="social-icons" style="margin-bottom: 10px;">
-            <a href="#" class="text-muted mr-3"><i class="fa-brands fa-linkedin" style="font-size: 16px;"></i></a>
-            <a href="#" class="text-muted"><i class="fa-brands fa-instagram" style="font-size: 16px;"></i></a>
+<footer style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); color: #e2e8f0; margin-top: auto; position: relative; overflow: hidden;">
+    <div style="height: 4px; background: linear-gradient(90deg, #059669, #10b981, #0d9488, #059669); background-size: 300% 100%; animation: gradientMove 4s ease infinite;"></div>
+    
+    <div class="container" style="padding: 60px 15px 0;">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="../images/logo.jpeg" alt="Logo" style="height: 42px; width: auto; border-radius: 8px; margin-right: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                    <h4 style="font-family: 'Outfit', sans-serif; font-weight: 800; margin: 0; background: linear-gradient(135deg, #10b981, #0d9488); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Health & Wellness</h4>
+                </div>
+                <p style="color: #94a3b8; font-size: 15px; line-height: 1.8; margin-bottom: 20px;">Empowering you to live a healthier, stronger, and more balanced life. Your wellness journey starts here.</p>
+                <div class="d-flex" style="gap: 12px;">
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 10px; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); display: flex; align-items: center; justify-content: center; color: #10b981; text-decoration: none; transition: all 0.3s ease; font-size: 16px;" onmouseover="this.style.background='#10b981';this.style.color='white';this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 20px rgba(16,185,129,0.4)'" onmouseout="this.style.background='rgba(16,185,129,0.1)';this.style.color='#10b981';this.style.transform='translateY(0)';this.style.boxShadow='none'"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 10px; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); display: flex; align-items: center; justify-content: center; color: #10b981; text-decoration: none; transition: all 0.3s ease; font-size: 16px;" onmouseover="this.style.background='#10b981';this.style.color='white';this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 20px rgba(16,185,129,0.4)'" onmouseout="this.style.background='rgba(16,185,129,0.1)';this.style.color='#10b981';this.style.transform='translateY(0)';this.style.boxShadow='none'"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 10px; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); display: flex; align-items: center; justify-content: center; color: #10b981; text-decoration: none; transition: all 0.3s ease; font-size: 16px;" onmouseover="this.style.background='#10b981';this.style.color='white';this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 20px rgba(16,185,129,0.4)'" onmouseout="this.style.background='rgba(16,185,129,0.1)';this.style.color='#10b981';this.style.transform='translateY(0)';this.style.boxShadow='none'"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 10px; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); display: flex; align-items: center; justify-content: center; color: #10b981; text-decoration: none; transition: all 0.3s ease; font-size: 16px;" onmouseover="this.style.background='#10b981';this.style.color='white';this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 20px rgba(16,185,129,0.4)'" onmouseout="this.style.background='rgba(16,185,129,0.1)';this.style.color='#10b981';this.style.transform='translateY(0)';this.style.boxShadow='none'"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 col-6 mb-4">
+                <h6 style="font-family: 'Outfit', sans-serif; font-weight: 700; color: #f1f5f9; margin-bottom: 20px; font-size: 16px;">Quick Links</h6>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 12px;"><a href="register-dashboard.php" style="color: #94a3b8; text-decoration: none; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='#10b981';this.style.paddingLeft='5px'" onmouseout="this.style.color='#94a3b8';this.style.paddingLeft='0'">Dashboard</a></li>
+                    <li style="margin-bottom: 12px;"><a href="meal-plans.php" style="color: #94a3b8; text-decoration: none; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='#10b981';this.style.paddingLeft='5px'" onmouseout="this.style.color='#94a3b8';this.style.paddingLeft='0'">Meal Plans</a></li>
+                    <li style="margin-bottom: 12px;"><a href="Exercise-plans.php" style="color: #94a3b8; text-decoration: none; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='#10b981';this.style.paddingLeft='5px'" onmouseout="this.style.color='#94a3b8';this.style.paddingLeft='0'">Exercise Plans</a></li>
+                    <li style="margin-bottom: 12px;"><a href="progress.php" style="color: #94a3b8; text-decoration: none; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='#10b981';this.style.paddingLeft='5px'" onmouseout="this.style.color='#94a3b8';this.style.paddingLeft='0'">Progress</a></li>
+                    <li><a href="my-profile.php" style="color: #94a3b8; text-decoration: none; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='#10b981';this.style.paddingLeft='5px'" onmouseout="this.style.color='#94a3b8';this.style.paddingLeft='0'">My Profile</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-md-6 col-6 mb-4">
+                <h6 style="font-family: 'Outfit', sans-serif; font-weight: 700; color: #f1f5f9; margin-bottom: 20px; font-size: 16px;">Support</h6>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 12px;"><a href="support.php" style="color: #94a3b8; text-decoration: none; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='#10b981';this.style.paddingLeft='5px'" onmouseout="this.style.color='#94a3b8';this.style.paddingLeft='0'">Help Center</a></li>
+                    <li style="margin-bottom: 12px;"><a href="Sub-tips.php" style="color: #94a3b8; text-decoration: none; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='#10b981';this.style.paddingLeft='5px'" onmouseout="this.style.color='#94a3b8';this.style.paddingLeft='0'">Wellness Tips</a></li>
+                    <li style="margin-bottom: 12px;"><a href="manage-plans.php" style="color: #94a3b8; text-decoration: none; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='#10b981';this.style.paddingLeft='5px'" onmouseout="this.style.color='#94a3b8';this.style.paddingLeft='0'">Manage Plans</a></li>
+                    <li><a href="#" style="color: #94a3b8; text-decoration: none; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.color='#10b981';this.style.paddingLeft='5px'" onmouseout="this.style.color='#94a3b8';this.style.paddingLeft='0'">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h6 style="font-family: 'Outfit', sans-serif; font-weight: 700; color: #f1f5f9; margin-bottom: 20px; font-size: 16px;">Stay Updated</h6>
+                <p style="color: #94a3b8; font-size: 14px; margin-bottom: 15px;">Subscribe to get the latest health tips and updates.</p>
+                <div class="d-flex" style="gap: 8px;">
+                    <input type="email" placeholder="Enter your email" style="flex: 1; padding: 12px 16px; border: 1px solid rgba(16,185,129,0.2); border-radius: 10px; background: rgba(255,255,255,0.05); color: #e2e8f0; font-size: 14px; outline: none;">
+                    <button style="padding: 12px 20px; background: linear-gradient(135deg, #059669, #0d9488); border: none; border-radius: 10px; color: white; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px rgba(16,185,129,0.4)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'">Subscribe</button>
+                </div>
+                <div style="margin-top: 20px; padding: 15px; background: rgba(16,185,129,0.08); border-radius: 10px; border: 1px solid rgba(16,185,129,0.15);">
+                    <div class="d-flex align-items-center">
+                        <i class="fa-solid fa-headset" style="font-size: 20px; color: #10b981; margin-right: 12px;"></i>
+                        <div>
+                            <p style="margin: 0; font-size: 13px; color: #94a3b8;">24/7 Support</p>
+                            <p style="margin: 0; font-weight: 600; color: #f1f5f9; font-size: 15px;">+91 98765 43210</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <p class="copyright text-muted" style="font-size:12px; margin: 0; border-top: 1px solid #374151; padding-top: 10px; max-width: 300px; margin: 0 auto;">
-            © <?php echo date("Y"); ?> Health & Wellness.
-        </p>
     </div>
+    <div style="border-top: 1px solid rgba(255,255,255,0.06); margin-top: 20px; padding: 20px 0; background: rgba(0,0,0,0.15);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-left">
+                    <p style="margin: 0; font-size: 13px; color: #64748b;">© <?php echo date("Y"); ?> Health & Wellness. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-right">
+                    <a href="#" style="color: #64748b; text-decoration: none; font-size: 13px; margin-left: 20px;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#64748b'">Privacy Policy</a>
+                    <a href="#" style="color: #64748b; text-decoration: none; font-size: 13px; margin-left: 20px;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#64748b'">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>@keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }</style>
 </footer>
 
 </body>

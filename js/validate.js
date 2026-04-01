@@ -63,7 +63,7 @@ $(document).ready(function () {
 
       // Password confirmation validation
       if (validationType.includes("confirmPassword")) {
-        const confirmPassword = $("#" + field.attr("name") + "_confirm").val();
+        const confirmPassword = $("input[name='password']").val();
         if (value !== confirmPassword) {
           errorMessage = "Passwords do not match.";
         }
@@ -76,20 +76,22 @@ $(document).ready(function () {
 
       // File size validation
       if (validationType.includes("fileSize")) {
-        const file = field[0].files[0];
+        const file = field[0].files ? field[0].files[0] : null;
         if (file && file.size > fileSize * 1024) {
           errorMessage = `File size must be less than ${fileSize}KB.`;
         }
       }
 
       if (validationType.includes("fileType")) {
-        const file = field[0].files[0];
-        const fileExtension = file.name.split(".").pop().toLowerCase();
-        const allowedExtensions = fileType
-          .split(",")
-          .map((ext) => ext.trim().toLowerCase());
-        if (!allowedExtensions.includes(fileExtension)) {
-          errorMessage = `File type must be ${fileType}.`;
+        const file = field[0].files ? field[0].files[0] : null;
+        if (file) {
+          const fileExtension = file.name.split(".").pop().toLowerCase();
+          const allowedExtensions = fileType
+            .split(",")
+            .map((ext) => ext.trim().toLowerCase());
+          if (!allowedExtensions.includes(fileExtension)) {
+            errorMessage = `File type must be ${fileType}.`;
+          }
         }
       }
 
@@ -120,6 +122,13 @@ $(document).ready(function () {
       });
     if (!isValid) {
       e.preventDefault();
+    } else {
+      if ($(this).attr("id") === "regform") {
+        e.preventDefault();
+        $(this).prepend('<div class="alert alert-success mt-3 mb-3">Registration successful! Please login.</div>');
+        $(this).find("button[type='submit']").attr("disabled", true);
+        $(this)[0].reset();
+      }
     }
   });
 });

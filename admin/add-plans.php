@@ -5,23 +5,10 @@ $css = "admin.css";
 ob_start();
 ?>
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-      crossorigin="anonymous"
-    ></script>
-    
-</head>
-
-<div class="row justify-content-center md-5">
-    <div class="col-md-8 col-lg-8">
+<div class="py-5" style="background-color: #ecfdf5; min-height: calc(100vh - 70px);">
+<div class="container">
+    <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-7">
         <div class="card border-0 shadow-lg">
             <div class="card-body p-5">
                 <!-- Heading -->
@@ -95,6 +82,8 @@ ob_start();
             </div>
         </div>
     </div>
+    </div>
+</div>
 </div>
 
 <script src="../js/validate.js"></script>

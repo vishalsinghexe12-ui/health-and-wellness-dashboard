@@ -7,7 +7,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['logged_in'] = true;
     
     // Redirect to the user dashboard
-    header("Location: user/register-dashboard.php");
+    if (isset($_SESSION['redirect_url'])) {
+        $redirect = $_SESSION['redirect_url'];
+        unset($_SESSION['redirect_url']);
+        header("Location: $redirect");
+    } else {
+        header("Location: user/register-dashboard.php");
+    }
     exit();
 } else {
     header("Location: login.php");

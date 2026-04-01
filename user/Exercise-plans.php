@@ -7,13 +7,7 @@ ob_start();
 
 <div class="py-5" style="background-color: var(--bg-light); min-height: calc(100vh - 70px);">
     <div class="container">
-        <!-- Back Button from remote -->
-        <div class="mb-4">
-            <a href="register-dashboard.php" class="btn btn-outline-success d-inline-flex align-items-center" style="border-radius: 20px; padding: 5px 20px;">
-                <i class="fa-solid fa-arrow-left mr-2"></i>
-                <span>Back to Dashboard</span>
-            </a>
-        </div>
+
 
         <div class="text-center mb-5">
             <h2 class="font-weight-bold mb-2" style="color: var(--primary-dark);">Fitness Exercise Plans</h2>
@@ -24,7 +18,7 @@ ob_start();
             <!-- Card 1 -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="stat-card h-100 d-flex flex-column" style="padding: 15px;">
-                    <img src="../Exercise-Images/weight loss.jpg" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;">
+                    <img src="../Exercise-Images/Weight loss fitness.jpg" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;">
                     <h4 class="font-weight-bold" style="color: var(--text-main);">Weight Loss Plan</h4>
                     <p class="text-muted flex-grow-1" style="font-size:14px;">High-intensity workouts designed to burn calories and shed weight fast.</p>
                     <div class="d-flex justify-content-between text-muted mb-2 font-weight-bold" style="font-size:13px;">
@@ -39,7 +33,7 @@ ob_start();
             <!-- Card 2 -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="stat-card h-100 d-flex flex-column" style="padding: 15px;">
-                    <img src="../Exercise-Images/muscle gain.jpg" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;">
+                    <img src="../Exercise-Images/muscle gain fitness.jpg" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;">
                     <h4 class="font-weight-bold" style="color: var(--text-main);">Muscle Building Plan</h4>
                     <p class="text-muted flex-grow-1" style="font-size:14px;">Focused strength training to increase muscle mass and strength.</p>
                     <div class="d-flex justify-content-between text-muted mb-2 font-weight-bold" style="font-size:13px;">
@@ -54,7 +48,7 @@ ob_start();
             <!-- Card 3 -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="stat-card h-100 d-flex flex-column" style="padding: 15px;">
-                    <img src="../Exercise-Images/yoga and flex.jpg" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;">
+                    <img src="../Exercise-Images/Full Body Workout.jpg" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;">
                     <h4 class="font-weight-bold" style="color: var(--text-main);">Yoga & Flexibility</h4>
                     <p class="text-muted flex-grow-1" style="font-size:14px;">Improve flexibility, balance, and mental clarity with guided yoga.</p>
                     <div class="d-flex justify-content-between text-muted mb-2 font-weight-bold" style="font-size:13px;">
@@ -69,7 +63,7 @@ ob_start();
             <!-- Card 4 -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="stat-card h-100 d-flex flex-column" style="padding: 15px;">
-                    <img src="../Exercise-Images/HIIT images.jpg" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;">
+                    <img src="../Exercise-Images/HIIT Blast.jpg" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;">
                     <h4 class="font-weight-bold" style="color: var(--text-main);">HIIT Intensity</h4>
                     <p class="text-muted flex-grow-1" style="font-size:14px;">Short, intense bursts of exercise followed by brief recovery periods.</p>
                     <div class="d-flex justify-content-between text-muted mb-2 font-weight-bold" style="font-size:13px;">
@@ -84,7 +78,7 @@ ob_start();
             <!-- Card 5 -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="stat-card h-100 d-flex flex-column" style="padding: 15px;">
-                    <img src="../Exercise-Images/Endurance Image.jpg" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;">
+                    <img src="../Exercise-Images/Beginner Fitness.jpg" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;">
                     <h4 class="font-weight-bold" style="color: var(--text-main);">Endurance Plan</h4>
                     <p class="text-muted flex-grow-1" style="font-size:14px;">Building cardiovascular strength and long-term stamina.</p>
                     <div class="d-flex justify-content-between text-muted mb-2 font-weight-bold" style="font-size:13px;">
@@ -99,7 +93,7 @@ ob_start();
             <!-- Card 6 -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="stat-card h-100 d-flex flex-column" style="padding: 15px;">
-                    <img src="../Exercise-Images/stregth training.jpg" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;">
+                    <img src="../Exercise-Images/Strenght.jpg" class="img-fluid rounded mb-3" style="height:200px; object-fit:cover;">
                     <h4 class="font-weight-bold" style="color: var(--text-main);">Strength Pro</h4>
                     <p class="text-muted flex-grow-1" style="font-size:14px;">In-depth resistance training for total body strength and power.</p>
                     <div class="d-flex justify-content-between text-muted mb-2 font-weight-bold" style="font-size:13px;">

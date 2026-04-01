@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    $_SESSION['redirect_url'] = $_SERVER['REQUEST_URI'];
+    header("Location: ../login.php");
+    exit();
+}
 $title = "Checkout - Secure Payment";
 $css = "register-dashboard.css"; 
 

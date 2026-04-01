@@ -8,61 +8,8 @@ ob_start();
     <div class="container-fluid" style="flex: 1; padding: 0;">
       <div class="row m-0" style="min-height: calc(100vh - 70px);">
 
-         <!-- Sidebar -->
-        <div class="col-md-3 col-lg-2 bg-success p-0">
-          <div class="sticky-top sidebar"> 
-            <nav class="nav flex-column">
-              <a class="nav-link active sidebar-link" href="register-dashboard.php">
-                <i class="fa-solid fa-gauge"></i> 
-                <span class="d-none d-sm-inline">Dashboard</span>
-              </a>
-
-              <hr class="sidebar-divider">
-
-              <a class="nav-link sidebar-link" href="meal-plans.php">
-                <i class="fa-solid fa-bowl-food"></i> 
-                <span class="d-none d-sm-inline">Meal Plans</span>
-              </a>
-
-              <a class="nav-link sidebar-link" href="Exercise-plans.php">
-                <i class="fa-solid fa-dumbbell"></i> 
-                <span class="d-none d-sm-inline">Exercise Plans</span>
-              </a>
-
-              <a class="nav-link sidebar-link" href="progress.php">
-                <i class="fa-solid fa-bars-progress"></i> 
-                <span class="d-none d-sm-inline">Progress Data</span>
-              </a>
-
-              <a class="nav-link sidebar-link" href="Sub-tips.php">
-                <i class="fa-solid fa-lightbulb"></i> 
-                <span class="d-none d-sm-inline">SUBI Tips</span>
-              </a>
-
-              <!-- NEW: Manage Plans -->
-              <a class="nav-link sidebar-link" href="manage-plans.php">
-                <i class="fa-solid fa-clipboard-list"></i> 
-                <span class="d-none d-sm-inline">Manage Plans</span>
-              </a>
-
-              <!-- NEW: Support -->
-              <a class="nav-link sidebar-link" href="support.php">
-                <i class="fa-solid fa-headset"></i> 
-                <span class="d-none d-sm-inline">Support</span>
-              </a>
-
-              <hr class="sidebar-divider pt-4 mt-auto">
-
-              <a class="nav-link sidebar-link" href="../login.php">
-                <i class="fa-solid fa-right-from-bracket"></i> 
-                <span class="d-none d-sm-inline">Logout</span>
-              </a>
-            </nav>
-          </div>
-        </div>
-
         <!-- Main Content -->
-        <div class="col-md-9 col-lg-10 p-4" style="background-color: var(--bg-light);">
+        <div class="col-12 py-4 px-5" style="background-color: var(--bg-light);">
           <div class="d-flex justify-content-between align-items-center mb-4">
               <h2 class="font-weight-bold m-0" style="color: var(--text-main);">Welcome Back!</h2>
               <span class="text-muted"><?php echo date('l, F j, Y'); ?></span>
@@ -138,15 +85,8 @@ ob_start();
                   </div>
               </div>
 
-              <div class="col-lg-4 mb-4">
-                  <div class="activity-card h-100 m-0 text-center d-flex flex-column justify-content-center align-items-center">
-                      <h4 class="font-weight-bold mb-3">Next Milestone</h4>
-                      <div class="spinner-border text-success mb-3" role="status" style="width: 3rem; height: 3rem;">
-                          <span class="sr-only">Loading...</span>
-                      </div>
-                      <p class="text-muted mb-0">5 Workout Sessions away from Level 3!</p>
-                  </div>
-              </div>
+
+
           </div>
 
         </div>

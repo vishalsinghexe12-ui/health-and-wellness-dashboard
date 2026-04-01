@@ -1,6 +1,12 @@
 <?php
+session_start();
 $title = "Login";
 $css = "guest.css"; 
+
+$flashMessage = $_SESSION['auth_flash'] ?? null;
+if ($flashMessage) {
+    unset($_SESSION['auth_flash']);
+}
 
 ob_start();
 ?>
@@ -16,6 +22,12 @@ ob_start();
                         <h2 class="font-weight-bold text-success">Welcome Back</h2>
                         <p class="text-muted">Login to Health & Wellness</p>
                     </div>
+
+                    <?php if ($flashMessage): ?>
+                        <div class="alert alert-success text-center">
+                            <?php echo htmlspecialchars($flashMessage); ?>
+                        </div>
+                    <?php endif; ?>
 
                     <!-- Role Selection Buttons -->
                     <div class="d-flex mb-4">
@@ -50,7 +62,7 @@ ob_start();
                         <!-- Remember + Forgot -->
                         <div class="mb-4 d-flex justify-content-between">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="remember" required>
+                                <input class="form-check-input" type="checkbox" name="remember">
                                 <label class="form-check-label">Remember me</label>
                             </div>
                             <a href="#" class="text-success">Forgot Password?</a>

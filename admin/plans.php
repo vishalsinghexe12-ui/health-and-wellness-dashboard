@@ -1,19 +1,11 @@
 <?php
-$title = "Admin";
+$title = "Manage Plans";
 $css = "admin.css";
 ob_start();
 ?>
 
 
 <div class="container mt-5">
-    <div class="mb-4">
-        <a href="javascript:history.back()" class="back-btn d-inline-flex align-items-center">
-            <span class="back-icon">
-                <i class="fa-solid fa-arrow-left"></i>
-            </span>
-            <span class="ml-2">Back</span>
-        </a>
-    </div>
     <h3 class="mb-4 font-weight-bold">Manage Plans</h3>
 
     <div class="row">

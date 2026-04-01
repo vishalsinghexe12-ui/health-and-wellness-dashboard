@@ -8,14 +8,7 @@ ob_start();
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <div class="mb-4">
-                <a href="javascript:history.back()" class="back-btn d-inline-flex align-items-center">
-                    <span class="back-icon">
-                        <i class="fa-solid fa-arrow-left"></i>
-                    </span>
-                    <span class="ml-2">Back</span>
-                </a>
-            </div>
+
             <div class="card shadow-lg border-0">
                 <div class="card-body p-4">
 
