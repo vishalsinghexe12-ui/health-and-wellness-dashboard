@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 require_once("db_config.php");
 require_once("includes/send_email.php");
@@ -53,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'name' => $name,
         'email' => $email,
         'phone' => $phone,
-        'password' => $password, // Note: In a real app, hash this before session or store securely
+        'password' => $password, // Note: Handled by verify_process later
         'gender' => $gender,
         'profile_picture' => $profile_picture,
         'otp' => $otp,
@@ -87,4 +88,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: register.php");
     exit();
 }
-?>

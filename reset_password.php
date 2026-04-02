@@ -23,9 +23,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Validation for strong password if you wish (skipping back-end regex for simplicity right now)
         
+        // Securely hash the new password
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        
         // Update user database
         $stmt = $con->prepare("UPDATE register SET password = ? WHERE email = ?");
-        $stmt->bind_param("ss", $password, $email);
+        $stmt->bind_param("ss", $hashed_password, $email);
         
         if ($stmt->execute()) {
             // Nullify token

@@ -49,16 +49,40 @@ $create_subscribers = "CREATE TABLE IF NOT EXISTS subscribers (
 )";
 mysqli_query($con, $create_subscribers);
 
-// Seed default Admin and User following the strong password rules
-$seed_admin = "INSERT INTO register (name, email, password, role, status)
-               SELECT 'Admin', 'admin@admin.com', 'Admin@123', 'admin', 'Active'
-               WHERE NOT EXISTS (SELECT id FROM register WHERE email = 'admin@admin.com')";
-mysqli_query($con, $seed_admin);
+// Seed default Admin and User with HASHED passwords
+$admin_email = 'admin@admin.com';
+$admin_pass = 'Admin@123';
+$admin_hash = password_hash($admin_pass, PASSWORD_DEFAULT);
 
-$seed_user = "INSERT INTO register (name, email, password, role, status)
-              SELECT 'User', 'user@user.com', 'User@123', 'user', 'Active'
-              WHERE NOT EXISTS (SELECT id FROM register WHERE email = 'user@user.com')";
-mysqli_query($con, $seed_user);
+$user_email = 'user@user.com';
+$user_pass = 'User@123';
+$user_hash = password_hash($user_pass, PASSWORD_DEFAULT);
+
+// Update existing if they are still plaintext (Admin)
+$check_admin = mysqli_query($con, "SELECT password FROM register WHERE email = '$admin_email'");
+if ($row = mysqli_fetch_assoc($check_admin)) {
+    if (!password_get_info($row['password'])['algo']) {
+        // It's plaintext, update to hash
+        $upd = "UPDATE register SET password = '$admin_hash' WHERE email = '$admin_email'";
+        mysqli_query($con, $upd);
+    }
+} else {
+    // Insert new
+    $seed_admin = "INSERT INTO register (name, email, password, role, status) VALUES ('Admin', '$admin_email', '$admin_hash', 'admin', 'Active')";
+    mysqli_query($con, $seed_admin);
+}
+
+// Update existing if they are still plaintext (User)
+$check_user = mysqli_query($con, "SELECT password FROM register WHERE email = '$user_email'");
+if ($row = mysqli_fetch_assoc($check_user)) {
+    if (!password_get_info($row['password'])['algo']) {
+        $upd = "UPDATE register SET password = '$user_hash' WHERE email = '$user_email'";
+        mysqli_query($con, $upd);
+    }
+} else {
+    $seed_user = "INSERT INTO register (name, email, password, role, status) VALUES ('User', '$user_email', '$user_hash', 'user', 'Active')";
+    mysqli_query($con, $seed_user);
+}
 
 // Plans table
 $create_plans = "CREATE TABLE IF NOT EXISTS plans (
@@ -154,4 +178,3 @@ $create_wellness = "CREATE TABLE IF NOT EXISTS user_wellness_profiles (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 mysqli_query($con, $create_wellness);
-?>

@@ -41,13 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    if (strlen($new_password) > 20) {
-        $_SESSION['pwd_flash'] = "New password cannot exceed 20 characters.";
-        $_SESSION['pwd_flash_type'] = "danger";
-        header("Location: $redirect_page");
-        exit();
-    }
-
     // Fetch current password from database
     $stmt = $con->prepare("SELECT password FROM register WHERE id = ?");
     $stmt->bind_param("i", $user_id);
@@ -55,11 +48,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->get_result();
 
     if ($row = $result->fetch_assoc()) {
-        // Compare old password (plaintext comparison matching login_process.php)
-        if ($old_password === $row['password']) {
-            // Old password matches — update to new password
+        // Compare OLD password using password_verify
+        if (password_verify($old_password, $row['password'])) {
+            
+            // Hash the NEW password
+            $new_hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+
+            // Update to new hashed password
             $update_stmt = $con->prepare("UPDATE register SET password = ? WHERE id = ?");
-            $update_stmt->bind_param("si", $new_password, $user_id);
+            $update_stmt->bind_param("si", $new_hashed_password, $user_id);
 
             if ($update_stmt->execute()) {
                 $_SESSION['pwd_flash'] = "Password changed successfully!";
@@ -85,4 +82,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: login.php");
     exit();
 }
-?>

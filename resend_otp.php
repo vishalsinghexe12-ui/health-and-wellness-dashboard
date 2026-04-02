@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 require_once("includes/send_email.php");
 
@@ -40,4 +41,3 @@ if (send_email($email, $subject, $message)) {
 
 header("Location: register_verify.php");
 exit();
-?>

@@ -20,8 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->get_result();
 
     if ($row = $result->fetch_assoc()) {
-        // Since we are using varchar(20) for password, we compare plaintext
-        if ($password === $row['password']) {
+        // Use password_verify to check hashed passwords
+        if (password_verify($password, $row['password'])) {
             if ($row['status'] === 'Inactive') {
                 $_SESSION['auth_flash'] = "Your account is not activated. Please verify your email first.";
                 header("Location: login.php?error=inactive");
@@ -71,4 +71,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: login.php");
     exit();
 }
-?>

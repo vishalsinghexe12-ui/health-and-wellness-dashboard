@@ -30,9 +30,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $gender = $pending_user['gender'];
         $profile_picture = $pending_user['profile_picture'];
 
+        // Securely hash the password before saving to DB
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
         // Insert into database
         $stmt = $con->prepare("INSERT INTO register (name, email, password, mobile, gender, profile_picture, status) VALUES (?, ?, ?, ?, ?, ?, 'Active')");
-        $stmt->bind_param("ssssss", $name, $email, $password, $phone, $gender, $profile_picture);
+        $stmt->bind_param("ssssss", $name, $email, $hashed_password, $phone, $gender, $profile_picture);
         
         if ($stmt->execute()) {
             // Clear session
@@ -56,4 +59,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: register_verify.php");
     exit();
 }
-?>
