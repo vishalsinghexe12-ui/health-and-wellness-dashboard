@@ -29,15 +29,25 @@ try {
 // Users table
 $create_table = "CREATE TABLE IF NOT EXISTS register(
 id int auto_increment primary key, 
-name varchar(100), email varchar(100), 
+name varchar(100), 
+email varchar(100) UNIQUE, 
 password varchar(255),
-mobile bigint(10),
+mobile varchar(15) UNIQUE,
 gender char(10), 
 profile_picture text,
 role char(20) default 'user',
 status char(10) default 'Inactive',
-token varchar(255) default null)";
+token varchar(255) default null,
+otp varchar(10) default null)";
 mysqli_query($con, $create_table);
+
+// Subscribers table
+$create_subscribers = "CREATE TABLE IF NOT EXISTS subscribers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+mysqli_query($con, $create_subscribers);
 
 // Seed default Admin and User following the strong password rules
 $seed_admin = "INSERT INTO register (name, email, password, role, status)

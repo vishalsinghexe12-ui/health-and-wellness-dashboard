@@ -11,13 +11,20 @@ $(document).ready(function () {
     let errorMessage = "";
 
     if (validationType) {
-      // Required field validation
-      if (validationType.includes("required") && value === "") {
-        errorMessage = "This field is required.";
+      // Checkbox specific validation
+      if (field.is(":checkbox")) {
+        if (validationType.includes("required") && !field.is(":checked")) {
+          errorMessage = "You must agree to the terms.";
+        }
+      } else {
+        // Required field validation for all other inputs
+        if (validationType.includes("required") && value === "") {
+          errorMessage = "This field is required.";
+        }
       }
 
       // Minimum length validation
-      if (validationType.includes("min") && value.length < minLength) {
+      if (!errorMessage && validationType.includes("min") && value.length < minLength) {
         errorMessage = `This field must be at least ${minLength} characters long.`;
       }
 
@@ -76,7 +83,7 @@ $(document).ready(function () {
       }
 
       // File size validation
-      if (validationType.includes("fileSize")) {
+      if (!errorMessage && validationType.includes("fileSize")) {
         const file = field[0].files ? field[0].files[0] : null;
         if (file && file.size > fileSize * 1024) {
           let sizeMsg = fileSize >= 1024 ? Math.round(fileSize / 1024) + "MB" : fileSize + "KB";
@@ -84,7 +91,8 @@ $(document).ready(function () {
         }
       }
 
-      if (validationType.includes("fileType")) {
+      // File type validation
+      if (!errorMessage && validationType.includes("fileType")) {
         const file = field[0].files ? field[0].files[0] : null;
         if (file) {
           const fileExtension = file.name.split(".").pop().toLowerCase();
@@ -92,7 +100,7 @@ $(document).ready(function () {
             .split(",")
             .map((ext) => ext.trim().toLowerCase());
           if (!allowedExtensions.includes(fileExtension)) {
-            errorMessage = `File type must be ${fileType}.`;
+            errorMessage = `Only ${fileType} formats are allowed.`;
           }
         }
       }

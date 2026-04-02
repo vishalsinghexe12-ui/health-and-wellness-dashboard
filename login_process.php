@@ -14,8 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $stmt = $con->prepare("SELECT id, name, email, password, role, profile_picture, status FROM register WHERE email = ?");
-    $stmt->bind_param("s", $email);
+    $stmt = $con->prepare("SELECT id, name, email, mobile, password, role, profile_picture, status FROM register WHERE email = ? OR mobile = ?");
+    $stmt->bind_param("ss", $email, $email); // Use the same input for both email and mobile
     $stmt->execute();
     $result = $stmt->get_result();
 

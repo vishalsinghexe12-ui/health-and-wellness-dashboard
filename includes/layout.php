@@ -115,10 +115,12 @@ if(isset($content)){
             <div class="col-lg-4 col-md-6 mb-4">
                 <h6 style="font-family: 'Outfit', sans-serif; font-weight: 700; color: #f1f5f9; margin-bottom: 20px; font-size: 16px;">Stay Updated</h6>
                 <p style="color: #94a3b8; font-size: 14px; margin-bottom: 15px;">Subscribe to get the latest health tips and updates.</p>
-                <div class="d-flex" style="gap: 8px;">
-                    <input type="email" placeholder="Enter your email" style="flex: 1; padding: 12px 16px; border: 1px solid rgba(16,185,129,0.2); border-radius: 10px; background: rgba(255,255,255,0.05); color: #e2e8f0; font-size: 14px; outline: none;">
-                    <button style="padding: 12px 20px; background: linear-gradient(135deg, #059669, #0d9488); border: none; border-radius: 10px; color: white; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px rgba(16,185,129,0.4)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'">Subscribe</button>
-                </div>
+                <form id="subscribeForm" class="d-flex" style="gap: 8px;">
+                    <input type="email" id="subscriberEmail" name="email" placeholder="Enter your email" required style="flex: 1; padding: 12px 16px; border: 1px solid rgba(16,185,129,0.2); border-radius: 10px; background: rgba(255,255,255,0.05); color: #e2e8f0; font-size: 14px; outline: none;">
+                    <button type="submit" style="padding: 12px 20px; background: linear-gradient(135deg, #059669, #0d9488); border: none; border-radius: 10px; color: white; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 20px rgba(16,185,129,0.4)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'">Subscribe</button>
+                </form>
+                <div id="subscribeStatus" style="margin-top: 10px; font-size: 13px; display: none; padding: 8px 12px; border-radius: 8px;"></div>
+                
                 <div style="margin-top: 20px; padding: 15px; background: rgba(16,185,129,0.08); border-radius: 10px; border: 1px solid rgba(16,185,129,0.15);">
                     <div class="d-flex align-items-center">
                         <i class="fa-solid fa-headset" style="font-size: 20px; color: #10b981; margin-right: 12px;"></i>
@@ -149,6 +151,42 @@ if(isset($content)){
 
     <style>@keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }</style>
 </footer>
+
+<script>
+$(document).ready(function() {
+    $('#subscribeForm').on('submit', function(e) {
+        e.preventDefault();
+        const email = $('#subscriberEmail').val();
+        const statusDiv = $('#subscribeStatus');
+        const btn = $(this).find('button');
+        
+        btn.prop('disabled', true).html('<i class="fa-solid fa-spinner fa-spin"></i>');
+        
+        $.ajax({
+            url: 'subscribe_process.php',
+            type: 'POST',
+            data: { email: email },
+            dataType: 'json',
+            success: function(response) {
+                statusDiv.show().text(response.message);
+                if (response.status === 'success') {
+                    statusDiv.css({'background': 'rgba(16,185,129,0.1)', 'color': '#10b981', 'border': '1px solid rgba(16,185,129,0.2)'});
+                    $('#subscriberEmail').val('');
+                } else {
+                    statusDiv.css({'background': 'rgba(239,68,68,0.1)', 'color': '#ef4444', 'border': '1px solid rgba(239,68,68,0.2)'});
+                }
+            },
+            error: function() {
+                statusDiv.show().text('An error occurred. Please try again later.').css({'background': 'rgba(239,68,68,0.1)', 'color': '#ef4444', 'border': '1px solid rgba(239,68,68,0.2)'});
+            },
+            complete: function() {
+                btn.prop('disabled', false).text('Subscribe');
+                setTimeout(() => statusDiv.fadeOut(), 5000);
+            }
+        });
+    });
+});
+</script>
 
 </body>
 </html>

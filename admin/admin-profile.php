@@ -106,15 +106,6 @@ ob_start();
                                 </div>
                             </div>
 
-                            <div class="col-md-6 mb-4">
-                                <label class="font-weight-bold text-muted small text-uppercase">Member Since</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light border-right-0" style="border-radius: 10px 0 0 10px;"><i class="fa-solid fa-calendar-alt text-muted"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control border-left-0" value="<?php echo date('F j, Y', strtotime($admin['created_at'] ?? 'now')); ?>" disabled style="border-radius: 0 10px 10px 0; padding: 25px 15px; background: #f8fafc;">
-                                </div>
-                            </div>
                         </div>
 
                         <div class="mt-4 pt-4 border-top">

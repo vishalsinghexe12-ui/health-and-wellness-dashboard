@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("db_config.php");
+require_once("includes/send_email.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -12,10 +13,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'] ?? ''; 
     $gender = $_POST['gender'] ?? '';
     
-    // Default image
-    $profile_picture = "default.png";
+    // Check if email or phone already exists
+    $check_query = "SELECT id FROM register WHERE email = ? OR mobile = ?";
+    $check_stmt = $con->prepare($check_query);
+    $check_stmt->bind_param("ss", $email, $phone);
+    $check_stmt->execute();
+    $check_result = $check_stmt->get_result();
 
-    // Handle Image Upload
+    if ($check_result->num_rows > 0) {
+        $_SESSION['auth_flash'] = "Email or Phone Number already registered.";
+        header("Location: register.php");
+        exit();
+    }
+
+    // Default image
+    $profile_picture = "images/uploads/default.png";
+
+    // Handle Image Upload (Optional)
     if(isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] == 0){
         $ext = pathinfo($_FILES['profileImage']['name'], PATHINFO_EXTENSION);
         $new_name = time() . "_" . uniqid() . "." . $ext;
@@ -31,52 +45,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Include the email helper
-    require_once("includes/send_email.php");
+    // Generate 6-digit OTP
+    $otp = sprintf("%06d", mt_rand(1, 999999));
 
-    // Generate Verification Token
-    $token = bin2hex(random_bytes(16));
+    // Store in session
+    $_SESSION['pending_registration'] = [
+        'name' => $name,
+        'email' => $email,
+        'phone' => $phone,
+        'password' => $password, // Note: In a real app, hash this before session or store securely
+        'gender' => $gender,
+        'profile_picture' => $profile_picture,
+        'otp' => $otp,
+        'expires' => time() + 600 // 10 minutes
+    ];
 
-    // Insert user
-    // `role` defaults to 'user', `status` defaults to 'Inactive' per schema.
-    try {
-        $stmt = $con->prepare("INSERT INTO register (name, email, password, mobile, gender, profile_picture, token) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssss", $name, $email, $password, $phone, $gender, $profile_picture, $token);
-        
-        if ($stmt->execute()) {
-            // Build the verify URL (assuming Laragon root)
-            $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
-            $domain = $_SERVER['HTTP_HOST'];
-            $app_path = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-            $verifyUrl = "{$protocol}://{$domain}{$app_path}/verify.php?token={$token}";
+    // Email body
+    $subject = "Verify Your Email - Health & Wellness";
+    $message = "
+        <div style='font-family: Arial, sans-serif; padding: 20px; color: #333;'>
+            <h2 style='color: #10b981;'>Email Verification</h2>
+            <p>Hello <strong>{$firstName}</strong>,</p>
+            <p>Thank you for signing up with Health & Wellness. Your verification code is:</p>
+            <div style='font-size: 32px; font-weight: bold; letter-spacing: 5px; color: #10b981; margin: 20px 0;'>{$otp}</div>
+            <p>This code will expire in 10 minutes.</p>
+            <p>If you did not request this, please ignore this email.</p>
+        </div>
+    ";
 
-            // Email body
-            $subject = "Verify Your Account - Health & Wellness";
-            $message = "
-                <h3>Welcome to Health & Wellness Dashboard, {$firstName}!</h3>
-                <p>Please click the link below to verify your email address and activate your account:</p>
-                <a href='{$verifyUrl}'>{$verifyUrl}</a>
-                <p>If you didn't request this, you can ignore this email.</p>
-            ";
-
-            // Send Email
-            if (send_email($email, $subject, $message)) {
-                $_SESSION['auth_flash'] = "Registration successful! Check your email to verify your account.";
-            } else {
-                $_SESSION['auth_flash'] = "Registered but failed to send verification email.";
-            }
-            header("Location: login.php?msg=registered");
-            exit();
-        } else {
-            $_SESSION['auth_flash'] = "Registration Failed: " . $stmt->error;
-            header("Location: register.php?error=failed");
-            exit();
-        }
-    } catch(Exception $e) {
-        $_SESSION['auth_flash'] = "Error: Email may already exist.";
-        header("Location: register.php?error=email_exists");
-        exit();
+    // Send Email
+    if (send_email($email, $subject, $message)) {
+        $_SESSION['auth_flash'] = "Verification code sent to your email.";
+        header("Location: register_verify.php");
+    } else {
+        $_SESSION['auth_flash'] = "Failed to send verification email. Please try again.";
+        header("Location: register.php");
     }
+    exit();
+
 } else {
     header("Location: register.php");
     exit();

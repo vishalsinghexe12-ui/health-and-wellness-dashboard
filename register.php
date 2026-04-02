@@ -14,6 +14,15 @@ ob_start();
                     <p class="text-muted">Join Health & Wellness today</p>
                 </div>
 
+                <?php if(isset($_SESSION['auth_flash'])): ?>
+                    <div class="alert alert-info text-center border-0 shadow-sm" style="border-radius: 12px; background-color: #f0fdf4; color: #166534;">
+                        <?php 
+                        echo $_SESSION['auth_flash']; 
+                        unset($_SESSION['auth_flash']);
+                        ?>
+                    </div>
+                <?php endif; ?>
+
 
                 <!-- Form Start -->
                 <form action="register_process.php" method="POST" id="regform" enctype="multipart/form-data">
@@ -151,8 +160,8 @@ ob_start();
                     </div>
 
                     <div class="mb-4">
-                        <label>Upload Profile Picture (Max 10MB)</label>
-                        <input type="file" name="profileImage" class="form-control-file" data-validation="required fileSize fileType"  data-filesize="10240" data-filetype="jpg,jpeg,png">   
+                        <label>Upload Profile Picture (Optional, Max 10MB)</label>
+                        <input type="file" name="profileImage" class="form-control-file" data-validation="fileSize fileType"  data-filesize="10240" data-filetype="jpg,jpeg,png">   
                         <span id="profileImage_error"></span> 
                     </div>
 

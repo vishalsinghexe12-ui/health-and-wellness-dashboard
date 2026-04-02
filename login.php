@@ -58,10 +58,10 @@ ob_start();
                     <!-- Login Form -->
                     <form action="login_process.php" method="POST">
 
-                        <!-- Email -->
+                        <!-- Email or Phone -->
                         <div class="mb-4">
-                            <label class="form-label font-weight-bold">Email Address</label>
-                            <input type="text" class="form-control" id="email" name="email" data-validation="required email" placeholder="Enter your email">
+                            <label class="form-label font-weight-bold">Email or Phone Number</label>
+                            <input type="text" class="form-control" id="email" name="email" data-validation="required" placeholder="Enter your email or phone number">
                             <span id="email_error"></span>
                         </div>
 

@@ -10,29 +10,17 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['role'] !== 'admin') {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $title = $_POST['planTitle'] ?? '';
-    // Use the dropdown 'type' which is 'Exercise plan' or 'Meal Plan', standardise to 'Exercise' or 'Meal'
-    $raw_type = $_POST['type'] ?? '';
-    $type = 'Wellness'; // fallback
-    if (stripos($raw_type, 'Exercise') !== false) {
-        $type = 'Exercise';
-    } elseif (stripos($raw_type, 'Meal') !== false) {
-        $type = 'Meal';
-    }
-
-    $duration = $_POST['duration'] ?? '';
-    if (is_numeric($duration)) {
-        $duration = $duration == 1 ? $duration . " Month" : $duration . " Months";
-    }
-
+    $title = mysqli_real_escape_string($con, $_POST['planTitle'] ?? '');
+    $type = mysqli_real_escape_string($con, $_POST['type'] ?? 'Wellness');
+    $category = mysqli_real_escape_string($con, $_POST['category'] ?? '');
+    $duration_months = $_POST['duration'] ?? 1;
+    $duration = $duration_months == 1 ? $duration_months . " Month" : $duration_months . " Months";
+    
     $price = $_POST['price'] ?? 0;
-    $description = $_POST['description'] ?? '';
-    $status = $_POST['status'] ?? 'Active';
-
-    // The form doesn't capture intensity or calories currently, we will leave them blank or add logic if needed.
-    $category = '';
-    $intensity = '';
-    $calories = '';
+    $calories = mysqli_real_escape_string($con, $_POST['calories'] ?? '');
+    $intensity = mysqli_real_escape_string($con, $_POST['intensity'] ?? '');
+    $description = mysqli_real_escape_string($con, $_POST['description'] ?? '');
+    $status = mysqli_real_escape_string($con, $_POST['status'] ?? 'Active');
 
     // Handle Image Upload
     $image_path = "images/default-plan.jpg";
@@ -40,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
         $new_name = time() . "_" . uniqid() . "." . $ext;
         
-        // Define directory based on type
+        // Use generic upload dir or type-specific
         $upload_dir = '../images/plans/';
         if ($type === 'Exercise') {
             $upload_dir = '../Exercise-Images/';
@@ -54,20 +42,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         $dest = $upload_dir . $new_name;
         if(move_uploaded_file($_FILES['image']['tmp_name'], $dest)){
-            // Store relative path in DB assuming root is `health-and-wellness-dashboard`
             $image_path = str_replace('../', '', $dest);
         }
     }
 
-    $stmt = $con->prepare("INSERT INTO plans (title, type, description, category, duration, calories, intensity, price, image_path, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $query = "INSERT INTO plans (title, type, description, category, duration, calories, intensity, price, image_path, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $con->prepare($query);
     $stmt->bind_param("ssssssssss", $title, $type, $description, $category, $duration, $calories, $intensity, $price, $image_path, $status);
     
     if ($stmt->execute()) {
         header("Location: admin.php?msg=plan_added");
         exit();
     } else {
-        header("Location: add-plans.php?error=failed");
+        header("Location: add-plans.php?error=failed&db_error=" . urlencode($con->error));
         exit();
     }
+} else {
+    header("Location: add-plans.php");
+    exit();
 }
 ?>
