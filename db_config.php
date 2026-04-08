@@ -178,3 +178,16 @@ $create_wellness = "CREATE TABLE IF NOT EXISTS user_wellness_profiles (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 mysqli_query($con, $create_wellness);
+
+// Offers & Discounts table
+$create_offers = "CREATE TABLE IF NOT EXISTS offers_discounts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    discount_percentage INT,
+    image_path VARCHAR(255),
+    valid_until DATE,
+    status VARCHAR(20) DEFAULT 'Active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+mysqli_query($con, $create_offers);

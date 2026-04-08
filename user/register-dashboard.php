@@ -63,6 +63,59 @@ ob_start();
               </div>
           <?php endif; ?>
 
+          <?php
+          // Fetch active offers for users
+          $user_offers_query = "SELECT * FROM offers_discounts WHERE status = 'Active' AND valid_until >= CURDATE() ORDER BY created_at DESC LIMIT 2";
+          $user_offers_result = mysqli_query($con, $user_offers_query);
+          if (mysqli_num_rows($user_offers_result) > 0):
+          ?>
+          <!-- Active Offers Alert/Banner -->
+          <div class="row mb-5">
+              <div class="col-12">
+                  <div class="card border-0 shadow-sm" style="border-radius: 20px; background: linear-gradient(135deg, #065f46 0%, #047857 100%); color: white; overflow: hidden;">
+                      <div class="card-body p-4 position-relative">
+                          <div style="position: absolute; right: -20px; top: -20px; opacity: 0.1; font-size: 150px;">
+                              <i class="fa-solid fa-tags"></i>
+                          </div>
+                          <div class="row align-items-center">
+                              <div class="col-lg-8">
+                                  <h4 class="font-weight-bold mb-2">🔥 Exclusive Offers for You!</h4>
+                                  <p class="mb-0" style="opacity: 0.9;">Don't miss out on these limited-time wellness deals. Grab them before they're gone!</p>
+                              </div>
+                              <div class="col-lg-4 text-lg-right mt-3 mt-lg-0">
+                                  <button class="btn btn-light px-4 py-2" style="border-radius: 12px; font-weight: 700; color: #047857;" onclick="$('#offersCollapse').collapse('toggle')">
+                                      View Offers
+                                  </button>
+                              </div>
+                          </div>
+                          
+                          <div class="collapse mt-4" id="offersCollapse">
+                              <div class="row">
+                                  <?php while($offer = mysqli_fetch_assoc($user_offers_result)): ?>
+                                  <div class="col-md-6 mb-3">
+                                      <div class="p-3" style="background: rgba(255,255,255,0.1); border-radius: 16px; border: 1px solid rgba(255,255,255,0.2);">
+                                          <div class="d-flex align-items-center">
+                                              <div class="mr-3" style="width: 60px; height: 60px; border-radius: 12px; overflow: hidden; background: white;">
+                                                  <?php $offer_img = !empty($offer['image_path']) ? "../".$offer['image_path'] : "../images/offer-placeholder.jpg"; ?>
+                                                  <img src="<?php echo htmlspecialchars($offer_img); ?>" class="w-100 h-100" style="object-fit: cover;">
+                                              </div>
+                                              <div>
+                                                  <h6 class="m-0 font-weight-bold"><?php echo htmlspecialchars($offer['title']); ?></h6>
+                                                  <p class="m-0 small" style="opacity: 0.8;"><?php echo $offer['discount_percentage']; ?>% Discount Applied</p>
+                                                  <small style="opacity: 0.7;">Expires: <?php echo date('M j, Y', strtotime($offer['valid_until'])); ?></small>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <?php endwhile; ?>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <?php endif; ?>
+
           <!-- Greeting -->
           <div class="d-flex justify-content-between align-items-center mb-4">
               <div>

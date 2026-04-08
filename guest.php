@@ -13,6 +13,58 @@ ob_start();
     </div>
 </div>
 
+<?php 
+require_once("db_config.php");
+$active_offers_query = "SELECT * FROM offers_discounts WHERE status = 'Active' AND valid_until >= CURDATE() ORDER BY created_at DESC LIMIT 3";
+$active_offers_result = mysqli_query($con, $active_offers_query);
+
+if (mysqli_num_rows($active_offers_result) > 0): ?>
+<div class="special-offers-section py-5" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);">
+    <div class="container">
+        <div class="row align-items-center mb-5">
+            <div class="col-md-8">
+                <h2 class="font-weight-bold" style="color: var(--text-main); font-size: 32px; font-family: 'Outfit', sans-serif;">Special Offers & Discounts</h2>
+                <p class="text-muted" style="font-size: 18px;">Grab these exclusive deals before they expire!</p>
+            </div>
+            <div class="col-md-4 text-md-right">
+                <a href="plans.php" class="btn btn-outline-success px-4 py-2" style="border-radius: 12px; font-weight: 600;">View All Plans</a>
+            </div>
+        </div>
+        <div class="row">
+            <?php while($offer = mysqli_fetch_assoc($active_offers_result)): ?>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="offer-card h-100 shadow-sm" style="border-radius: 20px; border: none; overflow: hidden; background: white; transition: all 0.3s ease; position: relative;" onmouseover="this.style.transform='translateY(-10px)';this.style.boxShadow='0 15px 30px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 5px 15px rgba(0,0,0,0.05)'">
+                    <div class="offer-image" style="height: 200px; position: relative; overflow: hidden;">
+                        <?php $offer_img = !empty($offer['image_path']) ? $offer['image_path'] : "images/offer-placeholder.jpg"; ?>
+                        <img src="<?php echo htmlspecialchars($offer_img); ?>" class="w-100 h-100" style="object-fit: cover;" alt="<?php echo htmlspecialchars($offer['title']); ?>">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(0deg, rgba(0,0,0,0.4), transparent);"></div>
+                        <div style="position: absolute; top: 15px; left: 15px;">
+                            <span class="badge badge-danger px-3 py-2" style="border-radius: 10px; font-size: 14px; font-weight: 700; box-shadow: 0 4px 10px rgba(220, 38, 38, 0.3);">
+                                -<?php echo $offer['discount_percentage']; ?>% OFF
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-weight-bold mb-2" style="font-family: 'Outfit', sans-serif; color: #1e293b;"><?php echo htmlspecialchars($offer['title']); ?></h4>
+                        <p class="text-muted small mb-3" style="line-height: 1.6; height: 48px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+                            <?php echo htmlspecialchars($offer['description']); ?>
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="text-muted" style="font-size: 13px;">
+                                <i class="fa-regular fa-clock mr-1 text-danger"></i> 
+                                Expires: <?php echo date('M j, Y', strtotime($offer['valid_until'])); ?>
+                            </span>
+                            <a href="register.php" class="btn btn-success btn-sm px-3" style="border-radius: 8px; font-weight: 600;">Claim Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php endwhile; ?>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+
 <div class="guest-card-container py-5">
     <div class="container">
         <div class="row">
