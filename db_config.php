@@ -188,6 +188,107 @@ $create_offers = "CREATE TABLE IF NOT EXISTS offers_discounts (
     image_path VARCHAR(255),
     valid_until DATE,
     status VARCHAR(20) DEFAULT 'Active',
+    plan_type VARCHAR(20) DEFAULT 'Both',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 mysqli_query($con, $create_offers);
+
+// Safely add plan_type column for existing installations
+$chk_offer_type = mysqli_query($con, "SHOW COLUMNS FROM offers_discounts LIKE 'plan_type'");
+if (mysqli_num_rows($chk_offer_type) == 0) {
+    mysqli_query($con, "ALTER TABLE offers_discounts ADD COLUMN plan_type VARCHAR(20) DEFAULT 'Both' AFTER status");
+}
+
+// Safely add offer_discount column to user_purchases
+$chk_offer_disc = mysqli_query($con, "SHOW COLUMNS FROM user_purchases LIKE 'offer_discount'");
+if (mysqli_num_rows($chk_offer_disc) == 0) {
+    mysqli_query($con, "ALTER TABLE user_purchases ADD COLUMN offer_discount INT DEFAULT 0 AFTER duration");
+}
+
+// Safely add token_expires column to register
+$chk_token_exp = mysqli_query($con, "SHOW COLUMNS FROM register LIKE 'token_expires'");
+if (mysqli_num_rows($chk_token_exp) == 0) {
+    mysqli_query($con, "ALTER TABLE register ADD COLUMN token_expires DATETIME DEFAULT NULL AFTER token");
+}
+
+// Guest Page Content table
+$create_guest_content = "CREATE TABLE IF NOT EXISTS guest_content (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    section VARCHAR(50) NOT NULL,
+    sort_order INT DEFAULT 0,
+    title VARCHAR(255),
+    subtitle TEXT,
+    body TEXT,
+    image_path VARCHAR(255),
+    button_text VARCHAR(100),
+    button_url VARCHAR(255),
+    is_active TINYINT(1) DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+mysqli_query($con, $create_guest_content);
+
+// Seed default guest page content if table is empty
+$check_seed = mysqli_query($con, "SELECT COUNT(*) as cnt FROM guest_content");
+$seed_row = mysqli_fetch_assoc($check_seed);
+if ($seed_row['cnt'] == 0) {
+    $seeds = [
+        ["section"=>"banner", "sort_order"=>0, "title"=>"Stay Fit, Stay Healthy!", "subtitle"=>"Enjoy fitness, meal plans, and Wellness Boosts designed to help you live your best life.", "body"=>"", "image_path"=>"", "button_text"=>"Get Started Today", "button_url"=>"register.php"],
+        ["section"=>"tip_card", "sort_order"=>1, "title"=>"Stay Hydrated", "subtitle"=>"Drink at least 8 glasses of water a day to keep your body hydrated and functioning properly.", "body"=>"Proper hydration keeps your body functioning efficiently and boosts daily performance. Water is essential for almost every function in the human body. It helps regulate body temperature, supports digestion, transports nutrients, and removes waste through urine and sweat. Staying properly hydrated improves concentration, prevents fatigue, and keeps your skin healthy. Experts generally recommend consuming 7-8 glasses of water per day.", "image_path"=>"images/get-hydrated.jpeg", "button_text"=>"", "button_url"=>""],
+        ["section"=>"tip_card", "sort_order"=>2, "title"=>"Enough Sleep", "subtitle"=>"Get 7-9 hours of quality sleep each night to support overall health and energy levels.", "body"=>"Sleep plays a vital role in maintaining both physical and mental health. During sleep, the body repairs damaged tissues, strengthens the immune system, and restores energy levels. It also supports brain function by enhancing memory, learning ability, and emotional balance. Adults generally require 7-9 hours of quality sleep per night for optimal performance.", "image_path"=>"images/enough-sleep.jpeg", "button_text"=>"", "button_url"=>""],
+        ["section"=>"tip_card", "sort_order"=>3, "title"=>"Manage Stress", "subtitle"=>"Practice relaxation techniques like meditation and deep breathing to reduce stress.", "body"=>"Stress is a natural response to challenging situations, but prolonged stress can negatively impact health. Chronic stress can lead to headaches, digestive problems, sleep disturbances, and even heart-related issues. Techniques such as deep breathing exercises, meditation, yoga, and mindfulness can help calm the mind and reduce anxiety.", "image_path"=>"images/manage-stress.jpeg", "button_text"=>"", "button_url"=>""],
+        ["section"=>"tip_card", "sort_order"=>4, "title"=>"Eat More Greens", "subtitle"=>"Add more green vegetables to your meals for better immunity and overall health.", "body"=>"Green vegetables are one of the most powerful natural sources of essential nutrients. They are rich in vitamins A, C, and K, along with iron, calcium, and antioxidants that help strengthen the immune system. Leafy greens such as spinach, kale, broccoli, and lettuce also contain high fiber content, which improves digestion and promotes gut health.", "image_path"=>"Images/Eat More Greens.jpeg", "button_text"=>"", "button_url"=>""],
+        ["section"=>"tip_card", "sort_order"=>5, "title"=>"Regular Exercise", "subtitle"=>"Daily physical activity strengthens your body and reduces disease risk.", "body"=>"Regular exercise is one of the most effective ways to maintain a healthy lifestyle. Physical activity strengthens the heart, improves blood circulation, builds muscle, and increases flexibility. Exercise has significant mental health benefits as well. Physical activity releases endorphins which help reduce stress, anxiety, and depression.", "image_path"=>"Images/Regular Exercise.jpeg", "button_text"=>"", "button_url"=>""],
+        ["section"=>"tip_card", "sort_order"=>6, "title"=>"Healthy Snacks", "subtitle"=>"Choose nutritious snacks to maintain energy and avoid unhealthy cravings.", "body"=>"Snacking is a common habit, but choosing the right snacks makes a big difference in overall health. Healthy snacks provide essential nutrients and sustained energy without causing sudden spikes in blood sugar levels. Options such as fruits, nuts, yogurt, boiled eggs, and whole-grain snacks are excellent choices.", "image_path"=>"Images/Healthy Snacks.jpeg", "button_text"=>"", "button_url"=>""]
+    ];
+    foreach ($seeds as $s) {
+        $sec = mysqli_real_escape_string($con, $s['section']);
+        $ord = (int)$s['sort_order'];
+        $tit = mysqli_real_escape_string($con, $s['title']);
+        $sub = mysqli_real_escape_string($con, $s['subtitle']);
+        $bod = mysqli_real_escape_string($con, $s['body']);
+        $img = mysqli_real_escape_string($con, $s['image_path']);
+        $btn = mysqli_real_escape_string($con, $s['button_text']);
+        $bur = mysqli_real_escape_string($con, $s['button_url']);
+        mysqli_query($con, "INSERT INTO guest_content (section, sort_order, title, subtitle, body, image_path, button_text, button_url) VALUES ('$sec', $ord, '$tit', '$sub', '$bod', '$img', '$btn', '$bur')");
+    }
+}
+
+// Memberships Table
+$create_memberships = "CREATE TABLE IF NOT EXISTS memberships (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    price INT NOT NULL,
+    duration VARCHAR(50) DEFAULT '1 Month',
+    features TEXT,
+    status VARCHAR(20) DEFAULT 'Active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+mysqli_query($con, $create_memberships);
+
+// Seed Default Memberships if empty
+$chk_mbr = mysqli_query($con, "SELECT COUNT(*) as cnt FROM memberships");
+$mbr_row = mysqli_fetch_assoc($chk_mbr);
+if ($mbr_row['cnt'] == 0) {
+    mysqli_query($con, "INSERT INTO memberships (title, description, price, duration, features, status) VALUES 
+        ('Basic Community', 'Join our private forum and track your progress.', 499, '1 Month', 'Private Community Access,Surprise Rewards System', 'Active'),
+        ('Pro Access', 'Everything in Basic plus downloadable diet recipes and workout templates.', 899, '1 Month', 'Private Community Access,Surprise Rewards System,Downloadable Resources', 'Active'),
+        ('Elite Coaching', 'Full suite! Priority expert support and live AI fitness assistance.', 1999, '3 Months', 'Private Community Access,Surprise Rewards System,Downloadable Resources,Priority Expert Help,AI Fitness Assistant', 'Active')
+    ");
+}
+
+// User Memberships Table tracking active subscriptions
+$create_user_memberships = "CREATE TABLE IF NOT EXISTS user_memberships (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    membership_id INT NOT NULL,
+    start_date DATETIME NOT NULL,
+    end_date DATETIME NOT NULL,
+    streak_days INT DEFAULT 0,
+    last_login DATE NULL,
+    status VARCHAR(20) DEFAULT 'Active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES register(id) ON DELETE CASCADE,
+    FOREIGN KEY (membership_id) REFERENCES memberships(id) ON DELETE CASCADE
+)";
+mysqli_query($con, $create_user_memberships);

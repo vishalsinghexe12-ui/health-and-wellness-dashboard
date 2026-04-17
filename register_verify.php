@@ -1,73 +1,71 @@
 <?php
 session_start();
-$title = "Verify Email - Health & Wellness";
-$css = "guest.css";
+$title = "Check Your Email - Health & Wellness";
+$css   = "guest.css";
 
-if (!isset($_SESSION['pending_registration'])) {
+$email = $_SESSION['pending_email'] ?? null;
+$firstName = $_SESSION['pending_firstName'] ?? 'there';
+
+if (!$email) {
     header("Location: register.php");
     exit();
 }
 
-$pending_user = $_SESSION['pending_registration'];
-$email = $pending_user['email'];
-
 ob_start();
 ?>
-<div class="row justify-content-center">
-    <div class="col-md-5">
-        <div class="card border-0 shadow-lg" style="border-radius: 20px;">
-            <div class="card-body p-5">
-                <div class="text-center mb-4">
-                    <div class="mb-3">
-                        <i class="fa-solid fa-envelope-circle-check text-success" style="font-size: 60px;"></i>
-                    </div>
-                    <h2 class="fw-bold text-success">Verify Your Email</h2>
-                    <p class="text-muted">A 6-digit verification code has been sent to <br><strong><?php echo htmlspecialchars($email); ?></strong></p>
+<div style="min-height: calc(100vh - 130px); display:flex; align-items:center; justify-content:center; background: linear-gradient(135deg,#f0fdf4,#ecfdf5,#f0f9ff); padding: 40px 15px;">
+    <div style="width:100%; max-width:500px;">
+        <div class="card border-0 shadow-lg" style="border-radius: 24px; overflow:hidden;">
+            <!-- Green top bar -->
+            <div style="height:6px; background:linear-gradient(90deg,#059669,#0d9488);"></div>
+            <div class="card-body p-5 text-center">
+                <!-- Envelope icon with animation -->
+                <div style="width:90px;height:90px;border-radius:24px;background:linear-gradient(135deg,#065f46,#047857);display:flex;align-items:center;justify-content:center;margin:0 auto 24px; box-shadow:0 12px 30px rgba(5,150,105,0.3);">
+                    <i class="fa-solid fa-envelope-circle-check" style="font-size:44px; color:white;"></i>
                 </div>
-                
-                <?php if(isset($_SESSION['auth_flash'])): ?>
-                    <div class="alert alert-info text-center border-0 shadow-sm" style="border-radius: 12px; background-color: #f0fdf4; color: #166534;">
-                        <?php 
-                        echo $_SESSION['auth_flash']; 
-                        unset($_SESSION['auth_flash']);
-                        ?>
-                    </div>
+
+                <h2 class="font-weight-bold mb-2" style="color:#065f46; font-family:'Outfit',sans-serif; font-size:26px;">Check Your Email!</h2>
+                <p class="text-muted mb-4" style="font-size:15px; line-height:1.7;">
+                    Hi <strong><?php echo htmlspecialchars($firstName); ?></strong>! We've sent an activation link to<br>
+                    <strong style="color:#047857;"><?php echo htmlspecialchars($email); ?></strong>
+                </p>
+
+                <?php if (isset($_SESSION['auth_flash'])): ?>
+                <div class="alert border-0 mb-4" style="border-radius:12px; background:#f0fdf4; color:#166534; border:1px solid #bbf7d0;">
+                    <i class="fa-solid fa-circle-check mr-2"></i>
+                    <?php echo $_SESSION['auth_flash']; unset($_SESSION['auth_flash']); ?>
+                </div>
                 <?php endif; ?>
 
-                <form action="register_verify_process.php" method="POST">
-                    <div class="mb-4 text-center">
-                        <label class="form-label fw-semibold mb-3">Enter Verification Code</label>
-                        <div class="d-flex justify-content-center gap-2">
-                             <input type="text" class="form-control text-center" name="otp" placeholder="123456" maxlength="6" required style="letter-spacing: 12px; font-size: 28px; font-weight: 800; border-radius: 12px; border: 2px solid #e2e8f0; height: 70px;">
-                        </div>
+                <!-- Steps -->
+                <div class="text-left mb-4" style="background:#f8fafc; border-radius:14px; padding:20px;">
+                    <p class="font-weight-bold mb-3" style="color:#1e293b;">Next Steps:</p>
+                    <div class="d-flex align-items-start mb-3">
+                        <div style="width:30px;height:30px;border-radius:50%;background:#059669;color:white;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-right:12px;margin-top:2px;">1</div>
+                        <p class="m-0 text-muted" style="font-size:14px;">Open your inbox for <strong><?php echo htmlspecialchars($email); ?></strong></p>
                     </div>
-                    
-                    <button type="submit" class="btn btn-success w-100 btn-lg shadow-sm" style="border-radius: 12px; padding: 15px; font-weight: 700; transition: all 0.3s ease;">Verify & Create Account</button>
-                    
-                    <div class="text-center mt-4">
-                        <p class="text-muted small">Didn't receive the code? 
-                            <a href="resend_otp.php" class="text-success text-decoration-none font-weight-bold">Resend OTP</a>
-                        </p>
-                        <p class="text-muted" style="font-size: 12px;"><i class="fa-solid fa-clock mr-1"></i> Code expires in 10 minutes</p>
-                        <hr class="my-4" style="opacity: 0.1;">
-                        <a href="register.php" class="text-muted small text-decoration-none"><i class="fa-solid fa-arrow-left mr-2"></i> Back to Registration</a>
+                    <div class="d-flex align-items-start mb-3">
+                        <div style="width:30px;height:30px;border-radius:50%;background:#059669;color:white;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-right:12px;margin-top:2px;">2</div>
+                        <p class="m-0 text-muted" style="font-size:14px;">Find the email from <strong>Health &amp; Wellness</strong></p>
                     </div>
-                </form>
+                    <div class="d-flex align-items-start">
+                        <div style="width:30px;height:30px;border-radius:50%;background:#059669;color:white;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-right:12px;margin-top:2px;">3</div>
+                        <p class="m-0 text-muted" style="font-size:14px;">Click <strong>"Activate My Account"</strong> to complete registration</p>
+                    </div>
+                </div>
+
+                <p class="text-muted small mb-3"><i class="fa-solid fa-clock mr-1"></i> The link expires in <strong>1 hour</strong>. Check your spam folder too.</p>
+
+                <a href="resend_otp.php" class="btn btn-outline-success btn-block mb-3" style="border-radius:10px; font-weight:600; padding:12px;">
+                    <i class="fa-solid fa-rotate-right mr-2"></i> Resend Activation Link
+                </a>
+                <a href="register.php" class="text-muted" style="font-size:13px; text-decoration:none;">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> Back to Registration
+                </a>
             </div>
         </div>
     </div>
 </div>
-
-<style>
-.btn-success:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2);
-}
-input:focus {
-    border-color: #10b981 !important;
-    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1) !important;
-}
-</style>
 
 <?php
 $content = ob_get_clean();

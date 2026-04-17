@@ -14,7 +14,8 @@ $offer = [
     'discount_percentage' => '',
     'valid_until' => '',
     'status' => 'Active',
-    'image_path' => ''
+    'image_path' => '',
+    'plan_type' => 'Both'
 ];
 
 if (isset($_GET['edit_id'])) {
@@ -116,6 +117,20 @@ ob_start();
                                         <option value="Active" <?php echo $offer['status'] === 'Active' ? 'selected' : ''; ?>>Active</option>
                                         <option value="Inactive" <?php echo $offer['status'] === 'Inactive' ? 'selected' : ''; ?>>Inactive</option>
                                     </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <label class="font-weight-bold" style="color: var(--text-main);">
+                                        <i class="fa-solid fa-layer-group mr-1 text-success"></i> Applies To
+                                    </label>
+                                    <select name="plan_type" class="form-control" style="border-radius: 10px; padding: 12px 15px; border: 1.5px solid #e2e8f0; height: auto;">
+                                        <option value="Both" <?php echo ($offer['plan_type'] ?? 'Both') === 'Both' ? 'selected' : ''; ?>>Both (Meal &amp; Exercise Plans)</option>
+                                        <option value="Meal" <?php echo ($offer['plan_type'] ?? '') === 'Meal' ? 'selected' : ''; ?>>Meal Plans Only</option>
+                                        <option value="Exercise" <?php echo ($offer['plan_type'] ?? '') === 'Exercise' ? 'selected' : ''; ?>>Exercise Plans Only</option>
+                                    </select>
+                                    <small class="text-muted">Controls which plans page the "Claim Offer" button leads to.</small>
                                 </div>
                             </div>
                         </div>

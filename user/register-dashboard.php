@@ -15,6 +15,13 @@ $q1->bind_param("i", $user_id);
 $q1->execute();
 $total_plans = $q1->get_result()->fetch_assoc()['total'];
 
+// Fetch active membership
+$q_mem = $con->prepare("SELECT m.title, m.features FROM user_memberships um JOIN memberships m ON um.membership_id = m.id WHERE um.user_id = ? AND um.status = 'Active' AND um.end_date > NOW() ORDER BY um.end_date DESC LIMIT 1");
+$q_mem->bind_param("i", $user_id);
+$q_mem->execute();
+$active_membership = $q_mem->get_result()->fetch_assoc();
+$is_member = $active_membership ? true : false;
+
 // Fetch total amount spent
 $q2 = $con->prepare("SELECT COALESCE(SUM(price), 0) as total_spent FROM user_purchases WHERE user_id = ?");
 $q2->bind_param("i", $user_id);
@@ -91,19 +98,43 @@ ob_start();
                           
                           <div class="collapse mt-4" id="offersCollapse">
                               <div class="row">
-                                  <?php while($offer = mysqli_fetch_assoc($user_offers_result)): ?>
+                                  <?php while($offer = mysqli_fetch_assoc($user_offers_result)):
+                                      $o_plan_type = $offer['plan_type'] ?? 'Both';
+                                      if ($o_plan_type === 'Exercise') {
+                                          $o_claim_url = "Exercise-plans.php?offer_id=" . $offer['id'];
+                                      } else {
+                                          $o_claim_url = "meal-plans.php?offer_id=" . $offer['id'];
+                                      }
+                                  ?>
                                   <div class="col-md-6 mb-3">
                                       <div class="p-3" style="background: rgba(255,255,255,0.1); border-radius: 16px; border: 1px solid rgba(255,255,255,0.2);">
-                                          <div class="d-flex align-items-center">
-                                              <div class="mr-3" style="width: 60px; height: 60px; border-radius: 12px; overflow: hidden; background: white;">
+                                          <div class="d-flex align-items-center mb-3">
+                                              <div class="mr-3" style="width: 60px; height: 60px; border-radius: 12px; overflow: hidden; background: white; flex-shrink:0;">
                                                   <?php $offer_img = !empty($offer['image_path']) ? "../".$offer['image_path'] : "../images/offer-placeholder.jpg"; ?>
                                                   <img src="<?php echo htmlspecialchars($offer_img); ?>" class="w-100 h-100" style="object-fit: cover;">
                                               </div>
-                                              <div>
+                                              <div class="flex-grow-1">
                                                   <h6 class="m-0 font-weight-bold"><?php echo htmlspecialchars($offer['title']); ?></h6>
-                                                  <p class="m-0 small" style="opacity: 0.8;"><?php echo $offer['discount_percentage']; ?>% Discount Applied</p>
+                                                  <p class="m-0 small" style="opacity: 0.8;">
+                                                      <?php echo $offer['discount_percentage']; ?>% OFF
+                                                      <?php
+                                                      if ($o_plan_type === 'Meal') echo '&middot; Meal Plans';
+                                                      elseif ($o_plan_type === 'Exercise') echo '&middot; Exercise Plans';
+                                                      else echo '&middot; All Plans';
+                                                      ?>
+                                                  </p>
                                                   <small style="opacity: 0.7;">Expires: <?php echo date('M j, Y', strtotime($offer['valid_until'])); ?></small>
                                               </div>
+                                          </div>
+                                          <div class="d-flex" style="gap:8px;">
+                                              <a href="<?php echo $o_claim_url; ?>" class="btn btn-warning btn-sm flex-grow-1 font-weight-bold" style="border-radius: 8px; color: #1a1a1a;">
+                                                  <i class="fa-solid fa-bolt mr-1"></i> Claim Offer
+                                              </a>
+                                              <?php if ($o_plan_type === 'Both'): ?>
+                                              <a href="Exercise-plans.php?offer_id=<?php echo $offer['id']; ?>" class="btn btn-outline-light btn-sm flex-grow-1 font-weight-bold" style="border-radius: 8px; font-size:12px;">
+                                                  <i class="fa-solid fa-dumbbell mr-1"></i> Exercise Plans
+                                              </a>
+                                              <?php endif; ?>
                                           </div>
                                       </div>
                                   </div>
@@ -119,7 +150,14 @@ ob_start();
           <!-- Greeting -->
           <div class="d-flex justify-content-between align-items-center mb-4">
               <div>
-                  <h2 class="font-weight-bold m-0" style="color: var(--text-main);">Welcome Back, <?php echo htmlspecialchars(explode(' ', $user_name)[0]); ?>! 👋</h2>
+                  <h2 class="font-weight-bold m-0" style="color: var(--text-main);">
+                      Welcome Back, <?php echo htmlspecialchars(explode(' ', $user_name)[0]); ?>! 👋
+                      <?php if ($is_member): ?>
+                          <span class="badge badge-warning ml-2 shadow-sm text-dark" style="font-size: 14px; vertical-align: middle; border-radius: 8px;">
+                              <i class="fa-solid fa-crown mr-1"></i> <?php echo htmlspecialchars($active_membership['title']); ?>
+                          </span>
+                      <?php endif; ?>
+                  </h2>
                   <p class="text-muted m-0 mt-1">Here's an overview of your wellness journey.</p>
               </div>
               <span class="text-muted"><?php echo date('l, F j, Y'); ?></span>
@@ -277,6 +315,66 @@ ob_start();
                               <small class="text-muted">Update your details</small>
                           </div>
                       </a>
+                  </div>
+              </div>
+          </div>
+          
+          <!-- Premium Features Section -->
+          <div class="row mt-4">
+              <div class="col-12">
+                  <div class="card border-0 shadow-sm" style="border-radius: 20px; overflow: hidden; background: linear-gradient(to right, #0f172a, #1e293b);">
+                      <div class="card-body p-4 position-relative text-white">
+                          <h4 class="font-weight-bold mb-4">
+                              <i class="fa-solid fa-star text-warning mr-2"></i>Premium Dashboard
+                          </h4>
+                          <div class="row g-3">
+                              <!-- Community -->
+                              <div class="col-md-4 col-lg-2 mb-3">
+                                  <a href="community.php" class="d-block text-decoration-none text-center p-3 h-100" style="border-radius: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">
+                                      <i class="fa-solid fa-users text-info mb-2" style="font-size:24px;"></i>
+                                      <h6 class="text-white mb-0 font-weight-bold">Community</h6>
+                                      <?php if(!$is_member): ?><i class="fa-solid fa-lock text-muted mt-2" style="font-size:12px;"></i><?php endif; ?>
+                                  </a>
+                              </div>
+                              <!-- Rewards -->
+                              <div class="col-md-4 col-lg-2 mb-3">
+                                  <a href="rewards.php" class="d-block text-decoration-none text-center p-3 h-100" style="border-radius: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">
+                                      <i class="fa-solid fa-gift text-danger mb-2" style="font-size:24px;"></i>
+                                      <h6 class="text-white mb-0 font-weight-bold">Rewards</h6>
+                                      <?php if(!$is_member): ?><i class="fa-solid fa-lock text-muted mt-2" style="font-size:12px;"></i><?php endif; ?>
+                                  </a>
+                              </div>
+                              <!-- Expert Help -->
+                              <div class="col-md-4 col-lg-2 mb-3">
+                                  <a href="expert-help.php" class="d-block text-decoration-none text-center p-3 h-100" style="border-radius: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">
+                                      <i class="fa-solid fa-user-doctor text-success mb-2" style="font-size:24px;"></i>
+                                      <h6 class="text-white mb-0 font-weight-bold">Expert Help</h6>
+                                      <?php if(!$is_member): ?><i class="fa-solid fa-lock text-muted mt-2" style="font-size:12px;"></i><?php endif; ?>
+                                  </a>
+                              </div>
+                              <!-- Resources -->
+                              <div class="col-md-4 col-lg-2 mb-3">
+                                  <a href="resources.php" class="d-block text-decoration-none text-center p-3 h-100" style="border-radius: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">
+                                      <i class="fa-solid fa-folder-open text-warning mb-2" style="font-size:24px;"></i>
+                                      <h6 class="text-white mb-0 font-weight-bold">Resources</h6>
+                                      <?php if(!$is_member): ?><i class="fa-solid fa-lock text-muted mt-2" style="font-size:12px;"></i><?php endif; ?>
+                                  </a>
+                              </div>
+                              <!-- AI Assistant -->
+                              <div class="col-md-4 col-lg-4 mb-3">
+                                  <a href="ai-assistant.php" class="d-flex align-items-center justify-content-center text-decoration-none p-3 h-100" style="border-radius: 16px; background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(59,130,246,0.2)); border: 1px solid rgba(139,92,246,0.3); transition: all 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                                      <div class="mr-3 text-center">
+                                          <i class="fa-solid fa-robot" style="font-size:28px; color:#8b5cf6;"></i>
+                                      </div>
+                                      <div>
+                                          <h6 class="text-white mb-0 font-weight-bold">AI Fitness Assistant</h6>
+                                          <small style="color: rgba(255,255,255,0.6);">Your personal coach 24/7</small>
+                                      </div>
+                                      <?php if(!$is_member): ?><div class="ml-3"><i class="fa-solid fa-lock text-muted" style="font-size:14px;"></i></div><?php endif; ?>
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
                   </div>
               </div>
           </div>

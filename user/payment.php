@@ -6,22 +6,48 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: ../register.php");
     exit();
 }
+require_once("../db_config.php");
+
 $title = "Checkout - Secure Payment";
 $css = "register-dashboard.css"; 
 
-// Get plan details from URL or default
-$planName = isset($_GET['plan']) ? htmlspecialchars($_GET['plan']) : "Custom Health Plan";
-$planPrice = isset($_GET['price']) ? htmlspecialchars($_GET['price']) : "0";
+// Get plan details from URL
+$planName  = isset($_GET['plan'])  ? htmlspecialchars($_GET['plan'])  : "Custom Health Plan";
+$planPrice = isset($_GET['price']) ? (int)$_GET['price'] : 0;
+
+// Also check for membership
+$membership_id = isset($_GET['membership_id']) ? (int)$_GET['membership_id'] : 0;
+if ($membership_id > 0) {
+    $planName = isset($_GET['title']) ? htmlspecialchars($_GET['title']) : "Membership";
+}
+
+// Fetch offer if claimed
+$active_offer   = null;
+$discount_pct   = 0;
+$discount_amt   = 0;
+$final_price    = $planPrice;
+
+if (!empty($_GET['offer_id'])) {
+    $oid = (int)$_GET['offer_id'];
+    $or  = mysqli_query($con, "SELECT * FROM offers_discounts WHERE id = $oid AND status = 'Active' AND valid_until >= CURDATE() LIMIT 1");
+    if ($or && mysqli_num_rows($or) > 0) {
+        $active_offer   = mysqli_fetch_assoc($or);
+        $discount_pct   = (int)$active_offer['discount_percentage'];
+        $discount_amt   = round($planPrice * $discount_pct / 100);
+        $final_price    = $planPrice - $discount_amt;
+    }
+}
+
+$offer_id_param = $active_offer ? $active_offer['id'] : 0;
 
 ob_start();
 ?>
 
 <div class="py-5" style="background-color: var(--bg-light); min-height: calc(100vh - 70px);">
     <div class="container">
-        
         <div class="row justify-content-center">
-            
             <div class="col-lg-8">
+
                 <!-- Order Summary -->
                 <div class="stat-card mb-4" style="border-top: 5px solid var(--primary);">
                     <h3 class="font-weight-bold mb-4" style="color: var(--text-main);">Order Summary</h3>
@@ -32,24 +58,41 @@ ob_start();
                             <small class="text-muted">Lifetime Access to this module</small>
                         </div>
                         <div class="font-weight-bold" style="font-size: 20px;">
-                            ₹ <?php echo $planPrice; ?>
+                            ₹ <?php echo number_format($planPrice); ?>
                         </div>
                     </div>
                     
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <span class="text-muted">Subtotal</span>
-                        <span>₹ <?php echo $planPrice; ?></span>
+                        <span>₹ <?php echo number_format($planPrice); ?></span>
                     </div>
+
+                    <?php if ($active_offer): ?>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="d-flex align-items-center" style="color:#059669; font-weight:600;">
+                            <i class="fa-solid fa-tag mr-2"></i>
+                            Offer: <?php echo htmlspecialchars($active_offer['title']); ?> (<?php echo $discount_pct; ?>% OFF)
+                        </span>
+                        <span style="color:#059669; font-weight:700;">- ₹ <?php echo number_format($discount_amt); ?></span>
+                    </div>
+                    <?php endif; ?>
                     
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                        <span class="text-muted">Taxes & Platform Fees</span>
+                        <span class="text-muted">Taxes &amp; Platform Fees</span>
                         <span>₹ 0</span>
                     </div>
                     
                     <div class="d-flex justify-content-between align-items-center mt-3 pt-3" style="border-top: 2px dashed rgba(0,0,0,0.1);">
                         <strong style="font-size: 18px;">Total Payable</strong>
-                        <strong style="font-size: 24px; color: var(--primary-dark);">₹ <?php echo $planPrice; ?></strong>
+                        <strong style="font-size: 24px; color: var(--primary-dark);">₹ <?php echo number_format($final_price); ?></strong>
                     </div>
+
+                    <?php if ($active_offer): ?>
+                    <div class="mt-3 p-3 text-center" style="background: rgba(5,150,105,0.07); border-radius:12px; border:1px dashed #059669;">
+                        <i class="fa-solid fa-circle-check text-success mr-1"></i>
+                        <strong class="text-success">You save ₹ <?php echo number_format($discount_amt); ?></strong> with this offer!
+                    </div>
+                    <?php endif; ?>
                 </div>
                 
                 <!-- Payment Form -->
@@ -99,7 +142,7 @@ ob_start();
                                   </div>
                               </div>
                               <button type="submit" class="btn btn-success btn-lg btn-block mt-4" style="border-radius: 8px;">
-                                  <i class="fa-solid fa-lock mr-2"></i> Pay ₹ <?php echo $planPrice; ?> Securely
+                                  <i class="fa-solid fa-lock mr-2"></i> Pay ₹ <?php echo number_format($final_price); ?> Securely
                               </button>
                           </form>
                       </div>
@@ -113,11 +156,10 @@ ob_start();
                               </div>
                               <div class="text-center my-4">
                                   <span class="text-muted text-uppercase">OR SCAN QR CODE</span><br>
-                                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=mock@upi&pn=Health+Wellness&am=<?php echo $planPrice; ?>" alt="QR Code" class="mt-3 img-thumbnail" style="border-radius: 12px; border: 2px solid var(--primary);">
+                                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=mock@upi&pn=Health+Wellness&am=<?php echo $final_price; ?>" alt="QR Code" class="mt-3 img-thumbnail" style="border-radius: 12px; border: 2px solid var(--primary);">
                               </div>
-                              
                               <button type="submit" class="btn btn-success btn-lg btn-block mt-4" style="border-radius: 8px;">
-                                  <i class="fa-solid fa-lock mr-2"></i> Pay ₹ <?php echo $planPrice; ?> Securely
+                                  <i class="fa-solid fa-lock mr-2"></i> Pay ₹ <?php echo number_format($final_price); ?> Securely
                               </button>
                           </form>
                       </div>
@@ -130,7 +172,6 @@ ob_start();
                 </div>
                 
             </div>
-            
         </div>
     </div>
 </div>     
@@ -138,7 +179,7 @@ ob_start();
 <!-- Modal Processing -->
 <div class="modal fade" id="processingModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content text-center p-5">
+    <div class="modal-content text-center p-5" style="border-radius:20px;">
       <div id="loadingState">
           <div class="spinner-border text-success mb-3" role="status" style="width: 4rem; height: 4rem;"></div>
           <h4 class="font-weight-bold">Processing Payment...</h4>
@@ -147,7 +188,13 @@ ob_start();
       <div id="successState" style="display:none;">
           <i class="fa-solid fa-circle-check text-success mb-4" style="font-size: 5rem;"></i>
           <h3 class="font-weight-bold text-success">Payment Successful!</h3>
-          <p class="text-muted mb-4">You have successfully purchased the <?php echo $planName; ?>.</p>
+          <p class="text-muted mb-2">You have successfully purchased <strong><?php echo $planName; ?></strong>.</p>
+          <?php if ($active_offer): ?>
+          <p class="text-success mb-4" style="font-size:14px;"><i class="fa-solid fa-tag mr-1"></i> <?php echo $discount_pct; ?>% discount applied — You saved ₹<?php echo number_format($discount_amt); ?>!</p>
+          <?php endif; ?>
+          <a href="#" id="downloadBillBtn" class="btn btn-outline-success btn-block mb-3" style="border-radius:8px;" target="_blank">
+              <i class="fa-solid fa-file-invoice mr-2"></i> Download / Print Bill
+          </a>
           <a href="manage-plans.php" class="btn btn-success btn-block" style="border-radius:8px;">Go to My Plans</a>
       </div>
     </div>
@@ -159,49 +206,45 @@ document.addEventListener('DOMContentLoaded', function() {
     var cardExpiry = document.getElementById('cardExpiry');
     if (cardExpiry) {
         cardExpiry.addEventListener('input', function() {
-            var val = this.value;
-            // Strip everything that is not a digit
-            val = val.replace(/[^0-9]/g, '');
-            // Max 4 digits (MMYY)
+            var val = this.value.replace(/[^0-9]/g, '');
             if (val.length > 4) val = val.substring(0, 4);
-            // After 2 digits, insert a single slash
-            if (val.length > 2) {
-                val = val.substring(0, 2) + '/' + val.substring(2);
-            }
+            if (val.length > 2) val = val.substring(0, 2) + '/' + val.substring(2);
             this.value = val;
         });
     }
 });
 
+var purchaseId = null;
+
 function processPayment(event, form) {
-    // Form verification natively triggers because of the submit event bind.
-    if (!form.checkValidity()) {
-        return;
-    }
-    
-    event.preventDefault(); // Pause form submittal
+    if (!form.checkValidity()) return;
+    event.preventDefault();
     
     $('#processingModal').modal('show');
     document.getElementById('loadingState').style.display = 'block';
-    document.getElementById('successState').style.display = 'none';
+    document.getElementById('successState').style.display  = 'none';
     
     const formData = new FormData();
-    formData.append('plan_name', '<?php echo addslashes($planName); ?>');
-    formData.append('price', '<?php echo addslashes($planPrice); ?>');
+    formData.append('plan_name',     '<?php echo addslashes($planName); ?>');
+    formData.append('price',         '<?php echo $planPrice; ?>');
+    formData.append('final_price',   '<?php echo $final_price; ?>');
+    formData.append('offer_id',      '<?php echo $offer_id_param; ?>');
+    formData.append('offer_discount','<?php echo $discount_pct; ?>');
+    formData.append('membership_id', '<?php echo $membership_id; ?>');
 
-    fetch('process_purchase.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.text())
+    fetch('process_purchase.php', { method: 'POST', body: formData })
+    .then(r => r.json())
     .then(data => {
-        // Give a satisfying simulated delay of 1.5 seconds minimum
+        purchaseId = data.purchase_id || null;
         setTimeout(function() {
             document.getElementById('loadingState').style.display = 'none';
-            document.getElementById('successState').style.display = 'block';
+            document.getElementById('successState').style.display  = 'block';
+            if (purchaseId) {
+                document.getElementById('downloadBillBtn').setAttribute('href', 'bill.php?purchase_id=' + purchaseId);
+            }
         }, 1500);
     })
-    .catch(error => {
+    .catch(function(error) {
         console.error('Error:', error);
         alert('An error occurred during submission.');
         $('#processingModal').modal('hide');
