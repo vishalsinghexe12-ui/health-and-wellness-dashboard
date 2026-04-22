@@ -47,10 +47,19 @@
                         <a class="nav-link mr-2 text-dark" href="admin.php"><i class="fa-solid fa-gauge mr-1"></i> Dashboard</a>
                         <a class="nav-link mr-2 text-dark" href="users.php"><i class="fa-solid fa-users mr-1"></i> Users</a>
                         <a class="nav-link mr-2 text-dark" href="plans.php"><i class="fa-solid fa-dumbbell mr-1"></i> Plans</a>
-                        <a class="nav-link mr-2 text-dark" href="manage-memberships.php"><i class="fa-solid fa-crown mr-1"></i> Memberships</a>
                         <a class="nav-link mr-2 text-dark" href="messages.php"><i class="fa-solid fa-envelope mr-1"></i> Messages</a>
-                        <a class="nav-link mr-2 text-dark" href="manage-offers.php"><i class="fa-solid fa-tags mr-1"></i> Offers</a>
-                        <a class="nav-link mr-2 text-dark" href="manage-guest-page.php"><i class="fa-solid fa-window-maximize mr-1"></i> Guest Page</a>
+                        
+                        <div class="nav-item dropdown">
+                            <a class="nav-link mr-2 text-dark dropdown-toggle" href="#" id="moreDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa-solid fa-ellipsis mr-1"></i> More
+                            </a>
+                            <div class="dropdown-menu border-0 shadow" aria-labelledby="moreDropdown" style="border-radius: 12px;">
+                                <a class="dropdown-item py-2" href="manage-memberships.php"><i class="fa-solid fa-crown mr-2 text-warning"></i> Memberships</a>
+                                <a class="dropdown-item py-2" href="manage-offers.php"><i class="fa-solid fa-tags mr-2 text-success"></i> Offers</a>
+                                <a class="dropdown-item py-2" href="manage-guest-page.php"><i class="fa-solid fa-window-maximize mr-2 text-info"></i> Guest Page</a>
+                                <a class="dropdown-item py-2" href="manage-pages.php"><i class="fa-solid fa-file-lines mr-2 text-primary"></i> Pages</a>
+                            </div>
+                        </div>
                         <a class="nav-link bg-success text-white ml-2 px-3 py-2" style="border-radius: 8px; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);" href="admin-profile.php">
                             <i class="fa-regular fa-user mr-1"></i> Profile
                         </a>

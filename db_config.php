@@ -96,10 +96,17 @@ $create_plans = "CREATE TABLE IF NOT EXISTS plans (
     intensity VARCHAR(100),
     price INT,
     image_path VARCHAR(255),
+    schedule_data TEXT DEFAULT NULL,
     status VARCHAR(20) DEFAULT 'Active',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 mysqli_query($con, $create_plans);
+
+// Safely add schedule_data column for existing installations
+$chk_plan_sched = mysqli_query($con, "SHOW COLUMNS FROM plans LIKE 'schedule_data'");
+if (mysqli_num_rows($chk_plan_sched) == 0) {
+    mysqli_query($con, "ALTER TABLE plans ADD COLUMN schedule_data TEXT DEFAULT NULL AFTER image_path");
+}
 
 // Password reset tokens table
 $create_password_token = "CREATE TABLE IF NOT EXISTS password_token (
@@ -159,6 +166,25 @@ mysqli_query($con, $create_purchases);
 $chk_purch_dur = mysqli_query($con, "SHOW COLUMNS FROM user_purchases LIKE 'duration'");
 if (mysqli_num_rows($chk_purch_dur) == 0) {
     mysqli_query($con, "ALTER TABLE user_purchases ADD COLUMN duration VARCHAR(50) DEFAULT '3 Months' AFTER price");
+}
+
+// Safely add start_date and end_date for upcoming queuing
+$chk_purch_start = mysqli_query($con, "SHOW COLUMNS FROM user_purchases LIKE 'start_date'");
+if (mysqli_num_rows($chk_purch_start) == 0) {
+    mysqli_query($con, "ALTER TABLE user_purchases ADD COLUMN start_date DATETIME NULL AFTER purchase_date");
+    mysqli_query($con, "ALTER TABLE user_purchases ADD COLUMN end_date DATETIME NULL AFTER start_date");
+    
+    // Backfill logic for existing active purchases
+    // Simplistic interpolation: '1 Month' adds 1 month, others default to 3 months for existing DB fixes if any
+    mysqli_query($con, "
+        UPDATE user_purchases 
+        SET start_date = purchase_date, 
+            end_date = CASE 
+                WHEN LOWER(duration) LIKE '%1 month%' THEN DATE_ADD(purchase_date, INTERVAL 1 MONTH)
+                ELSE DATE_ADD(purchase_date, INTERVAL 3 MONTH)
+            END
+        WHERE start_date IS NULL
+    ");
 }
 
 // Bulk update existing plans to have a 3-month duration if they're empty
@@ -292,3 +318,38 @@ $create_user_memberships = "CREATE TABLE IF NOT EXISTS user_memberships (
     FOREIGN KEY (membership_id) REFERENCES memberships(id) ON DELETE CASCADE
 )";
 mysqli_query($con, $create_user_memberships);
+
+// Pages content table for Guest Pages
+$create_pages = "CREATE TABLE IF NOT EXISTS tblpage (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    PageType VARCHAR(100) NOT NULL,
+    PageTitle VARCHAR(255) NOT NULL,
+    PageDescription TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)";
+mysqli_query($con, $create_pages);
+
+// Seed default dynamic pages if table is empty
+$chk_pages = mysqli_query($con, "SELECT COUNT(*) as cnt FROM tblpage");
+$page_row = mysqli_fetch_assoc($chk_pages);
+if ($page_row['cnt'] == 0) {
+    $seed_p = $con->prepare("INSERT INTO tblpage (PageType, PageTitle, PageDescription) VALUES (?, ?, ?)");
+    
+    // aboutus
+    $pt = 'aboutus'; $t = 'About Health & Wellness'; $d = 'Health & Wellness was created to help individuals take control of their physical and mental well-being.';
+    $seed_p->bind_param("sss", $pt, $t, $d); $seed_p->execute();
+    
+    // contactus
+    $pt = 'contactus'; $t = 'Get In Touch'; $d = "We'd love to hear from you. Send us a message and we'll respond as soon as possible.";
+    $seed_p->bind_param("sss", $pt, $t, $d); $seed_p->execute();
+
+    // plans
+    $pt = 'plans'; $t = 'Our Wellness Plans'; $d = 'Explore our comprehensive wellness plans tailored for your unique fitness goals.';
+    $seed_p->bind_param("sss", $pt, $t, $d); $seed_p->execute();
+
+    // gallery
+    $pt = 'gallery'; $t = 'Gallery'; $d = 'A collection of visual inspirations for your wellness journey.';
+    $seed_p->bind_param("sss", $pt, $t, $d); $seed_p->execute();
+}
+

@@ -4,6 +4,13 @@ $css = "guest.css";
 ob_start();
 
 require_once("db_config.php");
+
+$page_query = "SELECT PageTitle, PageDescription FROM tblpage WHERE PageType = 'plans'";
+$page_result = mysqli_query($con, $page_query);
+$page_data = mysqli_fetch_assoc($page_result);
+$page_title = $page_data['PageTitle'] ?? 'Our Wellness Plans';
+$page_desc = $page_data['PageDescription'] ?? '';
+
 $query = "SELECT * FROM plans WHERE type = 'Wellness' AND status = 'Active'";
 $result = mysqli_query($con, $query);
 ?>
@@ -12,8 +19,11 @@ $result = mysqli_query($con, $query);
     <div class="container">
         <div class="row">
             <div class="col-12 mb-5 text-center">
-                <h1 class="guest-bottom-heading">Our Wellness Plans</h1>
-                <hr class="heading-hr mx-auto">
+                <h1 class="guest-bottom-heading"><?php echo htmlspecialchars($page_title); ?></h1>
+                <?php if(!empty($page_desc)): ?>
+                    <p class="text-muted mt-2 mx-auto" style="max-width: 600px; font-size: 16px;"><?php echo nl2br(htmlspecialchars($page_desc)); ?></p>
+                <?php endif; ?>
+                <hr class="heading-hr mx-auto mt-4">
             </div>
             
             <?php while($row = mysqli_fetch_assoc($result)): ?>

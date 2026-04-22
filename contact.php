@@ -3,6 +3,13 @@ session_start();
 $title = "Contact Us - Health & Wellness";
 $css = "guest.css";
 
+require_once("db_config.php");
+$query = "SELECT PageTitle, PageDescription FROM tblpage WHERE PageType = 'contactus'";
+$result = mysqli_query($con, $query);
+$page_data = mysqli_fetch_assoc($result);
+$page_title = $page_data['PageTitle'] ?? 'Get In Touch';
+$page_desc = $page_data['PageDescription'] ?? '';
+
 $flashMessage = $_SESSION['flash_message'] ?? null;
 $flashType = isset($_GET['msg']) && $_GET['msg'] === 'sent' ? 'success' : 'danger';
 if (isset($_SESSION['flash_message'])) {
@@ -19,8 +26,8 @@ ob_start();
     <!-- Heading -->
     <div class="row mb-5">
         <div class="col-12 text-center">
-            <h1 class="display-4 font-weight-bold text-success">Get In Touch</h1>
-            <p class="lead text-muted">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+            <h1 class="display-4 font-weight-bold text-success"><?php echo htmlspecialchars($page_title); ?></h1>
+            <p class="lead text-muted"><?php echo nl2br(htmlspecialchars($page_desc)); ?></p>
         </div>
     </div>
 

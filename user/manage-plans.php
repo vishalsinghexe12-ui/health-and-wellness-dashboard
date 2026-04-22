@@ -52,7 +52,7 @@ ob_start();
                             </div>
                             <p class="text-muted"><small>Week 1 - Just Started!</small></p>
                             <hr>
-                            <button class="btn border-success text-success font-weight-bold px-4" style="border-radius: 8px;">View Training Schedule</button>
+                            <a href="training-schedule.php?plan=<?php echo urlencode($plan['plan_name']); ?>" class="btn border-success text-success font-weight-bold px-4" style="border-radius: 8px; text-decoration: none;">View Training Schedule</a>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>

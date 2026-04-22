@@ -9,6 +9,29 @@ require_once("../db_config.php");
 $user_id = $_SESSION['user_id'];
 $user_name = $_SESSION['user_name'] ?? 'User';
 
+// Handle State Transitions (Queued -> Active, Active -> Completed)
+$now = date('Y-m-d H:i:s');
+mysqli_query($con, "UPDATE user_purchases SET status = 'Completed' WHERE status = 'Active' AND end_date IS NOT NULL AND end_date <= '$now'");
+mysqli_query($con, "UPDATE user_memberships SET status = 'Completed' WHERE status = 'Active' AND end_date IS NOT NULL AND end_date <= '$now'");
+
+$q_act = "SELECT id, plan_name FROM user_purchases WHERE user_id = $user_id AND status = 'Queued' AND start_date <= '$now'";
+$r_act = mysqli_query($con, $q_act);
+if ($r_act && mysqli_num_rows($r_act) > 0) {
+    while($row = mysqli_fetch_assoc($r_act)) {
+        $_SESSION['login_success'] = "Your Queued Plan " . htmlspecialchars($row['plan_name']) . " has now started!";
+    }
+    mysqli_query($con, "UPDATE user_purchases SET status = 'Active' WHERE user_id = $user_id AND status = 'Queued' AND start_date <= '$now'");
+}
+
+$m_act = "SELECT m.title FROM user_memberships um JOIN memberships m ON um.membership_id = m.id WHERE um.user_id = $user_id AND um.status = 'Queued' AND um.start_date <= '$now'";
+$rm_act = mysqli_query($con, $m_act);
+if ($rm_act && mysqli_num_rows($rm_act) > 0) {
+    while($row = mysqli_fetch_assoc($rm_act)) {
+        $_SESSION['login_success'] = "Your Queued Membership " . htmlspecialchars($row['title']) . " has now started!";
+    }
+    mysqli_query($con, "UPDATE user_memberships SET status = 'Active' WHERE user_id = $user_id AND status = 'Queued' AND start_date <= '$now'");
+}
+
 // Fetch total purchased plans
 $q1 = $con->prepare("SELECT COUNT(*) as total FROM user_purchases WHERE user_id = ?");
 $q1->bind_param("i", $user_id);
@@ -40,11 +63,96 @@ $q4->bind_param("i", $user_id);
 $q4->execute();
 $q4->get_result();
 
-// Recent purchases (last 5)
-$q5 = $con->prepare("SELECT plan_name, price, purchase_date, duration FROM user_purchases WHERE user_id = ? ORDER BY purchase_date DESC LIMIT 5");
+// Schedule of the day for active plans
+$q5 = $con->prepare("
+    SELECT up.plan_name, up.start_date, p.type, p.intensity, p.schedule_data 
+    FROM user_purchases up
+    JOIN plans p ON up.plan_name = p.title
+    WHERE up.user_id = ? AND up.status = 'Active'
+");
 $q5->bind_param("i", $user_id);
 $q5->execute();
-$recent_purchases = $q5->get_result()->fetch_all(MYSQLI_ASSOC);
+$active_plans_for_schedule = $q5->get_result()->fetch_all(MYSQLI_ASSOC);
+
+$todays_schedule = [];
+$current_ts = time();
+foreach ($active_plans_for_schedule as $plan) {
+    if (empty($plan['start_date'])) continue;
+    $plan_start = strtotime($plan['start_date']);
+    $days_elapsed = max(0, floor(($current_ts - $plan_start) / 86400));
+    $current_week_index = floor($days_elapsed / 7);
+    $current_day_of_week = ($days_elapsed % 7) + 1;
+    
+    $task_found = false;
+    
+    if (!empty($plan['schedule_data'])) {
+        $decoded = json_decode($plan['schedule_data'], true);
+        if (is_array($decoded) && isset($decoded[$current_week_index])) {
+            $week_data = $decoded[$current_week_index];
+            if (!empty($week_data['days']) && is_array($week_data['days'])) {
+                foreach ($week_data['days'] as $day) {
+                    if ((int)$day['day'] == $current_day_of_week) {
+                        $todays_schedule[] = [
+                            'plan_name' => $plan['plan_name'],
+                            'type' => $plan['type'],
+                            'activity' => $day['activity'],
+                            'duration' => $day['duration'],
+                            'is_recovery' => !empty($day['is_recovery'])
+                        ];
+                        $task_found = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
+    if (!$task_found) {
+        if ($current_day_of_week <= 5) {
+            $daily_seed = crc32($plan['plan_name'] . $current_week_index . $current_day_of_week);
+            srand($daily_seed);
+            
+            $is_recovery = (rand(1, 10) > 8);
+            $banks = [
+                'Exercise' => ['High' => ['HIIT Sprints', 'Heavy Squats', 'Crossfit AMRAP', 'Plyometric Jumps', 'Tabata Rounds'], 'Medium' => ['Dumbbell Circuit', 'Steady State Jogging', 'Bodyweight Mastery', 'Functional Training'], 'Low' => ['Power Walking', 'Light Stretching', 'Basic Yoga', 'Joint Mobility']],
+                'Meal' => ['High' => ['Strict Macro Prep', 'Advanced Carb Cycling'], 'Medium' => ['Balanced Plate Prep', 'Whole Foods Focus'], 'Low' => ['Mindful Eating Practice', 'Healthy Snacking']],
+                'Wellness' => ['High' => ['Advanced Breathwork', 'Silent Meditation Walk'], 'Medium' => ['Mindfulness Session', 'Guided Meditation'], 'Low' => ['Gratitude Journaling', 'Hydration Tracking']]
+            ];
+            
+            $type = $plan['type'] ?? 'Exercise';
+            $intensity = $plan['intensity'] ?? 'Medium';
+            if(!isset($banks[$type])) $type = 'Exercise';
+            if(!isset($banks[$type][$intensity])) $intensity = 'Medium';
+            
+            if ($is_recovery) {
+                $pool = $banks[$type]['Low'];
+                $activity = $pool[array_rand($pool)];
+                $mins = rand(15, 25);
+            } else {
+                $pool = $banks[$type][$intensity];
+                $activity = $pool[array_rand($pool)];
+                $mins = rand(30, 60);
+            }
+            
+            $todays_schedule[] = [
+                'plan_name' => $plan['plan_name'],
+                'type' => $plan['type'],
+                'activity' => $activity,
+                'duration' => $mins . ' Min',
+                'is_recovery' => $is_recovery
+            ];
+            srand();
+        } else {
+             $todays_schedule[] = [
+                'plan_name' => $plan['plan_name'],
+                'type' => $plan['type'],
+                'activity' => "Rest & Recovery",
+                'duration' => "-",
+                'is_recovery' => true
+            ];
+        }
+    }
+}
 
 // BMI data
 $bmi = $wellness ? $wellness['bmi'] : null;
@@ -236,36 +344,41 @@ ob_start();
 
           <!-- Bottom Row -->
           <div class="row">
-              <!-- Recent Purchases -->
+              <!-- Schedule of the Day -->
               <div class="col-lg-8 mb-4">
                   <div class="activity-card h-100 m-0">
-                      <h4 class="font-weight-bold mb-4"><i class="fa-solid fa-clock-rotate-left mr-2 text-success"></i>Recent Purchases</h4>
-                      <?php if (count($recent_purchases) > 0): ?>
-                          <?php foreach ($recent_purchases as $purchase): ?>
+                      <h4 class="font-weight-bold mb-4"><i class="fa-solid fa-calendar-day mr-2 text-primary"></i>Schedule of the Day</h4>
+                      <?php if (count($todays_schedule) > 0): ?>
+                          <?php foreach ($todays_schedule as $task): ?>
                           <div class="d-flex align-items-center mb-3 pb-3" style="border-bottom: 1px solid rgba(0,0,0,0.06);">
-                              <div class="bg-success text-white rounded p-2 mr-3" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center; border-radius:10px !important;">
-                                  <i class="fa-solid fa-bag-shopping"></i>
+                              <div class="<?php echo $task['is_recovery'] ? 'bg-secondary' : 'bg-primary'; ?> text-white rounded p-2 mr-3" style="width:45px; height:45px; display:flex; align-items:center; justify-content:center; border-radius:12px !important;">
+                                  <?php if ($task['is_recovery']): ?>
+                                      <i class="fa-solid fa-bed"></i>
+                                  <?php elseif ($task['type'] === 'Exercise'): ?>
+                                      <i class="fa-solid fa-dumbbell"></i>
+                                  <?php elseif ($task['type'] === 'Meal'): ?>
+                                      <i class="fa-solid fa-utensils"></i>
+                                  <?php else: ?>
+                                      <i class="fa-solid fa-spa"></i>
+                                  <?php endif; ?>
                               </div>
                               <div class="flex-grow-1">
-                                  <h6 class="m-0 font-weight-bold"><?php echo htmlspecialchars($purchase['plan_name']); ?></h6>
-                                  <div class="d-flex align-items-center">
-                                      <small class="text-muted mr-2"><?php echo date('M j, Y', strtotime($purchase['purchase_date'])); ?></small>
-                                      <?php if(!empty($purchase['duration'])): ?>
-                                          <small class="badge badge-soft-success" style="font-size: 10px; background: rgba(16, 185, 129, 0.08); color: #10b981; border-radius: 4px; padding: 1px 6px;">
-                                              Valid until <?php echo date('M j, Y', strtotime($purchase['purchase_date'] . " + " . $purchase['duration'])); ?>
-                                          </small>
-                                      <?php endif; ?>
+                                  <h6 class="m-0 font-weight-bold <?php echo $task['is_recovery'] ? 'text-muted' : 'text-dark'; ?>"><?php echo htmlspecialchars($task['activity']); ?></h6>
+                                  <div class="d-flex align-items-center mt-1">
+                                      <small class="text-muted mr-2 font-weight-bold"><?php echo htmlspecialchars($task['plan_name']); ?></small>
+                                      <small class="badge <?php echo $task['is_recovery'] ? 'badge-soft-secondary text-secondary' : 'badge-soft-primary text-primary'; ?>" style="font-size: 10px; border-radius: 4px; padding: 2px 6px;">
+                                          <?php echo htmlspecialchars($task['duration']); ?>
+                                      </small>
                                   </div>
                               </div>
-                              <span class="font-weight-bold" style="color: var(--primary-dark);">₹<?php echo number_format($purchase['price']); ?></span>
                           </div>
                           <?php endforeach; ?>
-                          <a href="manage-plans.php" class="btn btn-outline-success btn-sm mt-2" style="border-radius: 8px;">View All Plans</a>
+                          <a href="manage-plans.php" class="btn btn-outline-primary btn-sm mt-2" style="border-radius: 8px;">View Full Schedules</a>
                       <?php else: ?>
                           <div class="text-center py-4">
-                              <i class="fa-solid fa-cart-shopping text-muted mb-3" style="font-size: 40px; opacity: 0.4;"></i>
-                              <p class="text-muted mb-3">You haven't purchased any plans yet.</p>
-                              <a href="meal-plans.php" class="btn btn-success btn-sm" style="border-radius: 8px;">Browse Plans</a>
+                              <i class="fa-solid fa-calendar-xmark text-muted mb-3" style="font-size: 40px; opacity: 0.4;"></i>
+                              <p class="text-muted mb-3">No active plans scheduled for today.</p>
+                              <a href="plans.php" class="btn btn-primary btn-sm" style="border-radius: 8px;">Browse Plans</a>
                           </div>
                       <?php endif; ?>
                   </div>

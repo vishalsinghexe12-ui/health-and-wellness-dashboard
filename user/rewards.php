@@ -9,8 +9,8 @@ require_once("../db_config.php");
 $user_id = $_SESSION['user_id'];
 
 // Restrict Access to Active Members Only
-$check_membership = $con->prepare("SELECT * FROM user_memberships WHERE user_id = ? AND end_date > NOW() AND status = 'Active'");
-$check_membership->bind_param("i", $user_id);
+$check_membership = $con->prepare("SELECT 1 FROM user_memberships WHERE user_id = ? AND end_date > NOW() AND status = 'Active' UNION SELECT 1 FROM user_purchases p JOIN memberships m ON p.plan_name = m.title WHERE p.user_id = ? AND p.status = 'Active'");
+$check_membership->bind_param("ii", $user_id, $user_id);
 $check_membership->execute();
 $mbr_result = $check_membership->get_result();
 
@@ -20,13 +20,26 @@ if ($mbr_result->num_rows == 0) {
     exit();
 }
 
-$membership_data = $mbr_result->fetch_assoc();
-$streak_days = $membership_data['streak_days'];
-$last_login = $membership_data['last_login'];
+$membership_id = null;
+$streak_days = 0;
+$last_login = null;
+
+$stmt = $con->prepare("SELECT id, streak_days, last_login FROM user_memberships WHERE user_id = ? AND end_date > NOW() AND status = 'Active'");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$res = $stmt->get_result();
+
+if ($res->num_rows > 0) {
+    $membership_data = $res->fetch_assoc();
+    $streak_days = $membership_data['streak_days'] ?? 0;
+    $last_login = $membership_data['last_login'] ?? null;
+    $membership_id = $membership_data['id'];
+}
+
 $current_date = date('Y-m-d');
 
 // Update streak logic (basic)
-if ($last_login !== $current_date) {
+if ($membership_id && $last_login !== $current_date) {
     $yesterday = date('Y-m-d', strtotime('-1 day'));
     if ($last_login === $yesterday) {
         $streak_days++;
@@ -36,7 +49,7 @@ if ($last_login !== $current_date) {
     
     // Check if we hit 7 days, if so, trigger a surprise? (For simulation, we cap at visual representation)
     $update_streak = $con->prepare("UPDATE user_memberships SET streak_days = ?, last_login = ? WHERE id = ?");
-    $update_streak->bind_param("isi", $streak_days, $current_date, $membership_data['id']);
+    $update_streak->bind_param("isi", $streak_days, $current_date, $membership_id);
     $update_streak->execute();
 }
 

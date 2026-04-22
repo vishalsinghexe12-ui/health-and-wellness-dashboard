@@ -10,8 +10,8 @@ $user_id = $_SESSION['user_id'];
 $user_name = $_SESSION['user_name'];
 
 // Restrict Access to Active Members Only
-$check_membership = $con->prepare("SELECT * FROM user_memberships WHERE user_id = ? AND end_date > NOW() AND status = 'Active'");
-$check_membership->bind_param("i", $user_id);
+$check_membership = $con->prepare("SELECT 1 FROM user_memberships WHERE user_id = ? AND end_date > NOW() AND status = 'Active' UNION SELECT 1 FROM user_purchases p JOIN memberships m ON p.plan_name = m.title WHERE p.user_id = ? AND p.status = 'Active'");
+$check_membership->bind_param("ii", $user_id, $user_id);
 $check_membership->execute();
 $mbr_result = $check_membership->get_result();
 

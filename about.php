@@ -2,6 +2,13 @@
 $title = "About Us - Health & Wellness";
 $css = "guest.css";
 
+require_once("db_config.php");
+$query = "SELECT PageTitle, PageDescription FROM tblpage WHERE PageType = 'aboutus'";
+$result = mysqli_query($con, $query);
+$page_data = mysqli_fetch_assoc($result);
+$page_title = $page_data['PageTitle'] ?? 'About Health & Wellness';
+$page_desc = $page_data['PageDescription'] ?? '';
+
 ob_start();
 ?>
 
@@ -10,8 +17,8 @@ ob_start();
     <!-- Heading -->
     <div class="row mb-5">
         <div class="col-12 text-center">
-            <h1 class="display-4 font-weight-bold text-success">About Health & Wellness</h1>
-            <p class="lead text-muted">Empowering healthier lifestyles every day</p>
+            <h1 class="display-4 font-weight-bold text-success"><?php echo htmlspecialchars($page_title); ?></h1>
+            <p class="lead text-muted"><?php echo nl2br(htmlspecialchars($page_desc)); ?></p>
         </div>
     </div>
 

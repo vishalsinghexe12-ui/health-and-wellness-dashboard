@@ -43,14 +43,17 @@ $result = mysqli_query($con, $query);
                     <p class="exercise-plan-price font-weight-bold mt-2" style="font-size: 20px; color: var(--primary-dark);">₹ <?php echo htmlspecialchars($row['price']); ?></p>
                     <hr>
                     <div class="d-flex mt-auto" style="gap: 8px;">
-                        <button class="btn btn-outline-success flex-grow-1" style="border-radius: 8px;" data-toggle="modal" data-target="#editModal<?php echo $row['id']; ?>">
-                            <i class="fa-solid fa-pen-to-square mr-1"></i>Edit
+                        <a href="manage-plan-schedule.php?plan_id=<?php echo $row['id']; ?>" class="btn btn-outline-primary flex-grow-1" style="border-radius: 8px; font-size: 14px;" title="Manage Schedule">
+                            <i class="fa-solid fa-calendar"></i>
+                        </a>
+                        <button class="btn btn-outline-success flex-grow-1" style="border-radius: 8px; font-size: 14px;" data-toggle="modal" data-target="#editModal<?php echo $row['id']; ?>" title="Edit Plan">
+                            <i class="fa-solid fa-pen-to-square"></i>
                         </button>
                         <form method="POST" action="delete_plan_process.php" class="flex-grow-1" onsubmit="return confirm('Delete this plan?');">
                             <input type="hidden" name="plan_id" value="<?php echo $row['id']; ?>">
                             <input type="hidden" name="redirect" value="admin-exercise-plans.php">
-                            <button type="submit" class="btn btn-outline-danger btn-block" style="border-radius: 8px;">
-                                <i class="fa-solid fa-trash mr-1"></i>Delete
+                            <button type="submit" class="btn btn-outline-danger btn-block" style="border-radius: 8px; font-size: 14px;" title="Delete Plan">
+                                <i class="fa-solid fa-trash"></i>
                             </button>
                         </form>
                     </div>

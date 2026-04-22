@@ -56,6 +56,7 @@
                             <div class="dropdown-menu border-0 shadow" aria-labelledby="navbarDropdown">
                               <a class="dropdown-item" href="wellness-quiz.php"><i class="fa-solid fa-heart-pulse mr-2 text-success"></i>Wellness Quiz</a>
                               <a class="dropdown-item" href="my-recommendations.php"><i class="fa-solid fa-wand-magic-sparkles mr-2 text-success"></i>My Recommendations</a>
+                              <a class="dropdown-item" href="memberships.php"><i class="fa-solid fa-crown mr-2 text-warning" style="color: #f59e0b !important;"></i>Memberships</a>
                               <div class="dropdown-divider"></div>
                               <a class="dropdown-item" href="Sub-tips.php">SUBI Tips</a>
                               <a class="dropdown-item" href="meal-plans.php">Meal Plans</a>
